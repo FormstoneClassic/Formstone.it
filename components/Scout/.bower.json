@@ -1,0 +1,40 @@
+{
+  "name": "Scout",
+  "version": "0.1.1",
+  "description": "A jQuery plugin for easily tracking Google Analytics Events.",
+  "keywords": [
+    "javascript",
+    "jquery",
+    "analytics",
+    "events",
+    "tracking",
+    "utility",
+    "benplum"
+  ],
+  "authors": [
+    "Ben Plum"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.benplum.com/projects/scout/",
+  "main": [
+    "jquery.bp.scout.min.js",
+    "jquery.bp.scout.maxScroll.min.js"
+  ],
+  "ignore": [
+    "*.json"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.7.0"
+  },
+  "devDependencies": {},
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "5f9793c42171d260bc4dd1ef00ccd53e5782d9b2"
+  },
+  "_source": "git://github.com/benplum/Scout.git",
+  "_target": "~0.1.1",
+  "_originalSource": "Scout",
+  "_direct": true
+}

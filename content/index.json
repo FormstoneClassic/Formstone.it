@@ -1,0 +1,28 @@
+{
+	"features" : [
+		{
+			"title" : "Responsive",
+			"description": "And ready for what comes next. Formstone components are designed mobile-first to ensure fast, usable interfaces, no matter the screen size."
+		},
+		{
+			"title": "Modular",
+			"description": "Maintaining a project means adding functionality as it matures. Components are name-spaced for minimal overlap with your existing styles and scripts."
+		},
+		{
+			"title": "Lightweight",
+			"description": "Components are minified and dependencies kept to a minimum so your site loads quickly and reliably for every user."
+		},
+		{
+			"title": "Open Source",
+			"description": "Missing a feature? Notice a bug in IE 10? Components are MIT Licensed and individually maintained so you can give a little back or make them your own."
+		},
+		{
+			"title": "Code Standards",
+			"description": "Formstone components are compiled with Grunt and deployable with Bower to ensure code quality and maintain simple implementation."
+		},
+		{
+			"title": "Browser Support",
+			"description": "The web is larger then WebKit and Formstone helps to achieve cross browser support for your site, while maintaining the interactions users expect."
+		}
+	]
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		
+		<title>Macroon Demo</title>
+		
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+		
+		<!--[if LTE IE 8]>
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+		<![endif]-->
+		
+		<script src="http://formstone.it/js/demo.js"></script>
+		
+		<!--[if LTE IE 9]>
+			<script src="ie/html5.js"></script>
+		<![endif]-->
+		<!--[if IE 9]>
+			<script src="ie/matchMedia.ie9.js"></script>
+		<![endif]-->
+		<!--[if LTE IE 8]>
+			<script src="ie/matchMedia.ie8.js"></script>
+		<![endif]-->
+		
+		<script src="../src/jquery.fs.macaroon.js"></script>
+		
+		<style>
+		</style>
+		
+		<script>
+			$(document).ready(function() {
+				$(".form .set").click(_setCookie);
+				$(".form .get").click(_getCookie);
+				$(".form .erase").click(_eraseCookie);
+			});
+			
+			function _setCookie(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				
+				var key = $(".form [name=set_key]").val(),
+					value = $(".form [name=set_value]").val();
+				
+				$.macaroon(key, value);
+				
+				_output("Set", key + " = " + value);
+			}
+			
+			function _getCookie(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				
+				var key = $(".form [name=get_key]").val(),
+					value = $.macaroon(key);
+				
+				_output("Get", key + " = " + value);
+			}
+			
+			function _eraseCookie(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				
+				var key = $(".form [name=erase_key]").val();
+				
+				$.macaroon(key, null);
+				
+				_output("Erase", key);
+			}
+			
+			function _output(label, value) {
+				var html = '';
+				html += '<p><span class="label">' + label + ':</span>';
+				html += '<span class="value">' + value; // + '<br />[ ' + document.cookie + ' ]</span></p>';
+				
+				$(".output").prepend(html);
+			}
+/*
+			function _output(text) {
+				$(".output").prepend("<p>" + text + "</p>");
+			}
+*/
+		</script>
+	</head>
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Macaroon Demo</h1>
+					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
+					<br />
+					<a href="http://formstone.it/macaroon/" class="button">View Documentation</a>
+				</header>
+				
+				<!-- Basic -->
+				<h2>Basic</h2>
+				<p>To create a new cookie, or update an existing one, simply pass the key and value as the first and second parameters, respectively:</p>
+				<pre class="example"><code class="language-javascript">// Set cookie
+$.macroon(key, value);</code></pre>
+				
+				<p>To return a cookie's value pass the key as the only parameter:</p>
+				<pre class="example"><code class="language-javascript">// Get Cookie
+var value = $.macroon(key);</code></pre>
+				
+				<p>To erase an existing cookie set it to <code>null</code>:</p>
+				<pre class="example"><code class="language-javascript">// Erase Cookie
+$.macroon(key, null);</code></pre>
+				
+				<h3>Demo</h3>
+				<div class="row form">
+					<form>
+						<fieldset class="mobile-third tablet-third desktop-third">
+							<h5>Set Cookie</h5>
+							<label>Key</label>
+							<input type="text" name="set_key" value="foo" />
+							<label>value</label>
+							<input type="text" name="set_value" value="bar" />
+							<input type="submit" class="button set" value="Set" />
+						</fieldset>
+					</form>
+					<form>
+						<fieldset class="mobile-third tablet-third desktop-third">
+							<h5>Get Cookie</h5>
+							<label>Key</label>
+							<input type="text" name="get_key" value="foo" />
+							<input type="submit" class="button get" value="Get" />
+						</fieldset>
+					</form>
+					<form>
+						<fieldset class="mobile-third tablet-third desktop-third">
+							<h5>Erase Cookie</h5>
+							<label>Key</label>
+							<input type="text" name="erase_key" value="foo" />
+							<input type="submit" class="button erase" value="Erase" />
+						</fieldset>
+					</form>
+				</div>
+				<div class="output"></div>
+				
+			</div>
+		</article>
+		
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>

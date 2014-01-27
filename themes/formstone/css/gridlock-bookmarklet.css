@@ -1,0 +1,34 @@
+#gridlock_menu, #gridlock_menu * {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	     -o-user-select: none;
+	     	user-select: none;
+}
+#gridlock_menu { background: #222; box-shadow: 0 0 8px rgba(0, 0, 0, 0.75); font-family: Helvetica, san-serif; margin: 0; padding: 0; position: fixed; z-index: 100001; }
+
+#gridlock_menu.top-left { border-bottom-right-radius: 4px; left: 0; top: 0; }
+#gridlock_menu.top-right { border-bottom-left-radius: 4px; right: 0; top: 0; }
+#gridlock_menu.bottom-left { border-top-right-radius: 4px; bottom: 0; left: 0; }
+#gridlock_menu.bottom,
+#gridlock_menu.bottom-right { border-top-left-radius: 4px; bottom: 0; right: 0; }
+
+#gridlock_menu .icon,
+#gridlock_menu .option { color: #999; display: block; float: left; font-size: 14px; height: 35px; line-height: 37px; padding: 0 10px; }
+
+#gridlock_menu .option { border-right: 1px solid #000; cursor: pointer; }
+#gridlock_menu .option:hover { color: #eee; }
+#gridlock_menu .option.active { background: #000; color: #eee; }
+
+#gridlock_menu .show { font-size: 11px; line-height: 35px; text-align: center; width: 60px; }
+
+#gridlock_menu .icon { background: url(www_root/images/gridlock_bookmarklet_icons.png) no-repeat; margin: 9px; padding: 0; }
+#gridlock_menu .icon.logo { background-position: -14px 10px; border-right: 1px solid #000; margin: 0 0 0 10px; padding: 0; text-indent: -99999px; width: 25px; }
+#gridlock_menu .icon.remove { background-position: 0 0; border: none; cursor: pointer; height: 13px; margin: 10px; opacity: 0.5; text-indent: -99999px; width: 13px; }
+#gridlock_menu .icon.remove:hover { opacity: 1; }
+
+
+#gridlock_overlay { height: 100%; left: 0; opacity: 0.5; overflow: hidden; position: fixed; pointer-events: none; top: 0; width: 100%; z-index: 100000; }
+#gridlock_overlay .row { background: rgba(0, 0, 0, 0.15); display: none; height: 100%; margin: 0 auto !important; }
+#gridlock_overlay .row [class*="desktop-"] { background: rgba(0, 0, 0, 0.15); border: 1px solid rgba(0, 0, 0, 0.2); border-width: 0 1px; height: 100%; overflow: hidden; }
+#gridlock_overlay .row [class*="desktop-"] span { display: block; padding-top: 10000px; width: 100%; }

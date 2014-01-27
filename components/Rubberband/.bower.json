@@ -1,0 +1,30 @@
+{
+  "name": "Rubberband",
+  "version": "3.0.2",
+  "description": "A jQuery plugin for responsive media query events. Part of the Formstone Library.",
+  "author": {
+    "name": "Ben Plum",
+    "email": "mr@benplum.com",
+    "url": "http://www.benplum.com"
+  },
+  "license": "MIT",
+  "homepage": "http://formstone.it/rubberband/",
+  "main": [
+    "jquery.fs.rubberband.js"
+  ],
+  "ignore": [
+    "*.jquery.json",
+    "Gruntfile.js",
+    "src/"
+  ],
+  "_release": "3.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.2",
+    "commit": "e5c969970ec961c9dcda93821b3000429cc5fb50"
+  },
+  "_source": "git://github.com/benplum/Rubberband.git",
+  "_target": "~3.0.2",
+  "_originalSource": "Rubberband",
+  "_direct": true
+}

@@ -1,0 +1,19 @@
+{
+	"components" : [
+		"boxer",
+		"macaroon",
+		"mimeo",
+		"naver",
+		"picker",
+		"pronto",
+		"ranger",
+		"roller",
+		"rubberband",
+		"selecter",
+		"shifter",
+		"stepper",
+		"tabber",
+		"wallpaper",
+		"zoetrope"
+	]
+}

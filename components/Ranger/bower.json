@@ -1,0 +1,34 @@
+{
+  "name": "Ranger",
+  "version": "3.0.0",
+  "description": "A jQuery plugin for cross browser range inputs. Part of the formstone library.",
+  "keywords": [
+    "javascript",
+    "jquery",
+    "range",
+    "input",
+    "ui",
+    "formstone",
+    "benplum"
+  ],
+  "license": "MIT",
+  "homepage": "http://formstone.it/ranger/",
+  "main": [
+    "jquery.fs.ranger.js",
+    "jquery.fs.ranger.css"
+  ],
+  "ignore": [
+    "*.jquery.json",
+    "Gruntfile.js",
+    "src/"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.7.0"
+  },
+  "devDependencies": {},
+  "author": {
+    "name": "Ben Plum",
+    "email": "mr@benplum.com",
+    "url": "http://www.benplum.com"
+  }
+}

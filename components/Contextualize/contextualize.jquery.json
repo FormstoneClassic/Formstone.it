@@ -1,0 +1,29 @@
+{
+	"name": "contextualize",
+	"title": "Contextualize",
+	"description": "A jQuery plugin for contextualizing in-content links. ",
+	"keywords": [
+		"utility",
+		"links",
+		"ui",
+		"benplum"
+	],
+	"version": "0.4.2",
+	"author": {
+		"name": "Ben Plum",
+		"url": "http://www.benplum.com"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://www.opensource.org/licenses/mit-license.php"
+		}
+	],
+	"docs": "http://www.benplum.com/projects/contextualize/",
+	"demo": "http://www.benplum.com/projects/contextualize/",
+	"download": "https://github.com/benplum/Contextualize",
+	"bugs": "https://github.com/benplum/Contextualize/issues",
+	"dependencies": {
+		"jquery": ">=1.7"
+	}
+}

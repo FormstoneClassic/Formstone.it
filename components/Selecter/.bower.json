@@ -1,0 +1,31 @@
+{
+  "name": "Selecter",
+  "version": "3.0.5",
+  "description": "A jQuery plugin for replacing default select elements. Part of the Formstone Library.",
+  "license": "MIT",
+  "homepage": "http://formstone.it/selecter/",
+  "author": {
+    "name": "Ben Plum",
+    "email": "mr@benplum.com",
+    "url": "http://www.benplum.com"
+  },
+  "ignore": [
+    "*.jquery.json",
+    "Gruntfile.js",
+    "src/"
+  ],
+  "main": [
+    "jquery.fs.selecter.js",
+    "jquery.fs.selecter.css"
+  ],
+  "_release": "3.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.5",
+    "commit": "1923a7f4810d245dafb829ea8f34f37daa25415b"
+  },
+  "_source": "git://github.com/benplum/Selecter.git",
+  "_target": "~3.0.5",
+  "_originalSource": "Selecter",
+  "_direct": true
+}

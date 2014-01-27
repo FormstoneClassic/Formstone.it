@@ -1,0 +1,20 @@
+{
+  "name": "Mimeo",
+  "version": "3.0.3",
+  "description": "A jQuery plugin for responsive images. Part of the Formstone Library.",
+  "author": {
+    "name": "Ben Plum",
+    "email": "mr@benplum.com",
+    "url": "http://www.benplum.com"
+  },
+  "license": "MIT",
+  "homepage": "http://formstone.it/mimeo/",
+  "main": [
+    "jquery.fs.mimeo.js"
+  ],
+  "ignore": [
+    "*.jquery.json",
+    "Gruntfile.js",
+    "src/"
+  ]
+}

@@ -1,0 +1,18 @@
+/*
+ * Contextualize Plugin - Give your links some context
+ * @author Ben Plum
+ * @version 0.4.2
+ *
+ * Copyright © 2013 Ben Plum <mr@benplum.com>
+ * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+ */
+
+	a[class*=icon_] { margin-right: 3px; }
+	a[class*=icon_]:after { background: url(../images/contextualize-icons.png) no-repeat; content: ' '; display: inline-block; height: 14px; margin-left: 4px; width: 11px; }
+	a.icon_file:after { background-position: 0 0; }
+	a.icon_zip:after { background-position: -12px 0; }
+	a.icon_pdf:after { background-position: -24px 0; }
+	a.icon_doc:after { background-position: -36px 0; }
+	a.icon_ppt:after { background-position: -48px 0; height: 11px; width: 14px; }
+	a.icon_xls:after { background-position: -63px 0; height: 11px; width: 14px; }
+	a.icon_external:after { background-position: -78px 0; height: 10px; width: 9px }

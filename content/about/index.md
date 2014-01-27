@@ -1,0 +1,4 @@
+/*
+Template: redirect
+Title: About
+*/

@@ -1,0 +1,69 @@
+{% if not meta.pronto %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<meta name="keywords" content="{{ meta.keywords }}" />
+		<meta name="description" content="{{ meta.description }}" />
+		{% if meta.robots %}
+		<meta name="robots" content="{{ meta.robots }}">
+		{% endif %}
+		<meta name="author" content="{{ site_title }}" />
+
+		<!-- G+ AND FACEBOOK META TAGS -->
+		<meta property="og:title" content="" />
+		<meta property="og:url" content="{{ base_url }}" />
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="http://formstone.it/images/facebook.jpg" />
+		<meta property="og:description" content="" />
+		<meta property="og:site_name" content="{{ site_title }}" />
+
+		<!-- TWITTER CARD -->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@" />
+		<meta name="twitter:creator" content="@" />
+		<meta name="twitter:url" content="{{ base_url }}" />
+		<meta name="twitter:title" content="{{ site_title }}" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="http://formstone.it/images/facebook.jpg" />
+
+		<title>{% if meta.title %}{{ meta.title }} &middot; {% endif %}{{ site_title }}</title>
+
+		<link rel="icon" href="{{ base_url }}/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="{{ base_url }}/favicon.ico" type="image/x-icon" />
+
+		<link rel="stylesheet" href="{{ base_url }}/css/site.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="{{ base_url }}/css/print.css" type="text/css" media="print" />
+
+		<!--[if LTE IE 8]>
+			<link href="{{ base_url }}/components/Gridlock/gridlock-ie.css" rel="stylesheet" type="text/css" media="all" />
+			<script src="{{ base_url }}/js/html5.js"></script>
+		<![endif]-->
+
+		{% if live %}
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-T4HSP3"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-T4HSP3');</script>
+		<!-- End Google Tag Manager -->
+		{% endif %}
+	</head>
+	<body class="gridlock shifter">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="{{ base_url }}" class="branding">{{ site_title }}</a>
+					<span class="mobile_handle shifter-handle">Menu</span>
+				</div>
+			</div>
+		</header>
+		<div class="shifter-page">
+			<div id="pronto">
+{% endif %}

@@ -1,0 +1,42 @@
+{% include 'layout/header.html' %}
+<header class="bar orange feature">
+	<div class="row">
+		<div class="mobile-full tablet-4 tablet-push-1 desktop-6 desktop-push-3 max-6 max-push-3">
+			<h1>{{ meta.title }}</h1>
+			<p class="emphasized">{{ meta.description }}</p>
+		</div>
+	</div>
+</header>
+<section class="bar">
+	<div class="row">
+		<header class="all-full">
+			<h2>Components</h2>
+		</header>
+		<div class="components clear">
+			{% for page in navigation.components.children %}
+			<div class="mobile-full tablet-half desktop-third component">
+				<h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+				<p>{{ page.description }}</p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<section class="bar gray">
+	<div class="row">
+		<header class="all-full">
+			<h2>Features</h2>
+		</header>
+		<div class="features clear mobile-full tablet-full desktop-full max-10 max-push-1">
+			<div class="row">
+				{% for feature in meta.features %}
+				<div class="mobile-full tablet-half desktop-half feature">
+					<h3>{{ feature.title }}</h3>
+					<p>{{ feature.description }}</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+{% include 'layout/footer.html' %}

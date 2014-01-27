@@ -1,0 +1,25 @@
+/* 
+ * Tabber v3.0.3 - 2014-01-14 
+ * A jQuery plugin for adding simple tabbed interfaces. Part of the Formstone Library. 
+ * http://formstone.it/tabber/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */ 
+
+	.tabber { overflow: hidden; }
+
+	.tabber .tabber-handle { color: #999; cursor: pointer; display: block; float: left;
+		-webkit-transition: none;
+		   -moz-transition: none;
+		   	-ms-transition: none;
+		   	 -o-transition: none;
+		   	 	transition: none;
+	}
+	.tabber .tabber-handle.active { color: #333; }
+	.tabber .tabber-handle.mobile { display: none; float: none; }
+
+	.tabber .tabber-tab { clear: both; display: none; }
+	.tabber .tabber-tab.active { display: block; }
+
+	.tabber.mobile .tabber-handle { display: none; }
+	.tabber.mobile .tabber-handle.mobile { display: block; }

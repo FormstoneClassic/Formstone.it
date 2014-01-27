@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+		<title>Ranger Demo</title>
+
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+
+		<!--[if LTE IE 8]>
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+		<![endif]-->
+
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<link href="../jquery.fs.ranger.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="../src/jquery.fs.ranger.js"></script>
+
+		<style>
+			.ranger-vertical { float: left; }
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				$("input[type=range]").ranger();
+
+				$(window).on("snap", function() {
+					$("input[type=range]").ranger("reset");
+				});
+			});
+		</script>
+	</head>
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Ranger Demo</h1>
+					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
+					<br />
+					<a href="http://formstone.it/ranger/" class="button">View Documentation</a>
+				</header>
+
+				<!-- BASIC -->
+				<h2>Basic</h2>
+				<p>The most basic method is simply applying the Ranger plugin:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").ranger();</code></pre>
+				<pre class="example"><code class="language-markup">&lt;input type="range" min="10" max="20" /&gt;
+&lt;input type="range" min="0" max="100" value="35" step="5" /&gt;
+&lt;input type="range" min="0" max="1" value="0.25" step="0.01" /&gt;</code></pre>
+
+				<h5>Demo</h5>
+				<fieldset>
+					<input type="range" name="range_1" min="10" max="20" />
+					<input type="range" name="range_2" min="0" max="100" value="35" step="5" />
+					<input type="range" name="range_3" min="0" max="1" value="0.25" step="0.01" />
+				</fieldset>
+
+				<!-- BASIC -->
+				<h2>Basic</h2>
+				<p>You can also specify a vertical Ranger:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").ranger({
+	vertical: true
+});</code></pre>
+
+				<h5>Demo</h5>
+				<fieldset>
+					<input type="range" name="vertical_1" min="0" max="100" value="75" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_2" min="0" max="100" value="60" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_3" min="0" max="100" value="50" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_4" min="0" max="100" value="45" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_6" min="0" max="100" value="40" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_7" min="0" max="100" value="45" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_8" min="0" max="100" value="50" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_9" min="0" max="100" value="60" step="5" data-ranger-options='{"vertical":"true"}' />
+					<input type="range" name="vertical_10" min="0" max="100" value="75" step="5" data-ranger-options='{"vertical":"true"}' />
+				</fieldset>
+
+				<br />
+
+			</div>
+		</article>
+
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>

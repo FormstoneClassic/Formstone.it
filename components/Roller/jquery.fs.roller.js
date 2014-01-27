@@ -1,0 +1,745 @@
+/* 
+ * Roller v3.0.9 - 2014-01-20 
+ * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
+ * http://formstone.it/roller/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */ 
+
+;(function ($, window) {
+	"use strict";
+
+	/**
+	 * @options
+	 * @param auto [boolean] <false> "Flag to auto advance items"
+	 * @param autoTime [int] <8000> "Auto advance time"
+	 * @param controls [boolean] <true> "Flag to draw controls"
+	 * @param customClass [string] <''> "Class applied to instance"
+	 * @param duration [int] <500> "Animation duration; should match CSS animation time"
+	 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
+	 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
+	 * @param paged [boolean] <false> "Flag for paged items"
+	 * @param pagination [boolean] <true> "Flag to draw pagination"
+	 * @param single [boolean] <false> "Flag for single items"
+	 * @param touchPaged [boolean] <true> "Flag for paged touch interaction"
+	 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
+	 */
+	var options = {
+		auto: false,
+		autoTime: 8000,
+		//canister: true, * @param canister [boolean] <true> "Flag to draw canister"
+		controls: true,
+		customClass: "",
+		duration: 500,
+		maxWidth: Infinity,
+		minWidth: '0px',
+		paged: false,
+		pagination: true,
+		single: false,
+		touchPaged: true,
+		useMargin: false
+		//viewport: true * @param viewport [boolean] <true> "Flag to draw viewport"
+	};
+
+	/**
+	 * @events
+	 * @event update.roller "Canister position updated"
+	 */
+
+	var pub = {
+
+		/**
+		 * @method
+		 * @name defaults
+		 * @description Sets default plugin options
+		 * @param opts [object] <{}> "Options object"
+		 * @example $.roller("defaults", opts);
+		 */
+		defaults: function(opts) {
+			options = $.extend(options, opts || {});
+			return $(this);
+		},
+
+		/**
+		 * @method
+		 * @name destroy
+		 * @description Removes instance of plugin
+		 * @example $(".target").roller("destroy");
+		 */
+		destroy: function() {
+			return $(this).each(function() {
+				var data = $(this).data("roller");
+
+				if (typeof data !== "undefined") {
+					_clearTimer(data.autoTimer);
+
+					if (!data.single) {
+						if (data.viewport) {
+							data.$items.unwrap();
+						}
+						if (data.canister) {
+							data.$items.unwrap();
+						} else {
+							data.$canister.attr("style", null);
+						}
+					}
+
+					data.$items.removeClass("visible");
+
+					if (data.pagination) {
+						data.$pagination.remove();
+					}
+					if (data.controls) {
+						data.$controls.remove();
+					}
+
+					data.$roller.removeClass("roller enabled " + (data.single ? "single " : "") + data.customClass)
+								.off(".roller")
+								.data("roller", null);
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name disable
+		 * @description Disables instance of plugin
+		 * @example $(".target").roller("disable");
+		 */
+		disable: function() {
+			return $(this).each(function() {
+				var data = $(this).data("roller");
+
+				if (typeof data !== "undefined" && data.enabled) {
+					_clearTimer(data.autoTimer);
+
+					data.enabled = false;
+
+					data.$roller.removeClass("enabled")
+								.off("touchstart.roller click.roller");
+
+					data.$canister.attr("style", "")
+								  .css( _prefix("transition", "none") )
+								  .off("touchstart.roller");
+
+					data.$controls.removeClass("visible");
+					data.$pagination.removeClass("visible")
+									.html("");
+
+					if (data.useMargin) {
+						data.$canister.css({ marginLeft: "" });
+					} else {
+						data.$canister.css( _prefix("transform", "translate3d(0px, 0, 0)") );
+					}
+
+					data.index = 0;
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name enable
+		 * @description Enables instance of plugin
+		 * @example $(".target").roller("enable");
+		 */
+		enable: function() {
+			return $(this).each(function() {
+				var data = $(this).data("roller");
+
+				if (typeof data !== "undefined" && !data.enabled) {
+					data.enabled = true;
+
+					data.$roller.addClass("enabled")
+								.on("touchstart.roller click.roller", ".roller-control", data, _onAdvance)
+								.on("touchstart.roller click.roller", ".roller-page", data, _onSelect);
+
+					data.$canister.css( _prefix("transition", "") );
+
+					pub.resize.apply(data.$roller);
+
+					if (!data.single) {
+						data.$canister.on("touchstart.roller", data, _onTouchStart);
+					}
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name jump
+		 * @description Jump instance of plugin to specific page
+		 * @example $(".target").roller("jump", 1);
+		 */
+		jump: function(index) {
+			return $(this).each(function() {
+				var data = $(this).data("roller");
+
+				if (typeof data !== "undefined" && data.enabled) {
+					_clearTimer(data.autoTimer);
+					_position(data, index-1);
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name resize
+		 * @description Resizes each instance
+		 * @example $(".target").roller("resize");
+		 */
+		resize: function() {
+			return $(this).each(function() {
+				var data = $(this).data("roller");
+
+				if (typeof data !== "undefined" && data.enabled) {
+					data.count = data.$items.length;
+					//data.viewportWidth = (data.$viewport.length > 0) ? data.$viewport.outerWidth(false) : data.$roller.outerWidth(false);
+					data.viewportWidth = data.$viewport.outerWidth(false);
+					data.itemMargin = parseInt(data.$items.eq(0).css("margin-left"), 10) + parseInt(data.$items.eq(0).css("margin-right"), 10);
+
+					if (data.single) {
+						data.perPage = 1;
+						data.pageCount = data.count - 1;
+					} else if (data.paged) {
+						data.canisterWidth = 0;
+						for (var i = 0; i < data.count; i++) {
+							data.canisterWidth += data.$items.eq(i).outerWidth() + data.itemMargin;
+						}
+						data.perPage = 1;
+						data.pageCount = (data.canisterWidth > data.viewportWidth) ? data.count - 1 : 0;
+					} else {
+						//data.itemMargin = parseInt(data.$items.eq(0).css("margin-left"), 10) + parseInt(data.$items.eq(0).css("margin-right"), 10);
+						data.itemWidth = data.$items.eq(0).outerWidth(false) + data.itemMargin;
+						data.perPage = Math.floor(data.viewportWidth / data.itemWidth);
+						if (data.perPage < 1) {
+							data.perPage = 1;
+						}
+						data.pageCount = Math.ceil(data.count / data.perPage) - 1;
+						data.pageMove = data.itemWidth * data.perPage;
+						data.canisterWidth = data.itemWidth * data.count;
+					}
+
+					data.maxMove = -data.canisterWidth + data.viewportWidth + data.itemMargin;
+					if (data.maxMove > 0) {
+						data.maxMove = 0;
+					}
+
+					// Reset Page Count
+					if (data.pageCount !== "Infinity") {
+						var html = '';
+						for (var j = 0; j <= data.pageCount; j++) {
+							html += '<span class="roller-page">' + (j + 1) + '</span>';
+						}
+						data.$pagination.html(html);
+					}
+
+					if (data.pageCount < 1) {
+						data.$controls.removeClass("visible");
+						data.$pagination.removeClass("visible");
+					} else {
+						data.$controls.addClass("visible");
+						data.$pagination.addClass("visible");
+					}
+					data.$paginationItems = data.$roller.find(".roller-page");
+
+					if (!data.single) {
+						data.$canister.css({ width: data.canisterWidth });
+					}
+
+					_position(data, _calculateIndex(data));
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name reset
+		 * @description Resets instance after item change
+		 * @example $(".target").roller("reset");
+		 */
+		reset: function() {
+			return $(this).each(function() {
+				var data = $(this).data("roller");
+
+				if (typeof data !== "undefined" && data.enabled) {
+					data.$items = data.$roller.find(".roller-item");
+					pub.resize.apply(data.$roller);
+				}
+			});
+		}
+	};
+
+	/**
+	 * @method private
+	 * @name _init
+	 * @description Initializes plugin
+	 * @param opts [object] "Initialization options"
+	 */
+	function _init(opts) {
+		// Settings
+		opts = $.extend({}, options, opts);
+
+		// Apply to each element
+		var $items = $(this);
+		for (var i = 0, count = $items.length; i < count; i++) {
+			_build($items.eq(i), opts);
+		}
+
+		return $items;
+	}
+
+	/**
+	 * @method private
+	 * @name _build
+	 * @description Builds each instance
+	 * @param $roller [jQuery object] "Target jQuery object"
+	 * @param opts [object] <{}> "Options object"
+	 */
+	function _build($roller, opts) {
+		if (!$roller.data("roller")) {
+			opts = $.extend({}, opts, $roller.data("roller-options"));
+
+			if (!opts.single) {
+				// Verify viewport and canister are available
+				if (!$roller.find(".roller-canister").length) {
+					$roller.wrapInner('<div class="roller-canister"></div>');
+					opts.canister = true;
+				}
+				if (!$roller.find(".roller-viewport").length) {
+					$roller.wrapInner('<div class="roller-viewport"></div>');
+					opts.viewport = true;
+				}
+			}
+
+			// Build controls and pagination
+			var html = '';
+			if (opts.controls && !$roller.find(".roller-controls").length) {
+				html += '<div class="roller-controls">';
+				html += '<span class="roller-control previous">Previous</span>';
+				html += '<span class="roller-control next">Next</span>';
+				html += '</div>';
+			}
+			if (opts.pagination && !$roller.find(".roller-pagination").length) {
+				html += '<div class="roller-pagination">';
+				html += '</div>';
+			}
+
+			// Modify target
+			$roller.addClass("roller " + (opts.single ? "single " : "") + opts.customClass)
+				   .append(html);
+
+			var data = $.extend({}, {
+				$roller: $roller,
+				$viewport: $roller.find(".roller-viewport").eq(0),
+				$canister: $roller.find(".roller-canister").eq(0),
+				$captions: $roller.find(".roller-captions").eq(0),
+				$controls: $roller.find(".roller-controls").eq(0),
+				$pagination: $roller.find(".roller-pagination").eq(0),
+				index: 0,
+				deltaX: null,
+				deltaY: null,
+				leftPosition: 0,
+				xStart: 0,
+				yStart: 0,
+				enabled: false,
+				touchstart: 0,
+				touchEnd: 0
+			}, opts);
+
+			data.$items = (data.single) ? data.$roller.find(".roller-item") : data.$canister.children(".roller-item");
+			data.$captionItems = data.$captions.find(".roller-caption");
+			data.$controlItems = data.$controls.find(".roller-control");
+			data.$paginationItems = data.$pagination.find(".roller-page");
+			data.$images = data.$canister.find("img");
+
+			data.totalImages = data.$images.length;
+
+			$roller.data("roller", data);
+
+			//pub.enable.apply(data.$roller);
+			// Navtive MQ Support
+			if (window.matchMedia !== undefined) {
+				data.maxWidth = data.maxWidth === Infinity ? "100000px" : data.maxWidth;
+				data.mediaQuery = window.matchMedia("(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")");
+				// Make sure we stay in context
+				data.mediaQuery.addListener(function() {
+					_onRespond.apply(data.$roller);
+				});
+				_onRespond.apply(data.$roller);
+			}
+
+			// Watch images
+			if (data.totalImages > 0) {
+				data.loadedImages = 0;
+				for (var i = 0; i < data.totalImages; i++) {
+					var $img = data.$images.eq(i);
+					$img.one("load.roller", data, _onImageLoad);
+					if ($img[0].complete || $img[0].height) {
+						$img.trigger("load.roller");
+					}
+				}
+			}
+
+			// Auto timer
+			if (data.auto) {
+				data.autoTimer = _startTimer(data.autoTimer, data.autoTime, function() {
+					_autoAdvance(data);
+				}, true);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onImageLoad
+	 * @description Handles child image load
+	 * @param e [object] "Event data"
+	 */
+	function _onImageLoad(e) {
+		var data = e.data;
+		data.loadedImages++;
+		if (data.loadedImages === data.totalImages) {
+			pub.resize.apply(data.$roller);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onTouchStart
+	 * @description Handles touchstart event
+	 * @param e [object] "Event data"
+	 */
+	function _onTouchStart(e) {
+		e.stopPropagation();
+
+		var data = e.data;
+
+		_clearTimer(data.autoTimer);
+
+		data.touchStart = new Date().getTime();
+		data.$canister.css( _prefix("transition", "none") );
+
+		var touch = (typeof e.originalEvent.targetTouches !== "undefined") ? e.originalEvent.targetTouches[0] : null;
+		data.xStart = (touch) ? touch.pageX : e.clientX;
+		data.yStart = (touch) ? touch.pageY : e.clientY;
+
+		data.$canister.on("touchmove.roller", data, _onTouchMove)
+					  .one("touchend.roller touchcancel.roller", data, _onTouchEnd);
+	}
+
+	/**
+	 * @method private
+	 * @name _onTouchMove
+	 * @description Handles touchmove event
+	 * @param e [object] "Event data"
+	 */
+	function _onTouchMove(e) {
+		e.stopPropagation();
+
+		var data = e.data,
+			touch = (typeof e.originalEvent.targetTouches !== "undefined") ? e.originalEvent.targetTouches[0] : null;
+
+		data.deltaX = data.xStart - ((touch) ? touch.pageX : e.clientX);
+		data.deltaY = data.yStart - ((touch) ? touch.pageY : e.clientY);
+
+		if (data.deltaX < -10 || data.deltaX > 10) {
+			e.preventDefault();
+		}
+
+		data.touchLeft = data.leftPosition - data.deltaX;
+		if (data.touchLeft > 0) {
+			data.touchLeft = 0;
+		}
+		if (data.touchLeft < data.maxMove) {
+			data.touchLeft = data.maxMove;
+		}
+
+		if (data.useMargin) {
+			data.$canister.css({ marginLeft: data.touchLeft });
+		} else {
+			data.$canister.css( _prefix("transform", "translate3d("+data.touchLeft+"px, 0, 0)") );
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onTouchEnd
+	 * @description Handles touchend event
+	 * @param e [object] "Event data"
+	 */
+	function _onTouchEnd(e) {
+		var data = e.data;
+
+		data.touchEnd = new Date().getTime();
+		data.leftPosition = data.touchLeft;
+		data.$canister.css( _prefix("transition", "") );
+
+		data.$canister.off("touchmove.roller touchend.roller touchcancel.roller");
+
+		var index = _calculateIndex(data);
+
+		if (data.touchPaged && !data.swipe) {
+			_position(data, index);
+		} else {
+			data.index = index;
+			_updateControls(data);
+		}
+		data.deltaX = null;
+		data.touchStart = 0;
+		data.touchEnd = 0;
+	}
+
+	/**
+	 * @method private
+	 * @name _autoAdvance
+	 * @description Handles auto advancement
+	 * @param data [object] "Instance data"
+	 */
+	function _autoAdvance(data) {
+		var index = data.index + 1;
+		if (index > data.pageCount) {
+			index = 0;
+		}
+		_position(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name _onAdvance
+	 * @description Handles item advancement
+	 * @param e [object] "Event data"
+	 */
+	function _onAdvance(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var data = e.data,
+			index = data.index + (($(e.currentTarget).hasClass("next")) ? 1 : -1);
+
+		_clearTimer(data.autoTimer);
+		_position(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name _onSelect
+	 * @description Handles item select
+	 * @param e [object] "Event data"
+	 */
+	function _onSelect(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var data = e.data,
+			index = data.$paginationItems.index($(e.currentTarget));
+
+		_clearTimer(data.autoTimer);
+		_position(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name _position
+	 * @description Handles updating instance position
+	 * @param data [object] "Instance data"
+	 * @param index [int] "Item index"
+	 */
+	function _position(data, index) {
+		if (index < 0) {
+			index = 0;
+		}
+		if (index > data.pageCount) {
+			index = data.pageCount;
+		}
+
+		if (data.single) {
+			data.$items.removeClass("active")
+					   .eq(index)
+					   .addClass("active");
+		} else {
+			if (data.paged) {
+				var offset = data.$items.eq(index).position();
+				if (offset) {
+					data.leftPosition = -offset.left;
+				}
+			} else {
+				data.leftPosition = -(index * data.pageMove);
+			}
+
+			if (data.leftPosition < data.maxMove) {
+				data.leftPosition = data.maxMove;
+			}
+
+			if (data.useMargin) {
+				data.$canister.css({ marginLeft: data.leftPosition });
+			} else {
+				data.$canister.css( _prefix("transform", "translate3d("+data.leftPosition+"px, 0, 0)") );
+			}
+		}
+
+		data.index = index;
+
+		_updateControls(data);
+
+		data.$roller.trigger("update.roller");
+	}
+
+	/**
+	 * @method private
+	 * @name _updateControls
+	 * @description Handles updating instance controls
+	 * @param data [object] "Instance data"
+	 */
+	function _updateControls(data) {
+		data.$captionItems.filter(".active").removeClass("active");
+		data.$captionItems.eq(data.index).addClass("active");
+
+		data.$paginationItems.filter(".active").removeClass("active");
+		data.$paginationItems.eq(data.index).addClass("active");
+
+		data.$items.removeClass("visible");
+		if (!data.single && data.perPage !== "Infinity") {
+			for (var i = 0; i < data.perPage; i++) {
+				if (data.leftPosition === data.maxMove) {
+					data.$items.eq(data.count - 1 - i).addClass("visible");
+				} else {
+					data.$items.eq((data.perPage * data.index) + i).addClass("visible");
+				}
+			}
+		}
+
+		if (data.pageCount <= 0) {
+			data.$controlItems.removeClass("enabled");
+		} else {
+			data.$controlItems.addClass("enabled");
+			if (data.index <= 0) {
+				data.$controlItems.filter(".previous").removeClass("enabled");
+			} else if (data.index >= data.pageCount || data.leftPosition === data.maxMove) {
+				data.$controlItems.filter(".next").removeClass("enabled");
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onRespond
+	 * @description Handles media query match change
+	 */
+	function _onRespond() {
+		var data = $(this).data("roller");
+
+		if (data.mediaQuery.matches) {
+			pub.enable.apply(data.$roller);
+		} else {
+			pub.disable.apply(data.$roller);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _calculateIndex
+	 * @description Determines new index based on current position
+	 * @param data [object] "Instance data"
+	 * @return [int] "New item index"
+	 */
+	function _calculateIndex(data) {
+		if (data.single) {
+			return data.index;
+		} if ((data.deltaX > 20 || data.deltaX < -20) && (data.touchStart && data.touchEnd) && data.touchEnd - data.touchStart < 200) {
+			// Swipe
+			return data.index + ((data.deltaX > 0) ? 1 : -1);
+		} else if (data.paged) {
+			// Find page
+			var goal = Infinity;
+			if (data.leftPosition === data.maxMove) {
+				return data.$items.length - 1;
+			} else {
+				var index = 0;
+				data.$items.each(function(i) {
+					var offset = $(this).position(),
+						check = offset.left + data.leftPosition;
+
+					if (check < 0) {
+						check = -check;
+					}
+
+					if (check < goal) {
+						goal = check;
+						index = i;
+					}
+				});
+				return index;
+			}
+		} else {
+			// Free scrolling
+			return Math.round( -data.leftPosition / data.viewportWidth);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _prefix
+	 * @description Builds vendor-prefixed styles
+	 * @param property [string] "Property to prefix"
+	 * @param value [string] "Property value"
+	 * @return [string] "Vendor-prefixed styles"
+	 */
+	function _prefix(property, value) {
+		var r = {};
+
+		r["-webkit-" + property] = value;
+		r[   "-moz-" + property] = value;
+		r[    "-ms-" + property] = value;
+		r[     "-o-" + property] = value;
+		r[             property] = value;
+
+		return r;
+	}
+
+	/**
+	 * @method private
+	 * @name _startTimer
+	 * @description Starts an internal timer
+	 * @param timer [int] "Timer ID"
+	 * @param time [int] "Time until execution"
+	 * @param callback [int] "Function to execute"
+	 * @param interval [boolean] "Flag for recurring interval"
+	 */
+	function _startTimer(timer, time, func, interval) {
+		_clearTimer(timer, interval);
+		if (interval === true) {
+			return setInterval(func, time);
+		} else {
+			return setTimeout(func, time);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _clearTimer
+	 * @description Clears an internal timer
+	 * @param timer [int] "Timer ID"
+	 */
+	function _clearTimer(timer) {
+		if (timer !== null) {
+			clearInterval(timer);
+			timer = null;
+		}
+	}
+
+	$.fn.roller = function(method) {
+		if (pub[method]) {
+			return pub[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || !method) {
+			return _init.apply(this, arguments);
+		}
+		return this;
+	};
+
+	$.roller = function(method) {
+		if (method === "defaults") {
+			pub.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
+		}
+	};
+})(jQuery, window);

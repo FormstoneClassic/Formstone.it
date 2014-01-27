@@ -1,0 +1,8 @@
+{% for page in navigation %}
+	<a href="{{ page.url }}" class="{% if page.current %}active{% endif %}">{{ page.title }}</a>
+	{% if page.children %}
+		<div class="children" style="margin-left: 20px">
+			{% include "layout/navigation-loop.html" with {'navigation': page.children} %}
+		</div>
+	{% endif %}
+{% endfor %}

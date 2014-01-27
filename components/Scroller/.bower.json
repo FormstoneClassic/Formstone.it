@@ -1,0 +1,15 @@
+{
+  "name": "Scroller",
+  "homepage": "https://github.com/benplum/Scroller",
+  "version": "0.6.4",
+  "_release": "0.6.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.6.4",
+    "commit": "7373fe805062821bdcff6c5d9e44da632980cc38"
+  },
+  "_source": "git://github.com/benplum/Scroller.git",
+  "_target": "~0.6.4",
+  "_originalSource": "Scroller",
+  "_direct": true
+}

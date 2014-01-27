@@ -1,0 +1,15 @@
+{
+  "name": "Contextualize",
+  "homepage": "https://github.com/benplum/Contextualize",
+  "version": "0.4.2",
+  "_release": "0.4.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.4.2",
+    "commit": "d0488d347694ea2ffb68cd8f309a77ea95b35c1f"
+  },
+  "_source": "git://github.com/benplum/Contextualize.git",
+  "_target": "~0.4.2",
+  "_originalSource": "Contextualize",
+  "_direct": true
+}

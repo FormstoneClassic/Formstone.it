@@ -1,0 +1,31 @@
+{
+  "name": "Naver",
+  "version": "3.0.3",
+  "description": "A jQuery plugin for responsive navigation. Part of the Formstone Library.",
+  "author": {
+    "name": "Ben Plum",
+    "email": "mr@benplum.com",
+    "url": "http://www.benplum.com"
+  },
+  "license": "MIT",
+  "homepage": "http://formstone.it/naver/",
+  "main": [
+    "jquery.fs.naver.js",
+    "jquery.fs.naver.css"
+  ],
+  "ignore": [
+    "*.jquery.json",
+    "Gruntfile.js",
+    "src/"
+  ],
+  "_release": "3.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.3",
+    "commit": "1d7994270adba044c3a8ee1f5a698ccbfdb33c78"
+  },
+  "_source": "git://github.com/benplum/Naver.git",
+  "_target": "~3.0.3",
+  "_originalSource": "Naver",
+  "_direct": true
+}

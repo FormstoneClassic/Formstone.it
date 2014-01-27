@@ -1,0 +1,31 @@
+{
+  "name": "Gridlock",
+  "version": "1.3.1",
+  "description": "A responsive CSS grid system.",
+  "keywords": [
+    "css",
+    "benplum"
+  ],
+  "authors": [
+    "Ben Plum"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.benplum.com/projects/gridlock/",
+  "main": [],
+  "ignore": [
+    "*.json",
+    "templates"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "_release": "1.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.3.1",
+    "commit": "6977d744d3fb8a3d63215f9677f12ad12b1d5932"
+  },
+  "_source": "git://github.com/benplum/Gridlock.git",
+  "_target": "~1.3.1",
+  "_originalSource": "Gridlock",
+  "_direct": true
+}

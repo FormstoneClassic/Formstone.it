@@ -1,0 +1,25 @@
+{% if not meta.pronto %}
+				<br />
+			</div>
+			<footer id="footer" class="row">
+				<div class="all-full copyright">
+					Made with &hearts; in Hampden
+				</div>
+			</footer>
+		</div>
+		<div class="shifter-navigation mobile_navigation">
+			{% include 'layout/navigation.html' %}
+		</div>
+		<script>
+			/*
+			var GridlockBookmarkletConfig = {
+			    useCookies: true,
+			    position: "bottom-left"
+			};
+			(function(){if(typeof GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://www.benplum.com/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
+			*/
+		</script>
+		<script src="{{ base_url }}/js/site.js"></script>
+	</body>
+</html>
+{% endif %}

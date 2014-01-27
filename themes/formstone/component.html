@@ -1,0 +1,140 @@
+{% include 'layout/header.html' %}
+<section class="row page component detail">
+	<div class="mobile-full tablet-full desktop-3 desktop_navigation">
+		{% include 'layout/navigation.html' %}
+	</div>
+	<article class="mobile-full tablet-full desktop-9">
+		<header class="intro">
+			<h1>{{ meta.title }}</h1>
+			<p class="emphasized orange">{{ meta.description }}</p>
+			<!--
+			<p>
+				Boxer is a simple way to display images, inline-content or iFramed URLs in a lightbox-style modal.
+			</p>
+			-->
+			<nav class="links">
+				{% if meta.demo %}
+				<a href="{{ meta.demo }}" class="button no-pronto">View Demo</a>
+				{% endif %}
+				{% if meta.repository %}
+				<a href="{{ meta.repository }}" class="button" target="_blank">Download</a>
+				{% endif %}
+			</nav>
+		</header>
+		<br />
+		<h2 id="usage">Usage</h2>
+		{% if meta.files %}
+		<h3>Installation</h3>
+		<p>Include the following resources on your page before initializing:</p>
+		<pre class="example"><code class="language-markup">{% if meta.files.js %}&lt;script src=&quot;{{ meta.files.js }}&quot;&gt;&lt;/script&gt;{% endif %}
+{% if meta.files.css %}&lt;link href=&quot;{{ meta.files.css }}&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;all&quot; /&gt;{% endif %}
+</code></pre>
+		{% endif %}
+		<h3>Bower</h3>
+		<p>You can deploy and update via the command line with <a href="http://bower.io/" target="_blank">Bower</a>:
+		<pre class="example"><code class="language-javascript">bower install {{ meta.name }}</code></pre>
+		<!--
+		<h3>Implimentation</h3>
+		<p>Boxer works like most of the other light box scripts out there. Target any links you'd like to open in a modal when initializing:</p>
+		<pre class="example"><code class="language-markup">&lt;a href="large-image.jpg" class="boxer"&gt;
+	&lt;img src="thumbnail-image.jpg" /&gt;
+&lt;/a&gt;</code></pre>
+		<pre class="example"><code class="language-javascript">$(".boxer").boxer();</code></pre>
+		-->
+		<br />
+		{% if meta.documentation.options %}
+		<h2 id="options">Options</h2>
+		<p>Options are set by passing a valid <code>options</code> object at initialization or to the public <code>"defaults"</code> method. You can also set custom options for a specific instance by attaching a <code>data-boxer-options</code> attribute containing a properly formatted JSON object to the target element.</p>
+		<div class="option_table_wrapper">
+			<table class="option_table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Default</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for option in meta.documentation.options %}
+					<tr>
+						<td><code>{{ option.name }}</code></td>
+						<td><code>{{ option.type }}</code></td>
+						<td><code>{{ option.default }}</code></td>
+						<td>{{ option.description }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<br />
+		{% endif %}
+		{% if meta.documentation.events %}
+		<h2 id="events">Events</h2>
+		<p>Events are triggered on the target instance's element, unless otherwise stated.</p>
+		<div class="option_table_wrapper">
+			<table class="option_table">
+				<thead>
+					<tr>
+						<th>Option</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for event in meta.documentation.events %}
+					<tr>
+						<td><code>{{ event.name }}</code></td>
+						<td>{{ event.description }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<br />
+		{% endif %}
+		{% if meta.documentation.methods %}
+		<h2 id="methods">Methods</h2>
+		<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+		{% for method in meta.documentation.methods %}
+			{% if not method.private %}
+		<div class="method">
+			<h3>{{ method.name }}</h3>
+			<p>{{ method.description }}</p>
+			{% if method.example %}
+			<pre class="example"><code class="language-javascript">{{ method.example }}</code></pre>
+			{% endif %}
+			{% if method.params %}
+			<div class="option_table_wrapper">
+				<table class="option_table">
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for param in method.params %}
+						<tr>
+							<td><code>{{ param.name }}</code></td>
+							<td><code>{{ param.type }}</code></td>
+							<td><code>{{ param.default }}</code></td>
+							<td>{{ param.description }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			{%  endif %}
+		</div>
+			{% endif %}
+		{% endfor %}
+		<br />
+		{% endif %}
+		{% if live %}
+		<div id="disqus_thread"></div>
+		{% endif %}
+	</article>
+</section>
+{% include 'layout/footer.html' %}
