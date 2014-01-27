@@ -15,6 +15,7 @@ class Nano__Headers {
 		"X-Frame-Options" => "SAMEORIGIN",
 		"X-XSS-Protection" => "1; mode=block",
 		"X-Permitted-Cross-Domain-Policies" => "master-only",
+		"X-Content-Type-Options" => "nosniff",
 		"Content-Security-Policy" => false, //
 		"Strict-Transport-Security" => false, // max-age=15768000
 		"Content-Type" => "text/html; charset=utf-8"
