@@ -7,7 +7,7 @@ Order: 1
 
 # Getting Started
 
-Formstone components are designed to be implemented with as little impact on your existing project as possible. Scripts are wrapped in self-executing closures and styles are individually namespaced to avoid collisions.
+Formstone components are designed to be implemented with as little impact on your existing project as possible. Scripts are wrapped in self-executing closures and styles are individually name spaced to avoid collisions.
 
 ### Deploy
 
