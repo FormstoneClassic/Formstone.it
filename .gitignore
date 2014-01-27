@@ -1,12 +1,12 @@
 # Composer
-composer.lock
-composer.phar
+#composer.lock
+#composer.phar
 
 # Pico
-lib/*
+#lib/*
 
 # Twig
-vendor/*
+#vendor/*
 
 #vendor/twig/twig/doc/*
 #vendor/twig/twig/ext/*
