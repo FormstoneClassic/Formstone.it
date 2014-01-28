@@ -78,7 +78,7 @@ class Nano_Resources {
 
 			$data = str_replace($keys, $vals, $data);
 
-			$min_lib = ROOT_DIR . "vendor/resources/" . $type . ".php";
+			$min_lib = ROOT_DIR . "vendor/nano_resources/" . $type . ".php";
 			if ($this->settings[$type]["minify"] && file_exists($min_lib)) {
 				require $min_lib;
 				if ($type === "js") {
