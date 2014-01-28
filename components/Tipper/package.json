@@ -1,15 +1,12 @@
 {
-  "name": "Picker",
-  "id": "picker",
-  "codename": "jquery.fs.picker",
-  "version": "3.0.7",
-  "description": "A jQuery plugin for replacing default checkboxes and radios. Part of the formstone library.",
+  "name": "Tipper",
+  "id": "tipper",
+  "codename": "jquery.fs.tipper",
+  "version": "3.0.0",
+  "description": "A jQuery plugin for simple tooltips. Part of the formstone library.",
   "keywords": [
-  	"radio",
-  	"checkbox",
-  	"input",
-  	"form",
-  	"ui",
+  	"tooltip",
+	"ui",
   	"javascript",
   	"jquery",
   	"formstone",
@@ -17,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benplum/Picker"
+    "url": "https://github.com/benplum/Tipper"
   },
-  "homepage": "http://formstone.it/picker/",
-  "demo": "http://formstone.it/components/Picker/demo/index.html",
+  "homepage": "http://formstone.it/tipper/",
+  "demo": "http://formstone.it/components/Tipper/demo/index.html",
   "license": "MIT",
   "author": {
     "name": "Ben Plum",

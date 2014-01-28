@@ -17,15 +17,5 @@
     "*.jquery.json",
     "Gruntfile.js",
     "src/"
-  ],
-  "_release": "3.0.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "3.0.0",
-    "commit": "136134bda1f456ba5fb9a3493d0a2c5f7f413081"
-  },
-  "_source": "git://github.com/benplum/Tipper.git",
-  "_target": "~3.0.0",
-  "_originalSource": "Tipper",
-  "_direct": true
+  ]
 }

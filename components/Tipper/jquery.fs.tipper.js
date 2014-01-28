@@ -1,129 +1,197 @@
-/*
- * Tipper Plugin [Formstone Library]
- * @author Ben Plum
- * @version 0.4.3
- *
- * Copyright © 2012 Ben Plum <mr@benplum.com>
- * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
- */
+/* 
+ * Tipper v3.0.0 - 2014-01-28 
+ * A jQuery plugin for simple tooltips. Part of the formstone library. 
+ * http://formstone.it/tipper/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */ 
 
-if (jQuery) (function($) {
-	
+;(function ($, window) {
+	"use strict";
+
+	var $body,
+		$tipper;
+
+	/**
+	 * @options
+	 * @param direction [string] <'top'> "Tooltip direction"
+	 * @param follow [boolean] <false> "Flag to follow mouse"
+	 * @param formatter [function] <$.noop> "Text format function"
+	 * @param margin [int] <15> "Tooltip margin"
+	 */
 	var options = {
-		direction: "right",
+		direction: "top",
 		follow: false,
-		formatter: function() {},
+		formatter: $.noop,
 		margin: 15
 	};
-	
-	// Public Methods
+
 	var pub = {
-		
+
+		/**
+		 * @method
+		 * @name defaults
+		 * @description Sets default plugin options
+		 * @param opts [object] <{}> "Options object"
+		 * @example $.tipper("defaults", opts);
+		 */
 		defaults: function(opts) {
 			options = $.extend(options, opts || {});
 			return $(this);
 		},
-		
+
+		/**
+		 * @method
+		 * @name destroy
+		 * @description Removes instance of plugin
+		 * @example $(".target").tipper("destroy");
+		 */
 		destroy: function() {
-			$(".tipper-wrapper").remove();
-			return $(this).off(".tipper")
-					  	  .data("tipper", null);
+			return $(this).trigger("mouseleave")
+						  .off(".tipper");
 		}
 	};
-		
+
+
+	/**
+	 * @method private
+	 * @name _init
+	 * @description Initializes plugin
+	 * @param opts [object] "Initialization options"
+	 */
 	function _init(opts) {
 		options.formatter = _format;
-		return $(this).on("mouseenter.tipper", _build)
-					  .data("tipper", $.extend({}, options, opts || {}));
+		return $(this).on("mouseenter.tipper", $.extend({}, options, opts || {}), _build);
 	}
-	
+
+	/**
+	 * @method private
+	 * @name _build
+	 * @description Builds target instance
+	 * @param e [object] "Event data"
+	 */
 	function _build(e) {
+		$body = $("body");
+
 		var $target = $(this),
-			data = $target.data("tipper");
-		
-		var html = '<div class="tipper-wrapper"><div class="tipper-content">';
-		html += data.formatter.apply($("body"), [$target]);
-		html += '</div><span class="tipper-caret"></span></div>';
-		
-		$target.data("tipper-text", $target.attr("title")).attr("title", null);
-		
-		var $tipper = $('<div class="tipper-positioner ' + data.direction + '" />');
-		$tipper.append(html)
-			   .appendTo("body");
-		
-		var $caret = $tipper.find(".tipper-caret"),
-			offset = $target.offset(),
-			targetWidth = $target.outerWidth(),
-			targetHeight = $target.outerHeight(),
-			tipperWidth = $tipper.outerWidth(true),
-			tipperHeight = $tipper.outerHeight(true),
-			tipperPos = {},
-			caretPos = {};
-		
-		if (data.direction == "right" || data.direction == "left") {
-			tipperPos.top = offset.top - ((tipperHeight - targetHeight) / 2);
-			caretPos.top = (tipperHeight - $caret.outerHeight(true)) / 2;
-			
-			if (data.direction == "right") {
-				tipperPos.left = offset.left + targetWidth + data.margin;
-			} else if (data.direction == "left") {
-				tipperPos.left = offset.left - tipperWidth - data.margin;
+			data = $.extend(true, {}, e.data, $target.data("tipper-options")),
+			html = '';
+
+		html += '<div class="tipper ' + data.direction + '">';
+		html += '<div class="tipper-content">';
+		html += data.formatter.apply($body, [$target]);
+		html += '<span class="tipper-caret"</span>';
+		html += '</div>';
+		html += '</div>';
+
+		data.$target = $target;
+		data.$tipper = $(html);
+
+		$body.append(data.$tipper);
+
+		data.$content = data.$tipper.find(".tipper-content");
+		data.$caret = data.$tipper.find(".tipper-caret");
+		data.offset = $target.offset();
+		data.height = $target.outerHeight();
+		data.width  = $target.outerWidth();
+
+		data.tipperPos = {};
+		data.caretPos = {};
+		data.contentPos = {};
+
+		var caretHeight   = data.$caret.outerHeight(true),
+			caretWidth    = data.$caret.outerWidth(true),
+			contentHeight = data.$content.outerHeight(true),
+			contentWidth  = data.$content.outerWidth(true) + caretWidth;
+
+		// position content
+		if (data.direction === "right" || data.direction === "left") {
+			data.caretPos.top = (contentHeight - caretHeight) / 2;
+			data.contentPos.top = -contentHeight / 2;
+			if (data.direction === "right") {
+				data.contentPos.left = caretWidth + data.margin;
+			} else if (data.direction === "left") {
+				data.contentPos.left = -(contentWidth + data.margin);
 			}
 		} else {
-			tipperPos.left = offset.left - ((tipperWidth - targetWidth) / 2);
-			caretPos.left = (tipperWidth - $caret.outerWidth(true)) / 2;
-			
-			if (data.direction == "bottom") {
-				tipperPos.top = offset.top + targetHeight + data.margin;
-			} else if (data.direction == "top") {
-				tipperPos.top = offset.top - tipperHeight - data.margin;
+			data.caretPos.left = (contentWidth - caretWidth) / 2;
+			data.contentPos.left = -contentWidth / 2;
+
+			if (data.direction === "bottom") {
+				data.contentPos.top = data.margin;
+			} else if (data.direction === "top") {
+				data.contentPos.top = -(contentHeight + data.margin);
 			}
 		}
-		
-		$tipper.css(tipperPos);
-		$caret.css(caretPos);
-		
-		$target.one("mouseleave.tipper", { 
-			$tipper: $tipper,
-			$target: $target
-		}, _destroy);
+
+		// modify dom
+		data.$content.css(data.contentPos);
+		data.$caret.css(data.caretPos);
+
+		// Position tipper
+		if (data.follow) {
+			data.$target.on("mousemove.tipper", data, _onMouseMove)
+						.trigger("mousemove");
+		} else {
+			if (data.direction === "right" || data.direction === "left") {
+				data.tipperPos.top = data.offset.top + (data.height / 2);
+				if (data.direction === "right") {
+					data.tipperPos.left = data.offset.left + data.width;
+				} else if (data.direction === "left") {
+					data.tipperPos.left = data.offset.left;
+				}
+			} else {
+				data.tipperPos.left = data.offset.left + (data.width / 2);
+				if (data.direction === "bottom") {
+					data.tipperPos.top = data.offset.top + data.height;
+				} else if (data.direction === "top") {
+					data.tipperPos.top = data.offset.top;
+				}
+			}
+
+			data.$tipper.css(data.tipperPos);
+		}
+
+		// Bind events
+		data.$target.one("mouseleave.tipper", data, _onMouseOut);
 	}
-	
+
+	/**
+	 * @method private
+	 * @name _format
+	 * @description Formats tooltip text
+	 * @param $target [jQuery object] "Target element"
+	 * @return [string] "Formatted text"
+	 */
 	function _format($target) {
-		return $target.attr("title");
+		return $target.data("title");
 	}
-	
-	function _destroy(e) {
+
+	/**
+	 * @method private
+	 * @name _onMouseMove
+	 * @description Handles mousemove event
+	 * @param e [object] "Event data"
+	 */
+	function _onMouseMove(e) {
 		var data = e.data;
-		data.$target.attr("title", data.$target.data("tipper-text"))
-					.data("tipper-text", null);
+
+		data.$tipper.css({ left: e.pageX, top: e.pageY });
+	}
+
+	/**
+	 * @method private
+	 * @name _onMouseOut
+	 * @description Handles mouseout event
+	 * @param e [object] "Event data"
+	 */
+	function _onMouseOut(e) {
+		var data = e.data;
+
 		data.$tipper.remove();
+		data.$target.off("mousemove.tipper mouseleave.tipper");
 	}
-	
-	/*
-	function _move(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		
-		var $tipper = $("#tipper");
-		
-		var width = $tipper.outerWidth(true);
-		var height = $tipper.outerHeight(true);
-		
-		var left = e.pageX + options.cursorOffset;
-		var top = e.pageY - ((options.caretOffset === "center") ? (height / 2) : options.caretOffset);
-		
-		if (left + width > $(window).width()) {
-			$tipper.addClass("left");
-			left = e.pageX - width - options.cursorOffset;
-		} else {
-			$tipper.removeClass("left");
-		}
-		
-		$tipper.css({ left: left, top: top });
-	}
-	*/
-	
+
 	$.fn.tipper = function(method) {
 		if (pub[method]) {
 			return pub[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -131,5 +199,11 @@ if (jQuery) (function($) {
 			return _init.apply(this, arguments);
 		}
 		return this;
+	};
+
+	$.tipper = function(method) {
+		if (method === "defaults") {
+			pub.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
+		}
 	};
 })(jQuery);
