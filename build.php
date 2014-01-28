@@ -9,7 +9,7 @@
 	$c = json_decode($c_file, true);
 
 	foreach ($c["components"] as $component) {
-		$dir = __DIR__ . "/components/" . $component . "/";
+		$dir = __DIR__ . "/components/" . ucwords($component) . "/";
 		if (is_dir($dir)) {
 			//parse();
 			$b_file = file_get_contents($dir . "bower.json");
@@ -82,10 +82,21 @@
 
 				file_put_contents(__DIR__ . "/content/components/" . $component . ".json", trim(json_encode($json)));
 				file_put_contents(__DIR__ . "/content/components/" . $component . ".md", trim($markdown));
+
+				echo "COMPLETE: " . $dir . "\n";
 			}
+		} else {
+			echo "NOT FOUND: " . $dir . "\n";
 		}
 	}
 
+	// Bust Component Cache
+	$files = glob(__DIR__ . "/lib/cache/pages/components-*");
+    foreach ($files as $file) {
+        if (!is_dir($file)) {
+            unlink($file);
+        }
+    }
 
 	function parseContent($content) {
 		$return = array();
@@ -157,6 +168,6 @@
 		return $return;
 	}
 
-	die("finished");
+	die("\nFINISHED");
 ?>
 </pre>
