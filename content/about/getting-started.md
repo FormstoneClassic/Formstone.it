@@ -34,4 +34,4 @@ When customizing any component, best practice is to deploy the production files 
 
 ### Contribute
 
-Find a bug? Have an idea for new functionality? You should check out [Contributing to Formstone](http://localhost:8888/formstone/about/contributing).
+Find a bug? Have an idea for new functionality? You should check out [Contributing to Formstone](http://formstone.it/about/contributing).
