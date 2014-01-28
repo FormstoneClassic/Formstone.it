@@ -12,12 +12,12 @@ class Nano_Navigation {
 
 	private $base_url = "";
 	private $navigation;
-	private $redirect_lower = false;
-	private $redirects = false;
+	private $redirect_lower;
+	private $redirects;
 
 	public function config_loaded(&$settings) {
 		$this->base_url = $settings["base_url"];
-		$this->redirects = $settings["nano_redirects"];
+		$this->redirects = isset($settings["nano_redirects"]) ? $settings["nano_redirects"] : false;
 	}
 
 	public function request_url(&$url) {
@@ -31,9 +31,7 @@ class Nano_Navigation {
 	}
 
 	public function file_meta(&$meta) {
-		if ($meta["template"] === "redirect") {
-			$this->redirect_lower = true;
-		}
+		$this->redirect_lower = ($meta["template"] === "redirect");
 	}
 
 	public function get_pages(&$pages, &$current_page, &$prev_page, &$next_page) {

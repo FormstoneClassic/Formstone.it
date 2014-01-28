@@ -10,17 +10,16 @@
  */
 class Nano_Resources {
 
-	private $settings = array();
-	private $theme = "";
-	private $base_url = "";
-	private $debug = false;
+	private $settings;
+	private $debug;
+	private $theme;
+	private $base_url;
 
 	public function config_loaded(&$settings) {
-		if (isset($settings["nano_resources"])) {
-			$this->settings = $settings["nano_resources"];
-			$this->debug = $this->settings["debug"];
-		}
-		$this->theme    = $settings["theme"];
+		$this->settings = isset($settings["nano_resources"]) ? $settings["nano_resources"] : array();
+		$this->debug = isset($this->settings["debug"]) ? $this->settings["debug"] : false;
+
+		$this->theme = $settings["theme"];
 		$this->base_url = $settings["base_url"];
 	}
 
@@ -79,8 +78,15 @@ class Nano_Resources {
 
 			$data = str_replace($keys, $vals, $data);
 
-			if ($this->settings[$type]["minify"]) {
-				//$data = JSMin::minify($data);
+			$min_lib = ROOT_DIR . "vendor/resources/" . $type . ".php";
+			if ($this->settings[$type]["minify"] && file_exists($min_lib)) {
+				require $min_lib;
+				if ($type === "js") {
+					$data = JShrink\Minifier::minify($data, array("flaggedComments" => false));
+				} else if ($type === "css") {
+					$data = CssMin::minify($data);
+				}
+				$data = trim($data);
 			}
 
 			if (!is_dir($cache_root)) {
@@ -89,6 +95,7 @@ class Nano_Resources {
 
 			$datestamp = date('Y-m-d H:i:s');
 			file_put_contents($cache_file, "/* CACHED : $datestamp */\n" . $data);
+
 			if ($type === "js") {
 				header("Content-type: text/javascript");
 			} else {

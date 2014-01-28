@@ -10,6 +10,7 @@
  */
 class Nano_Cache {
 
+	private $base_url;
 	private $cache_root;
 	private $cache_file;
 	private $cache_time = 604800; // 60*60*24*7, seven days
@@ -26,7 +27,7 @@ class Nano_Cache {
 	}
 
 	public function request_url(&$url) {
-		if ($_GET["pronto"] === "true" && $_SERVER["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest" && strpos($_SERVER["HTTP_REFERER"], $this->base_url) > -1) {
+		if (isset($_GET["pronto"]) && $_GET["pronto"] === "true" && $_SERVER["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest" && strpos($_SERVER["HTTP_REFERER"], $this->base_url) > -1) {
 			$this->pronto = true;
 		}
 

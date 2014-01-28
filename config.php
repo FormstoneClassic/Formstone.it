@@ -61,13 +61,14 @@ $config["nano_placeholder"] = array(
 
 /** !Resources Plugin */
 $config["nano_resources"] = array(
+	//"debug" => true,
 	"css" => array(
 		"files" => array(),
-		"minify" => false
+		"minify" => true
 	),
 	"js" => array(
 		"files" => array(),
-		"minify" => false
+		"minify" => true
 	)
 );
 

@@ -7,7 +7,7 @@ Order: 1
 
 # Getting Started
 
-Formstone components are designed to be implemented with as little impact on your existing project as possible. Scripts are wrapped in self-executing closures and styles are individually name spaced to avoid collisions.
+Formstone components are designed to be implemented easily without impacting your existing project. Scripts are wrapped in self-executing closures and styles are individually name spaced to avoid collisions.
 
 ### Deploy
 
@@ -23,14 +23,14 @@ Note: Bower will install components in a <code>bower-components</code> directory
 
 ### Implement
 
-Once installed, components can be implemented by including the files directly or hooking into your current build scripts:
+Once deployed, components can be implemented by including the files directly or hooking into your current build scripts:
 
-<pre class="example"><code class="language-markup">&lt;link href="/components/ComponentName/jquery.fs.component.css" rel="stylesheet" type="text/css" media="all" /&gt;
-&lt;script src="/components/ComponentName/jquery.fs.component.js"&gt;&lt;/script&gt;</code></pre>
+<pre class="example"><code class="language-markup">&lt;link href="/components/Component/jquery.fs.component.css" rel="stylesheet" type="text/css" media="all" /&gt;
+&lt;script src="/components/Component/jquery.fs.component.js"&gt;&lt;/script&gt;</code></pre>
 
 ### Customize
 
-When customizing any component, best practice is to include the production files as provided then implement and extend the component's properties in your local scripts and styles. This ensures the ability to update any component without overwriting custom styles.
+When customizing any component, best practice is to deploy the production files as provided then implement and extend the component's properties in your local scripts and styles. This ensures the ability to update any component without overwriting custom styles.
 
 ### Contribute
 
