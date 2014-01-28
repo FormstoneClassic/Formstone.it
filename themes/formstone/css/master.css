@@ -1,118 +1,107 @@
 /*-------------------------------------------
   Structure
 -------------------------------------------*/
-	/* 
+	/*
 	#header { background: $white; border-bottom: 1px solid $bgGray; height: 60px; overflow: hidden; padding: 20px; position: fixed; width: 100%; z-index: 5; }
 	.branding { color: $gray; $lato; font-size: 12px; letter-spacing: 0.2em; line-height: 1.1; text-transform: uppercase; }
 	.branding:before { background: $iconSprite 0 0; content: ''; display: block; float: left; height: 20px; margin: 0 10px 0 0; width: 20px; }
 	*/
-	
-	.mobile_handle { background: none; color: $lightGray; cursor: pointer; $lato; font-size: 12px; letter-spacing: 0.2em; line-height: 18px; text-transform: uppercase; }
+
+	.mobile_handle { background: none; color: $lightGray; cursor: pointer; display: block; $lato; font-size: 12px; letter-spacing: 0.2em; line-height: 18px; text-transform: uppercase; }
 	.mobile_handle:before { display: none; }
-	
-	
+
 	.shifter .shifter-handle { text-indent: 0; width: auto; }
 	.shifter .shifter-page { background: $white; box-shadow: none; padding-top: 60px; }
-	.shifter .shifter-navigation { background: $bgGray; padding-top: 80px; }
+	.shifter .shifter-navigation { background: $bgGray; overflow-y: scroll; padding-top: 80px; padding-bottom: 20px; }
 	.shifter-active .shifter-handle { background: none; }
-	
-	.mobile_handle { display: block; }
-	.desktop_navigation { display: none; }
-	
+
 	.navigation a { color: $textGray; display: block; font-size: 16px; margin: 20px 0; }
 	.navigation a.active { color: $orange; }
 	.navigation h5 { color: $lightGray; font-size: 12px; letter-spacing: 0.2em; margin: 13px 0; text-transform: uppercase; }
-	
+
 	.mobile_navigation { padding: 10px 30px; }
-	
-	
+	.mobile_navigation .navigation { padding-bottom: 20px; }
+
+	.desktop_navigation { display: none; }
+
+
 	.bar { padding: 50px 0; }
 	.bar.tan    { background: $tan; }
 	.bar.orange { background: $orange; }
 	.bar.gray   { background: $gray; }
-	
-	
+
 	.bar.feature { padding: 75px 0; text-align: center; }
-	.bar.feature h1 { color: $white; font-size: 30px; letter-spacing: 0.2em; margin: 0 0 25px; text-transform: uppercase; } 
+	.bar.feature h1 { color: $white; font-size: 30px; letter-spacing: 0.2em; margin: 0 0 25px; text-transform: uppercase; }
 	.bar.feature p { color: $white75; font-size: 16px; margin: 25px 0 0; padding: 0 20px; }
-	
+
 	.bar.feature h1:before { background: $iconSprite -15px 0; background-size: 500px 250px; content: ''; display: block; height: 60px; margin: 0 auto 30px; width: 60px; }
-	
-	
+
 	.bar h2 { color: $black25; font-size: 20px; letter-spacing: 0.2em; margin: 0 0 25px; text-align: center; text-transform: uppercase; }
 	.bar.gray h2 { color: $white50; }
-	
-	
+
+
 	.components a { color: $gray; }
 	.components h3 { margin-bottom: 10px; }
 	.components p { margin-top: 10px; }
-	
+
 	.features { text-align: center; }
 	.features h3 { color: $white; }
 	.features p { color: $white75; }
-	
-	
+
+
 	.page { padding: 25px 0; }
-	
-	
+
 	.component.detail h3 { color: $orange; }
-	
+
 	pre.example { background: $bgGray; border-left: 3px solid $lightGray; border-radius: 0; }
-	
-	
+
+
 	@media screen and (min-width: 500px) {
 	}
-	
+
 	@media screen and (min-width: 740px) {
 		#pronto { min-height: 500px; }
-		
+
 		.button { display: inline-block; margin: 0 10px 10px 0; padding: 0 30px; }
-		
+
 		.bar { padding: 75px 0; }
-		
-		
+
 		.bar.feature { padding: 125px 0; }
-		.bar.feature h1 { font-size: 45px; } 
+		.bar.feature h1 { font-size: 45px; }
 		.bar.feature h1:before { background: $iconSprite -30px 0; content: ''; display: block; height: 120px; margin: 0 auto 40px; width: 120px; }
-		
-		
+
 		.bar h2 { font-size: 28px; }
 		.bar.feature p { font-size: 18px; padding: 0; }
-		
-		
+
 		.components .component:nth-child(odd) { clear: both; }
-		
+
 		.features .feature { padding: 0 10px; }
 	}
-	
+
 	@media screen and (min-width: 980px) {
 		#pronto { min-height: 600px; }
-		
+
 		.button:hover { background: $black; }
-		
-		/* .shifter .mobile_handle { display: none; } */
+
 		.desktop_navigation { display: block; }
-		
+
 		.navigation a:hover { color: $gray; }
 		.navigation a.active { color: $orange; }
 		.desktop_navigation .navigation { padding: 15px 0; }
-		
-		
+
 		.bar { padding: 100px 0; }
-		
 		.bar.feature { padding: 175px 0; }
-		
-		
+
 		.components .component:nth-child(odd) { clear: none; }
 		.components .component:nth-child(3n+1) { clear: both; }
-		
+
 		.features .feature { padding: 0 45px; }
-		
+
 		.page { padding: 50px 0; }
 	}
-	
+
 	@media screen and (min-width: 1220px) {
 		.features .feature { padding: 0 50px; }
-		
+
 		.bar.feature p { padding: 0 30px; }
 	}

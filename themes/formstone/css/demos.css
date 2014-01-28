@@ -1,25 +1,24 @@
-
 /*-------------------------------------------
   Structure
 -------------------------------------------*/
 	.header { padding: 35px 0 20px 0; }
 	.page { padding: 50px 0; }
-	
-	
+
+
 /*-------------------------------------------
   Structure
 -------------------------------------------*/
-	
-	
+
+
 	@media screen and (min-width: 500px) {
 	}
-	
+
 	@media screen and (min-width: 740px) {
 	}
-	
+
 	@media screen and (min-width: 980px) {
 		.header { padding: 60px 0 20px 0; }
 	}
-	
+
 	@media screen and (min-width: 1220px) {
 	}
