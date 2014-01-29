@@ -83,10 +83,10 @@
 				file_put_contents(__DIR__ . "/content/components/" . $component . ".json", trim(json_encode($json)));
 				file_put_contents(__DIR__ . "/content/components/" . $component . ".md", trim($markdown));
 
-				echo "COMPLETE: " . $dir . "\n";
+				echo "COMPLETE: " . $component . "\n";
 			}
 		} else {
-			echo "NOT FOUND: " . $dir . "\n";
+			echo "NOT FOUND: " . $component . "\n";
 		}
 	}
 
