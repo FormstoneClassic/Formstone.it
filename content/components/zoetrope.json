@@ -1,1 +1,1 @@
-{"name":"Zoetrope","description":"A requestAnimationFrame polyfill and jQuery Animation shim. ","version":"3.0.2","demo":"http:\/\/formstone.it\/components\/Zoetrope\/demo\/index.html","repository":"https:\/\/github.com\/benplum\/Zoetrope","documentation":[],"files":{"js":"jquery.fs.zoetrope.js"}}
+{"name":"Zoetrope","description":"A requestAnimationFrame polyfill and jQuery Animation shim. ","version":"3.0.3","demo":null,"repository":"https:\/\/github.com\/benplum\/Zoetrope","documentation":[],"files":{"js":"jquery.fs.zoetrope.js"}}

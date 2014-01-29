@@ -35,13 +35,13 @@ class Nano_Resources {
 			if ( ($type == "js"  && isset($this->settings["js"]["files"][$file])  && is_array($this->settings["js"]["files"][$file]))
 			  || ($type == "css" && isset($this->settings["css"]["files"][$file]) && is_array($this->settings["css"]["files"][$file]))
 			 ) {
-				$this->processResource($file, $type);
+				$this->process_resource($file, $type);
 			}
 		}
 	}
 
 	// Process js / css
-	private function processResource($file, $type) {
+	private function process_resource($file, $type) {
 		$sources = $this->settings[$type]["files"][$file];
 		$vars = $this->settings[$type]["vars"];
 
@@ -55,7 +55,7 @@ class Nano_Resources {
 		$last_modified = 0;
 
 		foreach ($sources as $source) {
-			$m = file_exists($theme_root . "/$type/$source") ? filemtime($theme_root . "/$type/$source") : 0;
+			$m = file_exists($theme_root . "/$source") ? filemtime($theme_root . "/$source") : 0;
 			if ($m > $last_modified) {
 				$last_modified = $m;
 			}
@@ -64,7 +64,7 @@ class Nano_Resources {
 		if (!file_exists($cache_file) || $last_modified > $cache_modified || $this->debug === true) {
 			$data = "";
 			foreach ($sources as $source) {
-				$data .= file_exists($theme_root . "/$type/$source") ? file_get_contents($theme_root . "/$type/$source") . "\n" : "";
+				$data .= file_exists($theme_root . "/$source") ? file_get_contents($theme_root . "/$source") . "\n" : "";
 			}
 
 			$keys = array('$base_url', 'base_url', '$theme_url', 'theme_url');

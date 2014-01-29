@@ -1,5 +1,10 @@
 <?php
 
+/*
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+*/
+
 define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 define('CONTENT_DIR', ROOT_DIR .'content/');
 define('CONTENT_EXT', '.md');

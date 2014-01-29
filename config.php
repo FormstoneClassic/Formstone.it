@@ -21,8 +21,10 @@ $config["nano_redirects"] = array(
 	"shifter"		=> "components/shifter",
 	"stepper"		=> "components/stepper",
 	"tabber"		=> "components/tabber",
+	"tipper"		=> "components/tipper",
 	"wallpaper"		=> "components/wallpaper",
-	"zoetrope"		=> "components/zoetrope"
+	"zoetrope"		=> "components/zoetrope",
+	"zoomer"		=> "components/zoomer"
 );
 
 
@@ -63,104 +65,95 @@ $config["nano_placeholder"] = array(
 $config["nano_resources"] = array(
 	//"debug" => true,
 	"css" => array(
-		"files" => array(),
+		"files" => array(
+			"site" => array(
+				"../../components/Sprout/sprout.css",
+				"../../components/Gridlock/gridlock-base.css",
+				"../../components/Gridlock/gridlock-12.css",
+				"../../components/Shifter/jquery.fs.shifter.css",
+
+				"css/fonts.css",
+				"css/prism.css",
+				"css/base.css",
+				"css/master.css"
+			),
+			"print" => array(
+				"prints.css"
+			),
+			"demo" => array(
+				"../../components/Sprout/sprout.css",
+				"../../components/Gridlock/gridlock-base.css",
+				"../../components/Gridlock/gridlock-12.css",
+
+				"css/fonts.css",
+				"css/prism.css",
+				"css/base.css",
+				"css/demos.css"
+			),
+			"demo.ie" => array(
+				"../../components/Gridlock/gridlock-ie.css"
+			),
+			"gridlock.bookmarklet" => array(
+				"css/gridlock-bookmarklet.css"
+			)
+		),
+		"vars" => array(
+			"tan"         => "#D6C591",
+			"orange"  	  => "#C65032",
+			"gray" 		  => "#494C51",
+
+			"textGray"	  => "#666",
+			"bgGray"	  => "#f8f8f8",
+			"lighterGray" => "#ccc",
+			"lightGray"   => "#999",
+
+			"black0"      => "rgba(0, 0, 0, 0)",
+			"black25"     => "rgba(0, 0, 0, 0.25)",
+			"black50"     => "rgba(0, 0, 0, 0.5)",
+			"black75"     => "rgba(0, 0, 0, 0.75)",
+
+			"white0"      => "rgba(255, 255, 255, 0)",
+			"white25"     => "rgba(255, 255, 255, 0.25)",
+			"white50"     => "rgba(255, 255, 255, 0.5)",
+			"white75"     => "rgba(255, 255, 255, 0.75)",
+
+			"black"       => "#1C1F1D",
+			"white"       => "#fff",
+
+			"lato"   => "font-family: 'Lato', sans-serif;",
+			"ptMono" => "font-family: 'PTMono', monospace;",
+
+			"iconSprite" => "url(../images/icons.svg) no-repeat"
+		),
 		"minify" => true
 	),
 	"js" => array(
-		"files" => array(),
+		"files" => array(
+			"site" => array(
+				"../../components/jquery/jquery.min.js",
+				"../../components/Pronto/jquery.fs.pronto.min.js",
+				"../../components/Rubberband/jquery.fs.rubberband.min.js",
+				"../../components/Scout/jquery.bp.scout.js",
+				"../../components/Scout/jquery.bp.scout.maxScroll.js",
+				"../../components/Shifter/jquery.fs.shifter.min.js",
+
+				"js/prism.js",
+				"js/main.js"
+			),
+			"demo" => array(
+				"../../components/jquery/jquery.min.js",
+				"../../components/Rubberband/jquery.fs.rubberband.min.js",
+
+				"js/prism.js",
+				"js/demos.js"
+			),
+			"gridlock.bookmarklet" => array(
+				"gridlock-bookmarklet.js"
+			)
+		),
+		"vars" => array(
+			// "gridlock_bookmarklet_css" => file_get_contents("../cache/gridlock.bookmarklet.css")
+		),
 		"minify" => true
 	)
-);
-
-// JS
-$config["nano_resources"]["js"]["files"]["site"] = array(
-	"../../../components/jquery/jquery.min.js",
-	"../../../components/Pronto/jquery.fs.pronto.min.js",
-	"../../../components/Rubberband/jquery.fs.rubberband.min.js",
-	"../../../components/Scout/jquery.bp.scout.js",
-	"../../../components/Scout/jquery.bp.scout.maxScroll.js",
-	"../../../components/Shifter/jquery.fs.shifter.min.js",
-
-	"prism.js",
-	"main.js"
-);
-
-$config["nano_resources"]["js"]["files"]["demo"] = array(
-		"../../../components/jquery/jquery.min.js",
-		"../../../components/Rubberband/jquery.fs.rubberband.min.js",
-
-		"prism.js",
-	"demos.js"
-);
-
-$config["nano_resources"]["js"]["files"]["gridlock.bookmarklet"] = array(
-	"gridlock-bookmarklet.js"
-);
-
-$config["nano_resources"]["js"]["vars"] = array(
-	// "gridlock_bookmarklet_css" => file_get_contents("../cache/gridlock.bookmarklet.css")
-);
-
-// CSS
-$config["nano_resources"]["css"]["files"]["site"] = array(
-	"../../../components/Sprout/sprout.css",
-	"../../../components/Gridlock/gridlock-base.css",
-	"../../../components/Gridlock/gridlock-12.css",
-	"../../../components/Shifter/jquery.fs.shifter.css",
-
-	"fonts.css",
-	"prism.css",
-	"base.css",
-	"master.css"
-);
-
-$config["nano_resources"]["css"]["files"]["print"] = array(
-	"prints.css"
-);
-
-$config["nano_resources"]["css"]["files"]["demo"] = array(
-	"../../../components/Sprout/sprout.css",
-	"../../../components/Gridlock/gridlock-base.css",
-	"../../../components/Gridlock/gridlock-12.css",
-
-	"fonts.css",
-	"prism.css",
-	"base.css",
-	"demos.css"
-);
-$config["nano_resources"]["css"]["files"]["demo.ie"] = array(
-	"../../../components/Gridlock/gridlock-ie.css"
-);
-
-$config["nano_resources"]["css"]["files"]["gridlock.bookmarklet"] = array(
-	"gridlock-bookmarklet.css"
-);
-
-$config["nano_resources"]["css"]["vars"] = array(
-	"tan"         => "#D6C591",
-	"orange"  	  => "#C65032",
-	"gray" 		  => "#494C51",
-
-	"textGray"	  => "#666",
-	"bgGray"	  => "#f8f8f8",
-	"lighterGray" => "#ccc",
-	"lightGray"   => "#999",
-
-	"black0"      => "rgba(0, 0, 0, 0)",
-	"black25"     => "rgba(0, 0, 0, 0.25)",
-	"black50"     => "rgba(0, 0, 0, 0.5)",
-	"black75"     => "rgba(0, 0, 0, 0.75)",
-
-	"white0"      => "rgba(255, 255, 255, 0)",
-	"white25"     => "rgba(255, 255, 255, 0.25)",
-	"white50"     => "rgba(255, 255, 255, 0.5)",
-	"white75"     => "rgba(255, 255, 255, 0.75)",
-
-	"black"       => "#1C1F1D",
-	"white"       => "#fff",
-
-	"lato"   => "font-family: 'Lato', sans-serif;",
-	"ptMono" => "font-family: 'PTMono', monospace;",
-
-	"iconSprite" => "url(../images/icons.svg) no-repeat"
 );
