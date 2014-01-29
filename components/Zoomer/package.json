@@ -1,12 +1,14 @@
 {
-  "name": "Boxer",
-  "id": "boxer",
-  "codename": "jquery.fs.boxer",
-  "version": "3.0.7",
-  "description": "A jQuery plugin for displaying images, videos or content in a modal overlay. Part of the Formstone Library.",
+  "name": "Zoomer",
+  "id": "zoomer",
+  "codename": "jquery.fs.zoomer",
+  "version": "3.0.0",
+  "description":  "A jQuery plugin for smooth image exploration. Part of the formstone library.",
   "keywords": [
-  	"modal",
-  	"slideshow",
+  	"image",
+	"zoom",
+	"pinch",
+	"touch",
   	"ui",
   	"javascript",
   	"jquery",
@@ -15,10 +17,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benplum/Boxer"
+    "url": "https://github.com/benplum/Zoomer"
   },
-  "homepage": "http://formstone.it/boxer/",
-  "demo": "http://formstone.it/components/Boxer/demo/index.html",
+  "homepage": "http://formstone.it/components/zoomer/",
+  "demo": "http://formstone.it/components/Zoomer/demo/index.html",
   "license": "MIT",
   "author": {
     "name": "Ben Plum",

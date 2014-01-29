@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.9 - 2014-01-20 
+ * Roller v3.0.10 - 2014-01-29 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -70,7 +70,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (typeof data !== "undefined") {
+				if (data !== null) {
 					_clearTimer(data.autoTimer);
 
 					if (!data.single) {
@@ -110,7 +110,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (typeof data !== "undefined" && data.enabled) {
+				if (data !== null && data.enabled) {
 					_clearTimer(data.autoTimer);
 
 					data.enabled = false;
@@ -147,7 +147,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (typeof data !== "undefined" && !data.enabled) {
+				if (data !== null && !data.enabled) {
 					data.enabled = true;
 
 					data.$roller.addClass("enabled")
@@ -175,7 +175,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (typeof data !== "undefined" && data.enabled) {
+				if (data !== null && data.enabled) {
 					_clearTimer(data.autoTimer);
 					_position(data, index-1);
 				}
@@ -192,9 +192,8 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (typeof data !== "undefined" && data.enabled) {
+				if (data !== null && data.enabled) {
 					data.count = data.$items.length;
-					//data.viewportWidth = (data.$viewport.length > 0) ? data.$viewport.outerWidth(false) : data.$roller.outerWidth(false);
 					data.viewportWidth = data.$viewport.outerWidth(false);
 					data.itemMargin = parseInt(data.$items.eq(0).css("margin-left"), 10) + parseInt(data.$items.eq(0).css("margin-right"), 10);
 
@@ -209,7 +208,6 @@
 						data.perPage = 1;
 						data.pageCount = (data.canisterWidth > data.viewportWidth) ? data.count - 1 : 0;
 					} else {
-						//data.itemMargin = parseInt(data.$items.eq(0).css("margin-left"), 10) + parseInt(data.$items.eq(0).css("margin-right"), 10);
 						data.itemWidth = data.$items.eq(0).outerWidth(false) + data.itemMargin;
 						data.perPage = Math.floor(data.viewportWidth / data.itemWidth);
 						if (data.perPage < 1) {
@@ -262,7 +260,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (typeof data !== "undefined" && data.enabled) {
+				if (data !== null && data.enabled) {
 					data.$items = data.$roller.find(".roller-item");
 					pub.resize.apply(data.$roller);
 				}

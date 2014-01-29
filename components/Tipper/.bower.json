@@ -1,6 +1,6 @@
 {
   "name": "Tipper",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A jQuery plugin for simple tooltips. Part of the formstone library.",
   "author": {
     "name": "Ben Plum",
@@ -18,14 +18,13 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.0",
+  "_release": "3.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.0",
-    "commit": "136134bda1f456ba5fb9a3493d0a2c5f7f413081"
+    "tag": "3.0.1",
+    "commit": "cd31a6bb93b11dfc86c125bb35264ad99137b333"
   },
   "_source": "git://github.com/benplum/Tipper.git",
   "_target": "~3.0.0",
-  "_originalSource": "Tipper",
-  "_direct": true
+  "_originalSource": "Tipper"
 }

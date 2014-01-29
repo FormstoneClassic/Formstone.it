@@ -17,15 +17,5 @@
     "*.jquery.json",
     "Gruntfile.js",
     "src/"
-  ],
-  "_release": "3.0.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "3.0.0",
-    "commit": "63f51f390a670af1575fa88f4a2020640126f19e"
-  },
-  "_source": "git://github.com/benplum/Zoomer.git",
-  "_target": "~3.0.0",
-  "_originalSource": "Zoomer",
-  "_direct": true
+  ]
 }
