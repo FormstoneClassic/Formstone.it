@@ -1,6 +1,6 @@
 {
   "name": "Zoetrope",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A requestAnimationFrame polyfill and jQuery Animation shim. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -17,14 +17,13 @@
   "main": [
     "jquery.fs.zoetrope.js"
   ],
-  "_release": "3.0.2",
+  "_release": "3.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.2",
-    "commit": "e3a4693a778ff1745e3ed4e810f27efdc024a448"
+    "tag": "3.0.3",
+    "commit": "a63bd6a0e39a027ef9fb1a10558170d1e32692ca"
   },
   "_source": "git://github.com/benplum/Zoetrope.git",
   "_target": "~3.0.2",
-  "_originalSource": "Zoetrope",
-  "_direct": true
+  "_originalSource": "Zoetrope"
 }

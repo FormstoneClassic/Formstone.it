@@ -3,7 +3,6 @@
 
 A requestAnimationFrame polyfill and jQuery Animation shim. Part of the Formstone Library. 
 
-- [Demo](http://formstone.it/components/Zoetrope/demo/index.html) 
 - [Documentation](http://formstone.it/zoetrope/) 
 
 #### Bower Support 

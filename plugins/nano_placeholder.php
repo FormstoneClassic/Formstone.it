@@ -22,15 +22,15 @@ class Nano_Placeholder {
 		if (strpos($url, "placeholder") > -1) {
 			$url_parts = explode("/", strtolower($url));
 
-			if (count($url_parts) >= 2) {
-				if (strpos($url_parts[1], "x") > -1) {
+			if (count($url_parts) >= 3) {
+				if (strpos($url_parts[2], "x") > -1) {
 					// default
 					$style = "default";
-					$info = pathinfo($url_parts[1]);
+					$info = pathinfo($url_parts[2]);
 				} else {
 					// custom
-					$style = $url_parts[1];
-					$info = pathinfo($url_parts[2]);
+					$style = $url_parts[2];
+					$info = pathinfo($url_parts[3]);
 				}
 				$file = $info["filename"];
 				$size = explode("x", $file);

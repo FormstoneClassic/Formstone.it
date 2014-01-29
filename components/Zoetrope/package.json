@@ -2,7 +2,7 @@
   "name": "Zoetrope",
   "id": "zoetrope",
   "codename": "jquery.fs.zoetrope",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A requestAnimationFrame polyfill and jQuery Animation shim. Part of the Formstone Library.",
   "keywords": [
 	"animation",
@@ -18,7 +18,6 @@
     "url": "https://github.com/benplum/Zoetrope"
   },
   "homepage": "http://formstone.it/zoetrope/",
-  "demo": "http://formstone.it/components/Zoetrope/demo/index.html",
   "license": "MIT",
   "author": {
     "name": "Ben Plum",
