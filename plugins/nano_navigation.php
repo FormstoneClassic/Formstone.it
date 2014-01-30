@@ -17,7 +17,7 @@ class Nano_Navigation {
 
 	public function config_loaded(&$settings) {
 		$this->base_url = $settings["base_url"];
-		$this->redirects = isset($settings["nano_redirects"]) ? $settings["nano_redirects"] : false;
+		$this->redirects = isset($settings["nano_navigation"]["redirects"]) ? $settings["nano_navigation"]["redirects"] : false;
 	}
 
 	public function request_url(&$url) {

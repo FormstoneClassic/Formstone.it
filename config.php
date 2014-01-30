@@ -7,7 +7,7 @@ $config['theme'] = "formstone";
 
 
 /** !Redirect Plugin */
-$config["nano_redirects"] = array(
+$config["nano_navigation"]["redirects"] = array(
 	"boxer" 		=> "components/boxer",
 	"macaroon" 		=> "components/macaroon",
 	"mimeo" 		=> "components/mimeo",
