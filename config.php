@@ -49,14 +49,14 @@ $config["nano_placeholder"] = array(
 	"default" => array(
 		"background_color" => "CCCCCC",
 		"text_color" => "666666",
-		"image" => false,
-		"text" => false
+		//"image" => false,
+		//"text" => "Placeholder"
 	),
-	"black" => array(
+	"custom" => array(
 		"background_color" => "222222",
 		"text_color" => "666666",
-		"image" => false,
-		"text" => false
+		//"image" => false,
+		"text" => "Placeholder"
 	)
 );
 

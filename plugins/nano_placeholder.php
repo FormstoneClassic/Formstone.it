@@ -10,7 +10,14 @@
  */
 class Nano_Placeholder {
 
-	private $settings = array();
+	private $settings = array(
+		"default" => array(
+			"background_color" => "CCCCCC",
+			"text_color" => "666666",
+			//"image" => false,
+			"text" => false
+		)
+	);
 
 	public function config_loaded(&$settings) {
 		if (isset($settings["nano_placeholder"])) {
@@ -76,7 +83,6 @@ class Nano_Placeholder {
 		imagefill($image, 0, 0, $bg_color);
 
 		/*
-		// Add icon if provided
 		if ($icon_path) {
 			$icon_size = getimagesize($icon_path);
 			$icon_width = $icon_size[0];
@@ -88,14 +94,14 @@ class Nano_Placeholder {
 			imagesavealpha($icon, true);
 			imagealphablending($icon, true);
 			imagecopyresampled($image, $icon, $icon_x, $icon_y, 0, 0, $icon_width, $icon_height, $icon_width, $icon_height);
-		// Add text if provided or default to size
-		} elseif ($text) {
-			$font = BigTree::path("inc/lib/fonts/arial.ttf");
+			*/
+		//} elseif ($text) {
+		if ($text) {
+			$font = ROOT_DIR . ("vendor/nano_placeholder/arial.ttf");
 			$fontsize = ($width > $height) ? ($height / 15) : ($width / 15);
 			$textpos = imageTTFBbox($fontsize, 0, $font, $text);
 			imagettftext($image, $fontsize, 0, (($width - $textpos[2]) / 2), (($height - $textpos[5]) / 2), $text_color, $font, $text);
 		}
-		*/
 
 		// Serve image and die
 		header("Content-Type: image/png");
