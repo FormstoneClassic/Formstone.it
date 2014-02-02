@@ -63,11 +63,12 @@ $config["nano_placeholder"] = array(
 
 /** !Resources Plugin */
 $config["nano_resources"] = array(
-	//"debug" => true,
+	"debug" => true,
 	"css" => array(
 		"files" => array(
 			"site" => array(
-				"../../components/Sprout/sprout.css",
+				/* "../../components/Sprout/sprout.css", */
+				"../../components/normalize-css/normalize.css",
 				"../../components/Gridlock/gridlock-base.css",
 				"../../components/Gridlock/gridlock-12.css",
 				"../../components/Shifter/jquery.fs.shifter.css",
@@ -81,7 +82,8 @@ $config["nano_resources"] = array(
 				"prints.css"
 			),
 			"demo" => array(
-				"../../components/Sprout/sprout.css",
+				/* "../../components/Sprout/sprout.css", */
+				"../../components/normalize-css/normalize.css",
 				"../../components/Gridlock/gridlock-base.css",
 				"../../components/Gridlock/gridlock-12.css",
 
@@ -130,6 +132,8 @@ $config["nano_resources"] = array(
 	"js" => array(
 		"files" => array(
 			"site" => array(
+				"../../components/modernizr/modernizr.js",
+
 				"../../components/jquery/jquery.min.js",
 				"../../components/Pronto/jquery.fs.pronto.min.js",
 				"../../components/Rubberband/jquery.fs.rubberband.min.js",
