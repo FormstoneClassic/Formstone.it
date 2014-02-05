@@ -14,23 +14,23 @@
 		<meta name="author" content="{{ site_title }}" />
 
 		<!-- G+ AND FACEBOOK META TAGS -->
-		<meta property="og:title" content="" />
+		<meta property="og:title" content="{{ site_title }}" />
 		<meta property="og:url" content="{{ base_url }}" />
 		<meta property="og:type" content="website">
-		<meta property="og:image" content="http://formstone.it/images/facebook.jpg" />
-		<meta property="og:description" content="" />
+		<meta property="og:image" content="{{ base_url }}/images/social.jpg" />
+		<meta property="og:description" content="{{ meta.description }}" />
 		<meta property="og:site_name" content="{{ site_title }}" />
 
 		<!-- TWITTER CARD -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="@" />
-		<meta name="twitter:creator" content="@" />
+		<meta name="twitter:site" content="@FormstoneIt" />
+		<meta name="twitter:creator" content="@FormstoneIt" />
 		<meta name="twitter:url" content="{{ base_url }}" />
 		<meta name="twitter:title" content="{{ site_title }}" />
-		<meta name="twitter:description" content="" />
-		<meta name="twitter:image" content="http://formstone.it/images/facebook.jpg" />
+		<meta name="twitter:description" content="{{ meta.description }}" />
+		<meta name="twitter:image" content="{{ base_url }}/images/social.jpg" />
 
-		<title>{% if meta.title %}{{ meta.title }} &middot; {% endif %}{{ site_title }}</title>
+		<title>{% if meta.title and not is_front_page %}{{ meta.title }} &middot; {% endif %}{{ site_title }}</title>
 
 		<link rel="icon" href="{{ base_url }}/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="{{ base_url }}/favicon.ico" type="image/x-icon" />

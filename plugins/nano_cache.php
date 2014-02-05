@@ -6,7 +6,7 @@
  * @author Ben Plum
  * @link http://benplum.com
  * @license http://opensource.org/licenses/MIT
- * @Version 1.0.0
+ * @Version 1.0.1
  */
 class Nano_Cache {
 
@@ -46,7 +46,9 @@ class Nano_Cache {
 
 	public function file_meta(&$meta) {
 		$meta["pronto"] = $this->pronto;
-		$this->pronto_title = $meta["title"] . " &middot; " . $this->pronto_title;
+		if ($this->pronto_title !== $meta["title"]) {
+			$this->pronto_title = $meta["title"] . " &middot; " . $this->pronto_title;
+		}
 	}
 
 	public function after_render(&$output) {
