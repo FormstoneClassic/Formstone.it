@@ -127,9 +127,38 @@
 
 				<br />
 
+				<!-- AUTO WIDTH -->
+				<h2>Auto Width</h2>
+				<p>Roller will base all calculations on the item's widths, allowing items with varying widths to exists in the same instance. You can also set Roller to automatically resize all of it's items to the viewport width.</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").roller({
+	autoWidth: true
+});</code></pre>
+
+<h5>Demo</h5>
+				<div class="rolled" data-roller-options='{"autoWidth":"true"}'>
+					<div class="roller-item">
+						1
+					</div>
+					<div class="roller-item">
+						2
+					</div>
+					<div class="roller-item">
+						3
+					</div>
+					<div class="roller-item">
+						4
+					</div>
+					<div class="roller-item">
+						5
+					</div>
+				</div>
+
+				<br />
+
 				<!-- SINGLE -->
 				<h2>Single</h2>
-				<p>The:</p>
+				<p>To display a single item at a time:</p>
 
 				<pre class="example"><code class="language-javascript">$(".target").roller({
 	single: true

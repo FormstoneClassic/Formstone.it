@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.10 - 2014-01-29 
+ * Roller v3.0.12 - 2014-02-06 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -11,8 +11,9 @@
 
 	/**
 	 * @options
-	 * @param auto [boolean] <false> "Flag to auto advance items"
+	 * @param autoAdvance [boolean] <false> "Flag to auto advance items"
 	 * @param autoTime [int] <8000> "Auto advance time"
+	 * @param autoWidth [boolean] <false> "Flag to fit items to viewport width"
 	 * @param controls [boolean] <true> "Flag to draw controls"
 	 * @param customClass [string] <''> "Class applied to instance"
 	 * @param duration [int] <500> "Animation duration; should match CSS animation time"
@@ -25,8 +26,9 @@
 	 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 	 */
 	var options = {
-		auto: false,
+		autoAdvance: false,
 		autoTime: 8000,
+		autoWidth: false,
 		//canister: true, * @param canister [boolean] <true> "Flag to draw canister"
 		controls: true,
 		customClass: "",
@@ -70,7 +72,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (data !== null) {
+				if (data) {
 					_clearTimer(data.autoTimer);
 
 					if (!data.single) {
@@ -110,7 +112,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (data !== null && data.enabled) {
+				if (data && data.enabled) {
 					_clearTimer(data.autoTimer);
 
 					data.enabled = false;
@@ -147,7 +149,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (data !== null && !data.enabled) {
+				if (data && !data.enabled) {
 					data.enabled = true;
 
 					data.$roller.addClass("enabled")
@@ -175,7 +177,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (data !== null && data.enabled) {
+				if (data && data.enabled) {
 					_clearTimer(data.autoTimer);
 					_position(data, index-1);
 				}
@@ -192,10 +194,14 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (data !== null && data.enabled) {
+				if (data && data.enabled) {
 					data.count = data.$items.length;
 					data.viewportWidth = data.$viewport.outerWidth(false);
 					data.itemMargin = parseInt(data.$items.eq(0).css("margin-left"), 10) + parseInt(data.$items.eq(0).css("margin-right"), 10);
+
+					if (data.autoWidth) {
+						data.$items.css({ width: data.viewportWidth });
+					}
 
 					if (data.single) {
 						data.perPage = 1;
@@ -260,7 +266,7 @@
 			return $(this).each(function() {
 				var data = $(this).data("roller");
 
-				if (data !== null && data.enabled) {
+				if (data && data.enabled) {
 					data.$items = data.$roller.find(".roller-item");
 					pub.resize.apply(data.$roller);
 				}
@@ -380,7 +386,7 @@
 			}
 
 			// Auto timer
-			if (data.auto) {
+			if (data.autoAdvance || data.auto) { // backwards compatibility
 				data.autoTimer = _startTimer(data.autoTimer, data.autoTime, function() {
 					_autoAdvance(data);
 				}, true);

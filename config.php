@@ -131,9 +131,10 @@ $config["nano_resources"] = array(
 	),
 	"js" => array(
 		"files" => array(
+			"modernizr" => array(
+				"js/modernizr.custom.js",
+			),
 			"site" => array(
-				"../../components/modernizr/modernizr.js",
-
 				"../../components/jquery/jquery.min.js",
 				"../../components/Pronto/jquery.fs.pronto.min.js",
 				"../../components/Rubberband/jquery.fs.rubberband.min.js",

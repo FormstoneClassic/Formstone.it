@@ -1,5 +1,5 @@
 /* 
- * Tabber v3.0.4 - 2014-01-29 
+ * Tabber v3.0.5 - 2014-02-06 
  * A jQuery plugin for adding simple tabbed interfaces. Part of the Formstone Library. 
  * http://formstone.it/tabber/ 
  * 
@@ -43,7 +43,7 @@
 			return $(this).each(function(i) {
 				var data = $(this).data("tabber");
 
-				if (data !== null) {
+				if (data) {
 					data.$mobileHandles.remove();
 					data.$tabber.removeClass("tabber initialized " + data.customClass)
 							    .off(".tabber")
@@ -63,7 +63,7 @@
 			return $(this).each(function(i) {
 				var data = $(this).data("tabber");
 
-				if (data !== null) {
+				if (data) {
 					_set(data, index - 1);
 				}
 			});
