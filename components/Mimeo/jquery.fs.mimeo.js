@@ -1,5 +1,5 @@
 /* 
- * Mimeo v3.0.3 - 2014-01-20 
+ * Mimeo v3.0.4 - 2014-02-12 
  * A jQuery plugin for responsive images. Part of the Formstone Library. 
  * http://formstone.it/mimeo/ 
  * 
@@ -8,29 +8,54 @@
 
 ;(function ($, window) {
 	"use strict";
-	
+
 	var $window = $(window),
-		$pictures;
-		//nativeSupport = (document.createElement('picture') && window.HTMLPictureElement)
-	
+		$pictures = null,
+		pixelRatio = (typeof window.devicePixelRatio !== "undefined") ? Math.ceil(window.devicePixelRatio) : 1;
+
 	var pub = {
-		
+
 		/**
-		 * @method 
+		 * @method
 		 * @name update
 		 * @description Updates cache of active picture elements
-		 * @example $.mimeo("update);
-		 */ 
+		 * @example $.mimeo("update");
+		 */
 		update: function() {
-			$pictures = $("picture");
-			
-			$pictures.each(function(i, picture) {
+			$pictures = $("picture").each(function(i, picture) {
 				var $sources = $(picture).find("source, .mimeo-source");
-				
+
 				for (var j = 0, count = $sources.length; j < count; j++) {
 					var $source = $sources.eq(j),
-						media = $source.attr("media");
-					
+						media = $source.attr("media"),
+						srcset = $source.attr("srcset");
+
+					// Check for srcset
+					if (srcset) {
+						var sources = {},
+							ratio = 1;
+
+						// Check each source
+						srcset = srcset.split(",");
+						for (var k in srcset) {
+							if (srcset.hasOwnProperty(k)) {
+								var s = srcset[k].trim().split(" "),
+									r = parseInt(s[1], 10);
+
+								// Get the largest source possible
+								if (r > ratio && r <= pixelRatio) {
+									ratio = r;
+								}
+
+								sources[r] = s[0];
+							}
+						}
+
+						// Store all soruces and set target src attribute
+						$source.data("mimeo-sources", sources)
+							   .attr("src", sources[ratio]);
+					}
+
 					if (media) {
 						var _mq = window.matchMedia(media.replace(Infinity, "100000px"));
 						_mq.addListener(_respond);
@@ -38,64 +63,62 @@
 					}
 				}
 			});
-			
+
 			_respond();
 		}
 	};
-	
+
 	/**
 	 * @events
 	 * @event change.mimeo "Image source change; trigged on target <picture> element"
 	 */
-	
+
 	/**
 	 * @method private
 	 * @name _init
 	 * @description Initialize plugin
 	 * @param opts [object] "Initialization options"
-	 */ 
+	 */
 	function _init(opts) {
 		//$.extend(options, opts || {});
-		
+
 		//if (nativeSupport) {
 		//	return;
 		//}
-		
+
 		pub.update();
 	}
-	
+
 	/**
 	 * @method private
 	 * @name _respond
 	 * @description Handle media query changes
-	 */ 
+	 */
 	function _respond() {
 		$pictures.each(function() {
 			var $target = $(this),
 				$image = $target.find("img"),
 				$sources = $target.find("source, .mimeo-source"),
 				index = false;
-			
+
 			for (var i = 0, count = $sources.length; i < count; i++) {
 				var match = $sources.eq(i).data("mimeo-match");
-				
-				if (match) {
-					if (match.matches) {
-						index = i;
-					}
+
+				if (match && match.matches) {
+					index = i;
 				}
 			}
-			
+
 			if (index === false) {
 				index = $sources.length - 1;
 			}
-			
+
 			$image.attr("src", $sources.eq(index).attr("src"));
-			
+
 			$target.trigger("change.mimeo");
 		});
 	}
-	 
+
 	$.mimeo = function(method) {
 		if (pub[method]) {
 			return pub[method].apply(this, Array.prototype.slice.call(arguments, 1));

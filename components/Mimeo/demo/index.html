@@ -3,17 +3,17 @@
 	<head>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    	
+
 		<title>Mimeo Demo</title>
-		
+
 		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
-		
+
 		<!--[if LTE IE 8]>
 			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
 		<![endif]-->
-		
+
 		<script src="http://formstone.it/js/demo.js"></script>
-		
+
 		<!--[if LTE IE 9]>
 			<script src="ie/html5.js"></script>
 		<![endif]-->
@@ -23,15 +23,15 @@
 		<!--[if LTE IE 8]>
 			<script src="ie/matchMedia.ie8.js"></script>
 		<![endif]-->
-		
+
 		<script src="../jquery.fs.mimeo.js"></script>
-		
+
 		<style>
 			picture { display: block; margin: 25px 0; }
-			picture, 
+			picture,
 			picture img { width: 100%; }
 		</style>
-		
+
 		<script>
 			$(document).ready(function() {
 				$.mimeo();
@@ -54,11 +54,11 @@
 					<br />
 					<a href="http://formstone.it/mimeo/" class="button">View Documentation</a>
 				</header>
-			
+
 				<!-- Basic -->
 				<h2>Basic</h2>
 				<p>Simply markup your images using the proposed <code>&lt;picture&gt;</code> structure. The nested <code>&lt;img&gt;</code> source attribute should be set to the smallest source to reduce initial page load on mobile devices. Don't forget to set the image's width and height in CSS to maintain proper dimensions as the source changes.</p>
-				
+
 				<pre class="example"><code class="language-javascript">$.mimeo();</code></pre>
 				<pre class="example"><code class="language-markup">&lt;picture&gt;
 	&lt;source media="(min-width: 500px)" src="image-med.jpg"&gt;
@@ -67,7 +67,7 @@
 	&lt;source src="image-small.jpg"&gt;
 	&lt;img src="image-small.jpg"&gt;
 &lt;/picture&gt;</code></pre>
-				
+
 				<h5>Demo</h5>
 				<div class="clear_fix">
 					<picture>
@@ -78,9 +78,9 @@
 						<img src="http://formstone.it/images/placeholder/300x300">
 					</picture>
 				</div>
-				
+
 				<p>Mimeo will work with any valid media query, however you may have to adjust the order of the <code>source</code> tags since they will be read top down.</p>
-				
+
 				<pre class="example"><code class="language-markup">&lt;picture&gt;
 	&lt;source media="(max-width: Infinity)" src="image-x-large.jpg"&gt;
 	&lt;source media="(max-width: 980px)" src="image-large.jpg"&gt;
@@ -89,7 +89,7 @@
 	&lt;source src="image-small.jpg"&gt;
 	&lt;img src="image-small.jpg"&gt;
 &lt;/picture&gt;</code></pre>
-				
+
 				<h5>Demo</h5>
 				<div class="clear_fix">
 					<picture>
@@ -101,14 +101,40 @@
 						<img src="http://formstone.it/images/placeholder/300x300">
 					</picture>
 				</div>
-				
+
 				<br />
-				
+
+				<!-- srcset -->
+				<h2>Source Set</h2>
+				<p>Mimeo will also auto-detect <code>srcset</code> attributes and assign the proper source based on the current device's pixel ratio:</p>
+
+				<pre class="example"><code class="language-markup">&lt;picture&gt;
+	&lt;source media="(max-width: Infinity)" srcset="image-x-large.jpg 1x, image-x-large-hr.jpg 2x"&gt;
+	&lt;source media="(max-width: 980px)" srcset="image-large.jpg 1x, image-large-hr.jpg 2x"&gt;
+	&lt;source media="(max-width: 740px)" srcset="image-med.jpg 1x, image-med-hr.jpg 2x"&gt;
+	&lt;source media="(max-width: 500px)" srcset="image-small.jpg 1x, image-small-hr.jpg 2x"&gt;
+	&lt;source srcset="image-small.jpg 1x, image-small-hr.jpg 2x"&gt;
+	&lt;img src="image-small.jpg"&gt;
+&lt;/picture&gt;</code></pre>
+
+				<h5>Demo</h5>
+				<div class="clear_fix">
+					<picture>
+						<source media="(max-width: Infinity)" srcset="http://formstone.it/images/placeholder/1000x300 1x, http://formstone.it/images/placeholder/2000x600 2x">
+						<source media="(max-width: 980px)" srcset="http://formstone.it/images/placeholder/750x300 1x, http://formstone.it/images/placeholder/1000x600 2x">
+						<source media="(max-width: 740px)" srcset="http://formstone.it/images/placeholder/500x300 1x, http://formstone.it/images/placeholder/1000x600 2x">
+						<source media="(max-width: 500px)" srcset="http://formstone.it/images/placeholder/300x300 1x, http://formstone.it/images/placeholder/600x600 2x">
+						<source srcset="http://formstone.it/images/placeholder/300x300 1x, http://formstone.it/images/placeholder/600x600 2x">
+						<img src="http://formstone.it/images/placeholder/300x300">
+					</picture>
+				</div>
+
+				<br />
+
 				<!-- IE -->
 				<h2>IE Support</h2>
 				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>). IE 9 also has a strange bug where <code>source</code> tags will only exist inside of a <code>video</code> tag. Instead of <code>source</code> tags, use a <code>span</code> with the class <code>mimeo-source</code>:</p>
-				
-				<pre class="example"><code class="language-javascript">$.mimeo();</code></pre>
+
 				<pre class="example"><code class="language-markup">&lt;picture&gt;
 	&lt;span class="mimeo-source" media="(min-width: 500px)" src="image-med.jpg"&gt;&lt;/span&gt;
 	&lt;span class="mimeo-source" media="(min-width: 740px)" src="image-large.jpg"&gt;&lt;/span&gt;
@@ -116,7 +142,7 @@
 	&lt;span class="mimeo-source" src="image-small.jpg"&gt;&lt;/span&gt;
 	&lt;img src="image-small.jpg"&gt;
 &lt;/picture&gt;</code></pre>
-				
+
 				<h5>Demo</h5>
 				<p>Note: This example will work in all browsers, but is the only example that will work in IE 9.</p>
 				<div class="clear_fix">
@@ -129,10 +155,10 @@
 						<img src="http://formstone.it/images/placeholder/300x300">
 					</picture>
 				</div>
-				
+
 			</div>
 		</article>
-		
+
 		<footer id="footer" class="row">
 			<div class="all-full copyright">
 				Made with &hearts; in Hampden
