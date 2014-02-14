@@ -8,6 +8,9 @@
 				}
 			});
 
+			Site.$window = $(window);
+			Site.$page = $(".shifter-page");
+
 			$.rubberband({
 				minWidth: [ 320, 500, 740, 980, 1220 ],
 				maxWidth: [ 1220, 980, 740, 500, 320 ],
@@ -19,15 +22,17 @@
 			$.scout();
 
 			Site._onRender();
+			Site._sizePage();
 
 			$(window).on("snap", function(e, data) {
 				//console.log("OH SNAP! ", data);
 			}).on("pronto.request", Site._onRequest)
 			  .on("pronto.load", Site._onLoad)
-			  .on("pronto.render", Site._onRender);
+			  .on("pronto.render", Site._onRender)
+			  .on("resize", Site._sizePage);
 		},
 		_onLoad: function() {
-			Disqus._destroy();
+			//Disqus._destroy();
 		},
 		_onRequest: function() {
 			$.shifter("close");
@@ -39,7 +44,7 @@
 			});
 
 			Site._checkMainNav();
-			Disqus._load();
+			//Disqus._load();
 
 			$("#pronto").css({ opacity: 1 });
 		},
@@ -51,6 +56,9 @@
 					$(this).addClass("active");
 				}
 			});
+		},
+		_sizePage: function() {
+			Site.$page .css({ minHeight: Site.$window.height() });
 		}
 	};
 
