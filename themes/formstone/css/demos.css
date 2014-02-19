@@ -10,10 +10,10 @@
 
 	input.button { border: none; }
 
-	.form label { display: block; font-size: 12px; margin: 0 0 5px; text-transform: uppercase; }
+	.form label { display: block; font-size: 12px; font-size: 12rem; margin: 0 0 5px; text-transform: uppercase; }
 	.form .button { width: 100%; }
 	.form input[type=text],
-	.form textarea { border-radius: 3px; border: 1px solid $lighterGray; box-shadow: none; font-size: 14px; margin: 0 0 10px; padding: 10px; width: 100%; }
+	.form textarea { border-radius: 3px; border: 1px solid $lighterGray; box-shadow: none; font-size: 14px; font-size: 14rem; margin: 0 0 10px; padding: 10px; width: 100%; }
 	.form h5 { margin-top: 0; }
 
 	.output { background: #fff; border: 1px solid #ccc; border-radius: 3px; height: 200px; overflow-y: scroll; overflow-x: hidden; margin: 20px 0 0; padding: 0 20px; }

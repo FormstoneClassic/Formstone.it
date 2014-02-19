@@ -5,7 +5,7 @@
 /*-------------------------------------------
   Mobile - Min
 -------------------------------------------*/
-	.mobile_handle { background: none; color: $lightGray; cursor: pointer; $lato; font-size: 12px; letter-spacing: 0.2em; line-height: 18px; text-transform: uppercase; }
+	.mobile_handle { background: none; color: $lightGray; cursor: pointer; $lato; font-size: 12px; font-size: 12rem; letter-spacing: 0.2em; line-height: 18px; text-transform: uppercase; }
 	.mobile_handle:before { display: none; }
 
 
@@ -18,9 +18,9 @@
 	.mobile_handle { display: block; }
 	.desktop_navigation { display: none; }
 
-	.navigation a { color: $textGray; display: block; font-size: 16px; margin: 20px 0; }
+	.navigation a { color: $textGray; display: block; font-size: 16px; font-size: 16rem; margin: 20px 0; }
 	.navigation a.active { color: $orange; }
-	.navigation h5 { color: $lightGray; font-size: 12px; letter-spacing: 0.2em; margin: 13px 0; text-transform: uppercase; }
+	.navigation h5 { color: $lightGray; font-size: 12px; font-size: 12rem; letter-spacing: 0.2em; margin: 13px 0; text-transform: uppercase; }
 
 	.mobile_navigation { padding: 10px 30px; }
 	.mobile_navigation .navigation { padding: 0 0 20px; }
@@ -33,13 +33,13 @@
 
 
 	.bar.feature { padding: 75px 0; text-align: center; }
-	.bar.feature h1 { color: $white; font-size: 30px; letter-spacing: 0.2em; margin: 0 0 25px; text-transform: uppercase; }
-	.bar.feature p { color: $white; color: $white75; font-size: 16px; margin: 25px 0 0; padding: 0 20px; }
+	.bar.feature h1 { color: $white; font-size: 30px; font-size: 30rem; letter-spacing: 0.2em; margin: 0 0 25px; text-transform: uppercase; }
+	.bar.feature p { color: $white; color: $white75; font-size: 16px; font-size: 16rem; margin: 25px 0 0; padding: 0 20px; }
 
 	.bar.feature h1:before { background: $iconSprite -15px 0; background-size: 500px 250px; content: ''; display: block; height: 60px; margin: 0 auto 30px; width: 60px; }
 
 
-	.bar h2 { color: $black25; font-size: 20px; letter-spacing: 0.2em; margin: 0 0 25px; text-align: center; text-transform: uppercase; }
+	.bar h2 { color: $black25; font-size: 20px; font-size: 20rem; letter-spacing: 0.2em; margin: 0 0 25px; text-align: center; text-transform: uppercase; }
 	.bar.gray h2 {  color: $white; color: $white50; }
 
 
@@ -78,12 +78,12 @@
 
 
 		.bar.feature { padding: 125px 0; }
-		.bar.feature h1 { font-size: 45px; }
+		.bar.feature h1 { font-size: 45px; font-size: 45rem; }
 		.bar.feature h1:before { background: $iconSprite -30px 0; content: ''; display: block; height: 120px; margin: 0 auto 40px; width: 120px; }
 
 
-		.bar h2 { font-size: 28px; }
-		.bar.feature p { font-size: 18px; padding: 0; }
+		.bar h2 { font-size: 28px; font-size: 28rem; }
+		.bar.feature p { font-size: 18px; font-size: 18rem; padding: 0; }
 
 
 		.components .component:nth-child(odd) { clear: both; }
