@@ -1,12 +1,10 @@
 /*-------------------------------------------
-  Structure
+  Master
 -------------------------------------------*/
-	/*
-	#header { background: $white; border-bottom: 1px solid $bgGray; height: 60px; overflow: hidden; padding: 20px; position: fixed; width: 100%; z-index: 5; }
-	.branding { color: $gray; $lato; font-size: 12px; letter-spacing: 0.2em; line-height: 1.1; text-transform: uppercase; }
-	.branding:before { background: $iconSprite 0 0; content: ''; display: block; float: left; height: 20px; margin: 0 10px 0 0; width: 20px; }
-	*/
 
+/*-------------------------------------------
+  Mobile - Min
+-------------------------------------------*/
 	.mobile_handle { background: none; color: $lightGray; cursor: pointer; $lato; font-size: 12px; letter-spacing: 0.2em; line-height: 18px; text-transform: uppercase; }
 	.mobile_handle:before { display: none; }
 
@@ -36,13 +34,13 @@
 
 	.bar.feature { padding: 75px 0; text-align: center; }
 	.bar.feature h1 { color: $white; font-size: 30px; letter-spacing: 0.2em; margin: 0 0 25px; text-transform: uppercase; }
-	.bar.feature p { color: $white75; font-size: 16px; margin: 25px 0 0; padding: 0 20px; }
+	.bar.feature p { color: $white; color: $white75; font-size: 16px; margin: 25px 0 0; padding: 0 20px; }
 
 	.bar.feature h1:before { background: $iconSprite -15px 0; background-size: 500px 250px; content: ''; display: block; height: 60px; margin: 0 auto 30px; width: 60px; }
 
 
 	.bar h2 { color: $black25; font-size: 20px; letter-spacing: 0.2em; margin: 0 0 25px; text-align: center; text-transform: uppercase; }
-	.bar.gray h2 { color: $white50; }
+	.bar.gray h2 {  color: $white; color: $white50; }
 
 
 	.components a { color: $gray; }
@@ -51,7 +49,7 @@
 
 	.features { text-align: center; }
 	.features h3 { color: $white; }
-	.features p { color: $white75; }
+	.features p { color: $white; color: $white75; }
 
 
 	.page { padding: 25px 0; }
@@ -62,9 +60,15 @@
 	pre.example { background: $bgGray; border-left: 3px solid $lightGray; border-radius: 0; }
 
 
+/*-------------------------------------------
+  Mobile
+-------------------------------------------*/
 	@media screen and (min-width: 500px) {
 	}
 
+/*-------------------------------------------
+  Tablet
+-------------------------------------------*/
 	@media screen and (min-width: 740px) {
 		#pronto { min-height: 500px; }
 
@@ -87,6 +91,9 @@
 		.features .feature { padding: 0 10px; }
 	}
 
+/*-------------------------------------------
+  Desktop
+-------------------------------------------*/
 	@media screen and (min-width: 980px) {
 		#pronto { min-height: 600px; }
 
@@ -113,8 +120,63 @@
 		.page { padding: 50px 0; }
 	}
 
+/*-------------------------------------------
+  Desktop - Max
+-------------------------------------------*/
 	@media screen and (min-width: 1220px) {
 		.features .feature { padding: 0 50px; }
 
 		.bar.feature p { padding: 0 30px; }
+	}
+
+/*-------------------------------------------
+  IE8/9/10 - http://blog.keithclark.co.uk/moving-ie-specific-css-into-media-blocks/
+-------------------------------------------*/
+	@media screen\0 {
+
+	}
+
+/*-------------------------------------------
+  IE9/10 - http://blog.keithclark.co.uk/moving-ie-specific-css-into-media-blocks/
+-------------------------------------------*/
+	@media screen and (min-width:0\0) {
+
+	}
+
+/*-------------------------------------------
+  IE10/11 - https://gist.github.com/atk/4025104
+-------------------------------------------*/
+	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+
+	}
+
+/*-------------------------------------------
+  Print
+-------------------------------------------*/
+	@media print {
+	    * { background: transparent !important; box-shadow: none !important; color: #000 !important; text-shadow: none !important; }
+
+	    a, a:visited { text-decoration: underline; }
+	    a[href]:after { content: " (" attr(href) ")"; }
+	    abbr[title]:after { content: " (" attr(title) ")"; }
+
+	    a[href^="javascript:"]:after,
+	    a[href^="#"]:after { content: ""; }
+
+	    pre,
+	    blockquote { border: 1px solid #999; page-break-inside: avoid; }
+
+	    thead { display: table-header-group; }
+
+	    tr,
+	    img { page-break-inside: avoid; }
+
+	    img { max-width: 100% !important; }
+
+	    p,
+	    h2,
+	    h3 { orphans: 3; widows: 3; }
+
+	    h2,
+	    h3 { page-break-after: avoid; }
 	}

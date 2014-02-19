@@ -1,17 +1,17 @@
 {% if not meta.pronto %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<meta name="keywords" content="{{ meta.keywords }}" />
-		<meta name="description" content="{{ meta.description }}" />
+		<meta name="description" content="{{ meta.description }}">
 		{% if meta.robots %}
 		<meta name="robots" content="{{ meta.robots }}">
 		{% endif %}
-		<meta name="author" content="{{ site_title }}" />
+		<meta name="author" content="{{ site_title }}">
 
 		<!-- G+ AND FACEBOOK META TAGS -->
 		<meta property="og:title" content="{{ site_title }}" />
@@ -23,8 +23,8 @@
 
 		<!-- TWITTER CARD -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="@FormstoneIt" />
-		<meta name="twitter:creator" content="@FormstoneIt" />
+		<meta name="twitter:site" content="@benplum" />
+		<meta name="twitter:creator" content="@benplum" />
 		<meta name="twitter:url" content="{{ base_url }}" />
 		<meta name="twitter:title" content="{{ site_title }}" />
 		<meta name="twitter:description" content="{{ meta.description }}" />
@@ -32,18 +32,23 @@
 
 		<title>{% if meta.title and not is_front_page %}{{ meta.title }} &middot; {% endif %}{{ site_title }}</title>
 
-		<link rel="icon" href="{{ base_url }}/favicon.ico" type="image/x-icon" />
-		<link rel="shortcut icon" href="{{ base_url }}/favicon.ico" type="image/x-icon" />
-
-		<link rel="stylesheet" href="{{ base_url }}/css/site.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="{{ base_url }}/css/print.css" type="text/css" media="print" />
-
-		<!--[if LTE IE 8]>
-			<link href="{{ base_url }}/components/Gridlock/gridlock-ie.css" rel="stylesheet" type="text/css" media="all" />
-			<script src="{{ base_url }}/js/html5.js"></script>
-		<![endif]-->
+		<link rel="icon" href="{{ base_url }}/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="{{ base_url }}/favicon.ico" type="image/x-icon">
 
 		<script src="{{ base_url }}/js/modernizr.js"></script>
+
+		<link rel="stylesheet" href="{{ base_url }}/css/site.css" type="text/css" media="all">
+
+		<!--[if IE 8]>
+        	<script>var IE8 = true;</script>
+        	<script src="{{ base_url }}/js/site-ie8.js"></script>
+			<link rel="stylesheet" href="{{ base_url }}/css/site-ie8.css">
+		<![endif]-->
+		<!--[if IE 9]>
+        	<script>var IE9 = true;</script>
+        	<script src="{{ base_url }}/js/site-ie9.js"></script>
+			<link rel="stylesheet" href="{{ base_url }}/css/ie9.css">
+		<![endif]-->
 
 		{% if live %}
 		<!-- Google Tag Manager -->

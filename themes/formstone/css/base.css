@@ -67,16 +67,37 @@
 
 
 /*-------------------------------------------
-  Global
+  Helpers
 -------------------------------------------*/
-	.left { float: left; }
-	.block_left { float: left; margin: 0 20px 20px 0; }
-	.right { float: right; }
-	.block_right { float: right; margin: 0 0 20px 20px; }
-	.center { text-align: center; }
+	.left,
+	.block_left { float: left; }
+	.block_left { margin: 0 20px 20px 0; }
+	.right,
+	.block_right { float: right; }
+	.block_right { margin: 0 0 20px 20px; }
+
 	.clear { clear: both; }
+	.clearfix:after { clear: both; content: "."; display: block; height: 0; line-height: 0; visibility: hidden; }
 	.contain { overflow: hidden; }
 
+	.no_select,
+	.no_select * {
+		-webkit-user-select: none;
+		   -moz-user-select: none;
+			-ms-user-select: none;
+				user-select: none;
+	}
+
+	.hidden { display: none !important; visibility: hidden; }
+	.visually_hidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+	.visually_hidden.focusable:active,
+	.visually_hidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+	.invisible { visibility: hidden; }
+
+
+/*-------------------------------------------
+  Mobile - Min
+-------------------------------------------*/
 	#bigtree_bar_tab { display: none; }
 
 	#pronto { min-height: 400px; }
@@ -97,16 +118,28 @@
 	#footer { color: $lightGray; font-size: 12px; letter-spacing: 0.2em; margin-top: 25px; margin-bottom: 50px; text-align: center; text-transform: uppercase; }
 
 
+/*-------------------------------------------
+  Mobile
+-------------------------------------------*/
 	@media screen and (min-width: 500px) {
 	}
 
+/*-------------------------------------------
+  Tablet
+-------------------------------------------*/
 	@media screen and (min-width: 740px) {
 		.button { display: inline-block; margin: 0 10px 10px 0; padding: 0 30px; }
 	}
 
+/*-------------------------------------------
+  Desktop
+-------------------------------------------*/
 	@media screen and (min-width: 980px) {
 		.button:hover { background: $black; }
 	}
 
+/*-------------------------------------------
+  Desktop - Max
+-------------------------------------------*/
 	@media screen and (min-width: 1220px) {
 	}

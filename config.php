@@ -78,11 +78,14 @@ $config["nano_resources"] = array(
 				"css/base.css",
 				"css/master.css"
 			),
-			"print" => array(
-				"prints.css"
+			"site-ie8" => array(
+				"../../components/Gridlock/gridlock-ie.css",
+				"css/ie/ie8.css",
+			),
+			"site-ie9" => array(
+				"css/ie/ie9.css",
 			),
 			"demo" => array(
-				/* "../../components/Sprout/sprout.css", */
 				"../../components/normalize-css/normalize.css",
 				"../../components/Gridlock/gridlock-base.css",
 				"../../components/Gridlock/gridlock-12.css",
@@ -132,7 +135,7 @@ $config["nano_resources"] = array(
 	"js" => array(
 		"files" => array(
 			"modernizr" => array(
-				"js/modernizr.custom.js",
+				"js/lib/modernizr.custom.js",
 			),
 			"site" => array(
 				"../../components/jquery/jquery.min.js",
@@ -144,6 +147,12 @@ $config["nano_resources"] = array(
 
 				"js/prism.js",
 				"js/main.js"
+			),
+			"site-ie8" => array(
+				"js/ie/matchMedia.ie8.js",
+			),
+			"site-ie9" => array(
+				"js/ie/matchMedia.ie9.js",
 			),
 			"demo" => array(
 				"../../components/jquery/jquery.min.js",
