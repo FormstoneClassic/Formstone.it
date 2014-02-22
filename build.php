@@ -18,6 +18,7 @@
 			$package = json_decode($p_file, true);
 
 			$file = false;
+			$source = false;
 			foreach ($bower["main"] as $s) {
 				if (strpos($s, ".js") > -1) {
 					$source = $s;
@@ -84,6 +85,8 @@
 				file_put_contents(__DIR__ . "/content/components/" . $component . ".md", trim($markdown));
 
 				echo "COMPLETE: " . $component . "\n";
+			} else {
+				echo "NO SOURCE: " . $component . "\n";
 			}
 		} else {
 			echo "NOT FOUND: " . $component . "\n";
