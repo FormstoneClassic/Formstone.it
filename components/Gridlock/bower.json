@@ -19,14 +19,5 @@
     "*.jquery.json",
     "Gruntfile.js",
     "src/"
-  ],
-  "_release": "3.0.1",
-  "_resolution": {
-    "type": "version",
-    "tag": "3.0.1",
-    "commit": "7ad16c8431e70f209b38ef8cb02c09c032bac5bf"
-  },
-  "_source": "git://github.com/benplum/Gridlock.git",
-  "_target": "~3.0.0",
-  "_originalSource": "Gridlock"
+  ]
 }

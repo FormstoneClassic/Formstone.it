@@ -25,6 +25,7 @@
     "commit": "93706f899ec4e929e84384ee8554d75a3a39996b"
   },
   "_source": "git://github.com/benplum/Scroller.git",
-  "_target": "~3.0.0",
-  "_originalSource": "Scroller"
+  "_target": "~3.0.1",
+  "_originalSource": "Scroller",
+  "_direct": true
 }

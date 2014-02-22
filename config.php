@@ -9,6 +9,7 @@ $config['theme'] = "formstone";
 /** !Redirect Plugin */
 $config["nano_navigation"]["redirects"] = array(
 	"boxer" 		=> "components/boxer",
+	"gridlock" 		=> "components/gridlock",
 	"macaroon" 		=> "components/macaroon",
 	"mimeo" 		=> "components/mimeo",
 	"naver"			=> "components/naver",
@@ -70,8 +71,8 @@ $config["nano_resources"] = array(
 			"site" => array(
 				/* "../../components/Sprout/sprout.css", */
 				"../../components/normalize-css/normalize.css",
-				"../../components/Gridlock/gridlock-base.css",
-				"../../components/Gridlock/gridlock-12.css",
+				"../../components/Gridlock/fs.gridlock-base.css",
+				"../../components/Gridlock/fs.gridlock-12.css",
 				"../../components/Shifter/jquery.fs.shifter.css",
 
 				"css/fonts.css",
@@ -80,7 +81,7 @@ $config["nano_resources"] = array(
 				"css/master.css"
 			),
 			"site-ie8" => array(
-				"../../components/Gridlock/gridlock-ie.css",
+				"../../components/Gridlock/fs.gridlock-ie.css",
 				"css/ie/ie8.css",
 			),
 			"site-ie9" => array(
@@ -88,8 +89,8 @@ $config["nano_resources"] = array(
 			),
 			"demo" => array(
 				"../../components/normalize-css/normalize.css",
-				"../../components/Gridlock/gridlock-base.css",
-				"../../components/Gridlock/gridlock-12.css",
+				"../../components/Gridlock/fs.gridlock-base.css",
+				"../../components/Gridlock/fs.gridlock-12.css",
 
 				"css/fonts.css",
 				"css/prism.css",
@@ -97,7 +98,7 @@ $config["nano_resources"] = array(
 				"css/demos.css"
 			),
 			"demo.ie" => array(
-				"../../components/Gridlock/gridlock-ie.css"
+				"../../components/Gridlock/fs.gridlock-ie.css"
 			),
 			"gridlock.bookmarklet" => array(
 				"css/gridlock-bookmarklet.css"
@@ -163,7 +164,7 @@ $config["nano_resources"] = array(
 				"js/demos.js"
 			),
 			"gridlock.bookmarklet" => array(
-				"gridlock-bookmarklet.js"
+				"js/gridlock-bookmarklet.js"
 			)
 		),
 		"vars" => array(

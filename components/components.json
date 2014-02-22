@@ -1,6 +1,7 @@
 {
 	"components" : [
 		"boxer",
+		"gridlock",
 		"macaroon",
 		"mimeo",
 		"naver",

@@ -25,9 +25,9 @@
 				}
 			}
 
+			$doc = array();
 			if ($source) {
 				$file = file_get_contents($dir . $source);
-				$doc = array();
 
 				// Match /** ... */ style block comments
 				preg_match_all("/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/", $file, $matches);
@@ -51,43 +51,41 @@
 						$doc["methods"][] = $m;
 					}
 				}
-
-				$main = array();
-				foreach ($bower["main"] as $m) {
-					if (strpos($m, ".js") > -1) {
-						$main["js"] = $m;
-					} else if (strpos($m, ".css") > -1) {
-						$main["css"] = $m;
-					}
-				}
-
-				$json = array(
-					"name" => $package["name"],
-					"description" => str_ireplace("Part of the Formstone Library.", "", $package["description"]),
-					"version" => $package["version"],
-					"demo" => $package["demo"],
-					"repository" => $package["repository"]["url"],
-					"documentation" => $doc,
-					"files" => $main
-				);
-
-				$markdown = "/* \n";
-				$markdown .= "Template: component \n";
-				$markdown .= "Title: " . $package["name"];
-				$markdown .= " \n";
-				$markdown .= "Description: " . str_ireplace("Part of the Formstone Library.", "", $package["description"]);
-				$markdown .= " \n";
-				$markdown .= "Data: " . $package["id"] . ".md";
-				$markdown .= " \n";
-				$markdown .= "*/ \n";
-
-				file_put_contents(__DIR__ . "/content/components/" . $component . ".json", trim(json_encode($json)));
-				file_put_contents(__DIR__ . "/content/components/" . $component . ".md", trim($markdown));
-
-				echo "COMPLETE: " . $component . "\n";
-			} else {
-				echo "NO SOURCE: " . $component . "\n";
 			}
+
+			$main = array();
+			foreach ($bower["main"] as $m) {
+				if (strpos($m, ".js") > -1) {
+					$main["js"] = $m;
+				} else if (strpos($m, ".css") > -1) {
+					$main["css"] = $m;
+				}
+			}
+
+			$json = array(
+				"name" => $package["name"],
+				"description" => str_ireplace("Part of the Formstone Library.", "", $package["description"]),
+				"version" => $package["version"],
+				"demo" => $package["demo"],
+				"repository" => $package["repository"]["url"],
+				"documentation" => $doc,
+				"files" => $main
+			);
+
+			$markdown = "/* \n";
+			$markdown .= "Template: component \n";
+			$markdown .= "Title: " . $package["name"];
+			$markdown .= " \n";
+			$markdown .= "Description: " . str_ireplace("Part of the Formstone Library.", "", $package["description"]);
+			$markdown .= " \n";
+			$markdown .= "Data: " . $package["id"] . ".md";
+			$markdown .= " \n";
+			$markdown .= "*/ \n";
+
+			file_put_contents(__DIR__ . "/content/components/" . $component . ".json", trim(json_encode($json)));
+			file_put_contents(__DIR__ . "/content/components/" . $component . ".md", trim($markdown));
+
+			echo "COMPLETE: " . $component . "\n";
 		} else {
 			echo "NOT FOUND: " . $component . "\n";
 		}
