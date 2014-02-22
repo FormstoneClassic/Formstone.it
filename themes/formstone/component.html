@@ -26,8 +26,10 @@
 		{% if meta.files %}
 		<h3>Installation</h3>
 		<p>Include the following resources on your page before initializing:</p>
-		<pre class="example"><code class="language-markup">{% if meta.files.js %}&lt;script src=&quot;{{ meta.files.js }}&quot;&gt;&lt;/script&gt;{% endif %}&nbsp;
-{% if meta.files.css %}&lt;link href=&quot;{{ meta.files.css }}&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;all&quot; /&gt;{% endif %}
+		<pre class="example"><code class="language-markup">{% if meta.files.js %}{% for file in meta.files.js %}&lt;script src=&quot;{{ file }}&quot;&gt;&lt;/script&gt;
+{% endfor %}{% endif %}
+{% if meta.files.css %}{% for file in meta.files.css %}&lt;link href=&quot;{{ file }}&quot; rel=&quot;stylesheet&quot;&gt;
+{% endfor %}{% endif %}
 </code></pre>
 		{% endif %}
 		<h3>Bower</h3>

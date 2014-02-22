@@ -54,11 +54,14 @@
 			}
 
 			$main = array();
+			$main["js"] = array();
+			$main["css"] = array();
+
 			foreach ($bower["main"] as $m) {
 				if (strpos($m, ".js") > -1) {
-					$main["js"] = $m;
+					$main["js"][] = $m;
 				} else if (strpos($m, ".css") > -1) {
-					$main["css"] = $m;
+					$main["css"][] = $m;
 				}
 			}
 
