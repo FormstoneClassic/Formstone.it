@@ -7,11 +7,6 @@
 		<header class="intro">
 			<h1>{{ meta.title }}</h1>
 			<p class="emphasized orange">{{ meta.description }}</p>
-			<!--
-			<p>
-				Boxer is a simple way to display images, inline-content or iFramed URLs in a lightbox-style modal.
-			</p>
-			-->
 			<nav class="links">
 				{% if meta.demo %}
 				<a href="{{ meta.demo }}" class="button no-pronto">View Demo</a>
@@ -35,14 +30,6 @@
 		<h3>Bower</h3>
 		<p>You can deploy and update via the command line with <a href="http://bower.io/" target="_blank">Bower</a>:
 		<pre class="example"><code class="language-javascript">bower install {{ meta.name }}</code></pre>
-		<!--
-		<h3>Implimentation</h3>
-		<p>Boxer works like most of the other light box scripts out there. Target any links you'd like to open in a modal when initializing:</p>
-		<pre class="example"><code class="language-markup">&lt;a href="large-image.jpg" class="boxer"&gt;
-	&lt;img src="thumbnail-image.jpg" /&gt;
-&lt;/a&gt;</code></pre>
-		<pre class="example"><code class="language-javascript">$(".boxer").boxer();</code></pre>
-		-->
 		<br />
 		{% if meta.documentation.options %}
 		<h2 id="options">Options</h2>
