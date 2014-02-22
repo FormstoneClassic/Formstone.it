@@ -1,15 +1,15 @@
 
 	var Site = {
 		_init: function() {
+			Site.$window = $(window);
+			Site.$page = $(".shifter-page");
+
 			$.pronto({
 				selector: "a:not(.no-pronto)",
 				tracking: {
 					manager: true
 				}
 			});
-
-			Site.$window = $(window);
-			Site.$page = $(".shifter-page");
 
 			$.rubberband({
 				minWidth: [ 320, 500, 740, 980, 1220 ],

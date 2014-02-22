@@ -4,7 +4,6 @@ Options -Indexes
 ## Attempt to remove server signature
 ServerSignature Off
 
-
 <IfModule mod_deflate.c>
   # force deflate for mangled headers developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping/
   <IfModule mod_setenvif.c>
@@ -78,12 +77,11 @@ AddType video/webm .webm
 #SVG
 AddType image/svg+xml svg
 
-
 <IfModule mod_rewrite.c>
    RewriteEngine On
 
    #RewriteCond %{HTTP_HOST} ^www\.formstone\.it [NC]
-   #RewriteRule (.*) http://formstone.it/$1 [R=301,L]
+   #RewriteRule (.*) http://formstone.it$1 [R=301,L]
 
    #RewriteCond %{REQUEST_FILENAME} !-d
    RewriteCond %{REQUEST_FILENAME} !-f
