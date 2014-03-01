@@ -1,5 +1,5 @@
 /* 
- * Selecter v3.0.12 - 2014-02-14 
+ * Selecter v3.0.13 - 2014-03-01 
  * A jQuery plugin for replacing default select elements. Part of the Formstone Library. 
  * http://formstone.it/selecter/ 
  * 
@@ -420,12 +420,7 @@
 						  .addClass("open");
 			$body.on("click.selecter-" + data.guid, ":not(.selecter-options)", data, _onCloseHelper);
 
-			if ($.fn.scroller !== undefined) {
-				data.$itemsWrapper.scroller("scroll", (data.$itemsWrapper.find(".scroller-content").scrollTop() + selectedOffset.top), 0)
-								  .scroller("reset");
-			} else {
-				data.$itemsWrapper.scrollTop( data.$itemsWrapper.scrollTop() + selectedOffset.top );
-			}
+			_scrollOptions(data);
 		}
 	}
 
@@ -603,7 +598,7 @@
 				}
 
 				// If not, start from the beginning
-				if (index < 0) {
+				if (index < 0 || index === data.index) {
 					for (i = 0; i <= total; i++) {
 						letter = data.$options.eq(i).text().charAt(0).toUpperCase();
 						if (letter === input) {
@@ -617,6 +612,7 @@
 			// Update
 			if (index >= 0) {
 				_update(index, data);
+				_scrollOptions(data);
 			}
 		}
 	}
@@ -635,8 +631,6 @@
 
 		// Check for disabled options
 		if (!isDisabled) {
-			// Make sure we have a new index to prevent false 'change' triggers
-
 			if (index === -1 && data.label !== "") {
 				data.$selected.html(data.label);
 			} else if (!isSelected) {
@@ -661,13 +655,36 @@
 				$item.removeClass("selected");
 			}
 
-			if (/* !isSelected ||  */ !data.multiple) {
+			if (!data.multiple) {
 				// Update index
 				data.index = index;
 			}
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name _scrollOptions
+	 * @description Scrolls options wrapper to specific option
+	 * @param data [object] "Instance data"
+	 */
+	function _scrollOptions(data) {
+		var selectedOffset = (data.index >= 0) ? data.$items.eq(data.index).position() : { left: 0, top: 0 };
+
+		if ($.fn.scroller !== undefined) {
+			data.$itemsWrapper.scroller("scroll", (data.$itemsWrapper.find(".scroller-content").scrollTop() + selectedOffset.top), 0)
+							  .scroller("reset");
+		} else {
+			data.$itemsWrapper.scrollTop( data.$itemsWrapper.scrollTop() + selectedOffset.top );
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _handleChange
+	 * @description Handles change events
+	 * @param data [object] "Instance data"
+	 */
 	function _handleChange(data) {
 		if (data.links) {
 			_launch(data);
