@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.13 - 2014-02-17 
+ * Roller v3.0.14 - 2014-03-04 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -482,7 +482,8 @@
 
 		data.$canister.off("touchmove.roller touchend.roller touchcancel.roller");
 
-		var index = _calculateIndex(data);
+		// only update index if we actually moved
+		var index = (data.deltaX > -10 && data.deltaX < 10) ? data.index : _calculateIndex(data);
 
 		if (data.touchPaged && !data.swipe) {
 			_position(data, index);

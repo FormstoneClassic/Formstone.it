@@ -1,6 +1,6 @@
 {
   "name": "Naver",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "A jQuery plugin for responsive navigation. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.6",
+  "_release": "3.0.7",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.6",
-    "commit": "2b87374e4f34983312b6d3ce8529b765ba71448b"
+    "tag": "3.0.7",
+    "commit": "c1be8d67f71455534aa060634f366ba32011e376"
   },
   "_source": "git://github.com/benplum/Naver.git",
   "_target": "~3.0.3",
