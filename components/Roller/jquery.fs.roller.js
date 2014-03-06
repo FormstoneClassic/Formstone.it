@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.14 - 2014-03-04 
+ * Roller v3.0.18 - 2014-03-06 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -16,7 +16,6 @@
 	 * @param autoWidth [boolean] <false> "Flag to fit items to viewport width"
 	 * @param controls [boolean] <true> "Flag to draw controls"
 	 * @param customClass [string] <''> "Class applied to instance"
-	 * @param duration [int] <500> "Animation duration; should match CSS animation time"
 	 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
 	 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 	 * @param paged [boolean] <false> "Flag for paged items"
@@ -32,7 +31,6 @@
 		//canister: true, * @param canister [boolean] <true> "Flag to draw canister"
 		controls: true,
 		customClass: "",
-		duration: 500,
 		infinite: false,
 		maxWidth: Infinity,
 		minWidth: '0px',
@@ -252,7 +250,7 @@
 						data.$canister.css({ width: data.canisterWidth });
 					}
 
-					_position(data, _calculateIndex(data));
+					_position(data, _calculateIndex(data), false);
 				}
 			});
 		},
@@ -551,7 +549,7 @@
 	 * @param data [object] "Instance data"
 	 * @param index [int] "Item index"
 	 */
-	function _position(data, index) {
+	function _position(data, index, animate) {
 		if (index < 0) {
 			index = (data.infinite) ? data.pageCount : 0;
 		}
@@ -580,15 +578,26 @@
 			if (data.useMargin) {
 				data.$canister.css({ marginLeft: data.leftPosition });
 			} else {
-				data.$canister.css( _prefix("transform", "translate3d("+data.leftPosition+"px, 0, 0)") );
+				if (animate === false) {
+					data.$canister.css( _prefix("transition", "none") )
+								  .css( _prefix("transform", "translate3d("+data.leftPosition+"px, 0, 0)") );
+
+					// Slight delay before adding transitions backs
+					data.resizeTimer = _startTimer(data.resizeTimer, 5, function() {
+						data.$canister.css( _prefix("transition", "") );
+					}, false);
+				} else {
+					data.$canister.css( _prefix("transform", "translate3d("+data.leftPosition+"px, 0, 0)") );
+				}
 			}
 		}
 
+		if (index !== data.index && animate !== false) {
+			data.$roller.trigger("update.roller", [ index ]);
+		}
 		data.index = index;
 
 		_updateControls(data);
-
-		data.$roller.trigger("update.roller");
 	}
 
 	/**
