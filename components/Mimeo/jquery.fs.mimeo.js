@@ -1,5 +1,5 @@
 /* 
- * Mimeo v3.0.4 - 2014-02-12 
+ * Mimeo v3.0.5 - 2014-03-07 
  * A jQuery plugin for responsive images. Part of the Formstone Library. 
  * http://formstone.it/mimeo/ 
  * 
@@ -22,6 +22,16 @@
 		 * @example $.mimeo("update");
 		 */
 		update: function() {
+			// Fix IE9 shenanigans - http://www.w3.org/community/respimg/2012/03/15/polyfilling-picture-without-the-overhead/#comment-212
+			$("video > picture").each (function(i, picture) {
+				var $picture = $(this),
+					$video = $picture.parent("video");
+
+				$video.before($picture)
+					  .remove();
+			});
+
+			// Then parse the pictures
 			$pictures = $("picture").each(function(i, picture) {
 				var $sources = $(picture).find("source, .mimeo-source");
 

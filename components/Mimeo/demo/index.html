@@ -50,7 +50,6 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Mimeo Demo</h1>
-					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
 					<br />
 					<a href="http://formstone.it/mimeo/" class="button">View Documentation</a>
 				</header>
@@ -70,6 +69,9 @@
 
 				<h5>Demo</h5>
 				<div class="clear_fix">
+					<!--[if IE 9]>
+					<video>
+					<![endif]-->
 					<picture>
 						<source media="(min-width: 500px)" src="http://formstone.it/images/placeholder/500x300">
 						<source media="(min-width: 740px)" src="http://formstone.it/images/placeholder/750x300">
@@ -77,6 +79,9 @@
 						<source src="http://formstone.it/images/placeholder/300x300">
 						<img src="http://formstone.it/images/placeholder/300x300">
 					</picture>
+					<!--[if IE 9]>
+					</video>
+					<![endif]-->
 				</div>
 
 				<p>Mimeo will work with any valid media query, however you may have to adjust the order of the <code>source</code> tags since they will be read top down.</p>
@@ -92,6 +97,9 @@
 
 				<h5>Demo</h5>
 				<div class="clear_fix">
+					<!--[if IE 9]>
+					<video>
+					<![endif]-->
 					<picture>
 						<source media="(max-width: Infinity)" src="http://formstone.it/images/placeholder/1000x300">
 						<source media="(max-width: 980px)" src="http://formstone.it/images/placeholder/750x300">
@@ -100,6 +108,9 @@
 						<source src="http://formstone.it/images/placeholder/300x300">
 						<img src="http://formstone.it/images/placeholder/300x300">
 					</picture>
+					<!--[if IE 9]>
+					</video>
+					<![endif]-->
 				</div>
 
 				<br />
@@ -119,6 +130,9 @@
 
 				<h5>Demo</h5>
 				<div class="clear_fix">
+					<!--[if IE 9]>
+					<video>
+					<![endif]-->
 					<picture>
 						<source media="(max-width: Infinity)" srcset="http://formstone.it/images/placeholder/1000x300 1x, http://formstone.it/images/placeholder/2000x600 2x">
 						<source media="(max-width: 980px)" srcset="http://formstone.it/images/placeholder/750x300 1x, http://formstone.it/images/placeholder/1000x600 2x">
@@ -127,34 +141,30 @@
 						<source srcset="http://formstone.it/images/placeholder/300x300 1x, http://formstone.it/images/placeholder/600x600 2x">
 						<img src="http://formstone.it/images/placeholder/300x300">
 					</picture>
+					<!--[if IE 9]>
+					</video>
+					<![endif]-->
 				</div>
 
 				<br />
 
 				<!-- IE -->
 				<h2>IE Support</h2>
-				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>). IE 9 also has a strange bug where <code>source</code> tags will only exist inside of a <code>video</code> tag. Instead of <code>source</code> tags, use a <code>span</code> with the class <code>mimeo-source</code>:</p>
+				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>). IE 9 also has a strange bug where <code>source</code> tags can only exist inside of a <code>video</code> tag. The fix is to simply wrap the <code>picture</code> tag in an IE9 conditional <code>video</code> tag:</p>
 
-				<pre class="example"><code class="language-markup">&lt;picture&gt;
+				<pre class="example"><code class="language-markup">&lt;!--[if IE 9]&gt;
+&lt;video&gt;
+&lt;![endif]--&gt;
+&lt;picture&gt;
 	&lt;span class="mimeo-source" media="(min-width: 500px)" src="image-med.jpg"&gt;&lt;/span&gt;
 	&lt;span class="mimeo-source" media="(min-width: 740px)" src="image-large.jpg"&gt;&lt;/span&gt;
 	&lt;span class="mimeo-source" media="(min-width: 980px)" src="image-x-large.jpg"&gt;&lt;/span&gt;
 	&lt;span class="mimeo-source" src="image-small.jpg"&gt;&lt;/span&gt;
 	&lt;img src="image-small.jpg"&gt;
-&lt;/picture&gt;</code></pre>
-
-				<h5>Demo</h5>
-				<p>Note: This example will work in all browsers, but is the only example that will work in IE 9.</p>
-				<div class="clear_fix">
-					<picture>
-						<span class="mimeo-source" media="(max-width: Infinity)" src="http://formstone.it/images/placeholder/1000x300"></span>
-						<span class="mimeo-source" media="(max-width: 980px)" src="http://formstone.it/images/placeholder/750x300"></span>
-						<span class="mimeo-source" media="(max-width: 740px)" src="http://formstone.it/images/placeholder/500x300"></span>
-						<span class="mimeo-source" media="(max-width: 500px)" src="http://formstone.it/images/placeholder/300x300"></span>
-						<span class="mimeo-source" src="http://formstone.it/images/placeholder/300x300"></span>
-						<img src="http://formstone.it/images/placeholder/300x300">
-					</picture>
-				</div>
+&lt;/picture&gt;
+&lt;!--[if IE 9]&gt;
+&lt;/video&gt;
+&lt;![endif]--&gt;</code></pre>
 
 			</div>
 		</article>
