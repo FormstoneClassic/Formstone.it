@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+		<title>Pager Demo</title>
+
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+
+		<!--[if LTE IE 8]>
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+		<![endif]-->
+
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<link href="../jquery.fs.pager.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="../jquery.fs.pager.js"></script>
+
+		<style>
+			.pager .pager-pages a { color: #222; }
+			.pager .pager-pages a.active { color: #999; }
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				$(".pagination").pager();
+			});
+		</script>
+	</head>
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Pager Demo</h1>
+					<br />
+					<a href="http://formstone.it/pager/" class="button">View Documentation</a>
+				</header>
+
+				<!-- BASIC -->
+				<h2>Basic</h2>
+				<p></p>
+
+				<pre class="example"><code class="language-javascript">$(".target").pager();</code></pre>
+				<pre class="example"><code class="language-markup"></code></pre>
+
+				<h5>Demo</h5>
+				<div class="pagination clear_fix">
+					<a href="#1">1</a>
+					<a href="#2">2</a>
+					<a href="#3">3</a>
+					<a href="#4">4</a>
+					<a href="#5">5</a>
+					<a href="#6">6</a>
+					<a href="#7">7</a>
+					<a href="#8">8</a>
+					<a href="#9">9</a>
+					<a href="#10">10</a>
+				</div>
+
+				<br />
+
+				<!-- FOLLOW -->
+<!--
+				<h2>Follow</h2>
+				<p>You can also configure Tipper to follow the user's mouse:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").tipper({
+	follow: true
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div class="clear_fix">
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"left","follow":"true"}'>Left</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"right","follow":"true"}'>Right</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"top","follow":"true"}'>Top</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"bottom","follow":"true"}'>Bottom</a>
+				</div>
+
+				<br />
+-->
+
+			</div>
+		</article>
+
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>
