@@ -6,7 +6,7 @@
  * @author Ben Plum
  * @link http://benplum.com
  * @license http://opensource.org/licenses/MIT
- * @Version 1.0.1
+ * @Version 1.0.2
  */
 class Nano_Cache {
 
@@ -35,6 +35,7 @@ class Nano_Cache {
 
 		if ($this->cache_enabled && file_exists($this->cache_file) && (time() - filemtime($this->cache_file)) < $this->cache_time) {
 			header("Expires: " . gmdate("D, d M Y H:i:s", $this->cache_time + filemtime($this->cache_file)) . " GMT");
+			header("Content-length: " . filesize($this->cache_file));
 			readfile($this->cache_file);
 			die();
 		}
@@ -70,6 +71,8 @@ class Nano_Cache {
 			}
 			file_put_contents($this->cache_file, $output);
 		}
+
+		header("Content-length: " . strlen($output));
 	}
 }
 
