@@ -1,15 +1,16 @@
 
 	var Site = {
 		_init: function() {
-			Site.$window = $(window);
-			Site.$page = $(".shifter-page");
-
 			$.pronto({
 				selector: "a:not(.no-pronto)",
 				tracking: {
 					manager: true
 				}
 			});
+
+			Site.$window = $(window);
+			Site.$page = $(".shifter-page");
+			Site.$progress = $("#progress");
 
 			$.rubberband({
 				minWidth: [ 320, 500, 740, 980, 1220 ],
@@ -27,18 +28,31 @@
 			$(window).on("snap", function(e, data) {
 				//console.log("OH SNAP! ", data);
 			}).on("pronto.request", Site._onRequest)
+			  .on("pronto.progress", Site._onLoadProgress)
 			  .on("pronto.load", Site._onLoad)
 			  .on("pronto.render", Site._onRender)
 			  .on("resize", Site._sizePage);
 		},
-		_onLoad: function() {
-			//Disqus._destroy();
-		},
-		_onRequest: function() {
+		_onRequest: function(e) {
 			$.shifter("close");
 			$("#pronto").css({ opacity: 0.5 }, 100);
 		},
-		_onRender: function() {
+		_onLoadProgress: function(e, percent) {
+			// update progress to reflect loading
+			console.log("New page load progress", percent);
+
+			Site.$progress.stop().animate({ width: (percent * 100) + "%" });
+		},
+		_onLoad: function(e) {
+			//Disqus._destroy();
+
+			Site.$progress.css({ width: "100%" });
+
+			Site.$progress.stop().animate({ width: "100%" }, function() {
+				Site.$progress.css({ width: 0 });
+			});
+		},
+		_onRender: function(e) {
 			$("#pronto code").each(function() {
 				Prism.highlightElement($(this)[0]);
 			});

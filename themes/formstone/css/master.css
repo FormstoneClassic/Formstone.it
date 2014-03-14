@@ -9,6 +9,13 @@
 	.mobile_handle:before { display: none; }
 
 
+	#progress { background: $orange; height: 3px; left: 0; position: fixed; top: 0; width: 0; z-index: 6; }
+	#progress.animated {
+		-webkit-transition: width 0.15s ease-out;
+		   	 	transition: width 0.15s ease-out;
+	}
+
+
 	.shifter .shifter-handle { text-indent: 0; width: auto; }
 	.shifter .shifter-page { background: $white; box-shadow: none; padding-top: 60px; }
 	.shifter .shifter-navigation { background: $bgGray; overflow-y: auto; padding-top: 80px; }
