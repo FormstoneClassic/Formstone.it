@@ -1,6 +1,12 @@
 
 	var Site = {
+		transitionEvent: false,
+		transitionSupported: false,
+
 		_init: function() {
+			Site.transitionEvent = Site._getTransitionEvent();
+			Site.transitionSupported = (Site.transitionEvent !== false);
+
 			$.pronto({
 				selector: "a:not(.no-pronto)",
 				tracking: {
@@ -11,6 +17,7 @@
 			Site.$window = $(window);
 			Site.$page = $(".shifter-page");
 			Site.$progress = $("#progress");
+			Site.$pronto = $("#pronto");
 
 			$.rubberband({
 				minWidth: [ 320, 500, 740, 980, 1220 ],
@@ -35,32 +42,38 @@
 		},
 		_onRequest: function(e) {
 			$.shifter("close");
-			$("#pronto").css({ opacity: 0.5 }, 100);
+			Site.$pronto.css({ opacity: 0.5 });
+
+			Site.$progress.addClass("visible");
+			setTimeout("Site.$progress.css({ width: '15%' });", 10);
 		},
 		_onLoadProgress: function(e, percent) {
-			// update progress to reflect loading
-			console.log("New page load progress", percent);
+			percent = 15 + ((percent * 100) * 0.7); // to 90%
 
-			Site.$progress.stop().animate({ width: (percent * 100) + "%" });
+			Site.$progress.css({ width: percent + "%" });
 		},
 		_onLoad: function(e) {
-			//Disqus._destroy();
+
+			Site._transitionListener( Site.$progress, "width", "100%", Site._resetProgress );
 
 			Site.$progress.css({ width: "100%" });
 
-			Site.$progress.stop().animate({ width: "100%" }, function() {
-				Site.$progress.css({ width: 0 });
-			});
 		},
 		_onRender: function(e) {
-			$("#pronto code").each(function() {
+			Site.$pronto.find("code").each(function() {
 				Prism.highlightElement($(this)[0]);
 			});
 
 			Site._checkMainNav();
-			//Disqus._load();
 
-			$("#pronto").css({ opacity: 1 });
+			Site.$pronto.css({ opacity: 1 });
+		},
+		_resetProgress: function() {
+			Site._transitionListener(Site.$progress, "opacity", "0", function() {
+				Site.$progress.css({ width: "0%" });
+			});
+
+			Site.$progress.removeClass("visible");
 		},
 		_checkMainNav: function() {
 			var href = window.location.href;
@@ -73,9 +86,41 @@
 		},
 		_sizePage: function() {
 			Site.$page .css({ minHeight: Site.$window.height() });
+		},
+		_getTransitionEvent: function() {
+			var transitions = {
+					'WebkitTransition': 'webkitTransitionEnd',
+					'MozTransition':    'transitionend',
+					'OTransition':      'oTransitionEnd',
+					'transition':       'transitionend'
+				},
+				test = document.createElement('div');
+
+			for (var type in transitions) {
+				if (transitions.hasOwnProperty(type) && type in test.style) {
+					return transitions[type];
+				}
+			}
+
+			return false;
+		},
+		// handle adding and removing transition listeners;
+		_transitionListener: function($target, property, value, callback) {
+			$target.on(Site.transitionEvent, function(e) {
+				var $t = $(e.currentTarget),
+					p = e.originalEvent.propertyName,
+					v = $t[0].style[p] || $t.css(p);
+
+				if ($t.is($target) && property == p && value == v) {
+					$t.off(Site.transitionEvent);
+
+					callback.apply($t);
+				}
+			});
 		}
 	};
 
+	/*
 	var disqus_shortname = 'formstone',
 		disqus_identifier = window.location.pathname,
 		disqus_url = window.location.href;
@@ -103,5 +148,6 @@
 			}
 		}
 	};
+	*/
 
 	$(document).ready(Site._init());

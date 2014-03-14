@@ -4,6 +4,9 @@ Options -Indexes
 ## Attempt to remove server signature
 ServerSignature Off
 
+## Stop directory redirects
+DirectorySlash Off
+
 <IfModule mod_deflate.c>
   # force deflate for mangled headers developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping/
   <IfModule mod_setenvif.c>

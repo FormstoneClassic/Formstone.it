@@ -15,6 +15,10 @@ class Site {
 	}
 
 	public function request_url(&$url) {
+		if (substr($url, strlen($url)-1, 1) === "/") {
+			$url = substr($url, 0, strlen($url)-1);
+		}
+
 		$this->current_url = $url;
 	}
 

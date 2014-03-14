@@ -5,16 +5,14 @@
 /*-------------------------------------------
   Mobile - Min
 -------------------------------------------*/
+	#progress { background: $orange; height: 2px; left: 0; opacity: 0; position: fixed; top: 0; width: 0; z-index: 6;
+		-webkit-transition: width 0.2s ease-out, opacity 0.2s linear;
+		   	 	transition: width 0.2s ease-out, opacity 0.2s linear;
+	}
+	#progress.visible { opacity: 1; }
+
 	.mobile_handle { background: none; color: $lightGray; cursor: pointer; $lato; font-size: 12px; font-size: 12rem; letter-spacing: 0.2em; line-height: 18px; text-transform: uppercase; }
 	.mobile_handle:before { display: none; }
-
-
-	#progress { background: $orange; height: 3px; left: 0; position: fixed; top: 0; width: 0; z-index: 6; }
-	#progress.animated {
-		-webkit-transition: width 0.15s ease-out;
-		   	 	transition: width 0.15s ease-out;
-	}
-
 
 	.shifter .shifter-handle { text-indent: 0; width: auto; }
 	.shifter .shifter-page { background: $white; box-shadow: none; padding-top: 60px; }
