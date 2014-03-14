@@ -1,6 +1,6 @@
 {
   "name": "Pronto",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "description": "A jQuery plugin for faster page loads. Part of the formstone library.",
   "keywords": [
     "javascript",
@@ -33,11 +33,11 @@
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
   },
-  "_release": "3.0.12",
+  "_release": "3.0.13",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.12",
-    "commit": "a7f10f17ad338d87d17a0c5224180dac99bb04a7"
+    "tag": "3.0.13",
+    "commit": "7932da9f47a53e3e2d62b825ee379bcb77c6cd58"
   },
   "_source": "git://github.com/benplum/Pronto.git",
   "_target": "~3.0.8",
