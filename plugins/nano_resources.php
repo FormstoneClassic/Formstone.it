@@ -6,7 +6,7 @@
  * @author Ben Plum
  * @link http://benplum.com
  * @license http://opensource.org/licenses/MIT
- * @Version 1.0.0
+ * @Version 1.0.1
  */
 class Nano_Resources {
 
@@ -101,7 +101,10 @@ class Nano_Resources {
 			} else {
 				header("Content-Type: text/css");
 			}
-			die("/* RENDERED : $datestamp */\n" . $data);
+
+			$data = "/* RENDERED : $datestamp */\n" . $data;
+			header("Content-length: " . strlen($data));
+			die($data);
 		} else {
 			if (function_exists("apache_request_headers")) {
 				$headers = apache_request_headers();
@@ -112,15 +115,17 @@ class Nano_Resources {
 
 			if (!$ims || strtotime($ims) != $cache_modified) {
 				if ($type === "js") {
-				header("Content-type: text/javascript");
+					header("Content-type: text/javascript");
 				} else {
 					header("Content-Type: text/css");
 				}
 				header("Last-Modified: ".gmdate("D, d M Y H:i:s", $cache_modified).' GMT', true, 200);
+				header("Content-length: " . filesize($cache_file));
 				readfile($cache_file);
 				die();
 			} else {
 				header("Last-Modified: ".gmdate("D, d M Y H:i:s", $cache_modified).' GMT', true, 304);
+				header("Content-length: " . filesize($cache_file));
 				die();
 			}
 		}
