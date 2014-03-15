@@ -25,6 +25,14 @@
 		<script>
 			$(document).ready(function() {
 				$(".pagination").pager();
+
+				$(".pagination.events").on("update.pager", function(e, index) {
+					var html = '';
+					html += '<p><span class="label">Page Index: </span>';
+					html += '<span class="value">' + index + '</p>';
+
+					$(".output").prepend(html);
+				});
 			});
 		</script>
 	</head>
@@ -46,10 +54,15 @@
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
-				<p></p>
+				<p>The most basic method is simply applying the Pager plugin:</p>
 
 				<pre class="example"><code class="language-javascript">$(".target").pager();</code></pre>
-				<pre class="example"><code class="language-markup"></code></pre>
+				<pre class="example"><code class="language-markup">&lt;div class="pagination"&gt;
+	&lt;a href="#1"&gt;1&lt;/a&gt;
+	&lt;a href="#2"&gt;2&lt;/a&gt;
+	&lt;a href="#3"&gt;3&lt;/a&gt;
+	...
+&lt;/div&gt;</code></pre>
 
 				<h5>Demo</h5>
 				<div class="pagination clear_fix">
@@ -67,25 +80,53 @@
 
 				<br />
 
-				<!-- FOLLOW -->
-<!--
-				<h2>Follow</h2>
-				<p>You can also configure Tipper to follow the user's mouse:</p>
+				<!-- Current -->
+				<h2>Current Page</h2>
+				<p>Pager will automatically detect the current page based on the <code>active</code> class.</p>
 
-				<pre class="example"><code class="language-javascript">$(".target").tipper({
-	follow: true
-});</code></pre>
+				<pre class="example"><code class="language-markup">&lt;div class="pagination"&gt;
+	&lt;a href="#1"&gt;1&lt;/a&gt;
+	&lt;a href="#2" class="active"&gt;2&lt;/a&gt;
+	&lt;a href="#3"&gt;3&lt;/a&gt;
+&lt;/div&gt;</code></pre>
 
 				<h5>Demo</h5>
-				<div class="clear_fix">
-					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"left","follow":"true"}'>Left</a>
-					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"right","follow":"true"}'>Right</a>
-					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"top","follow":"true"}'>Top</a>
-					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"bottom","follow":"true"}'>Bottom</a>
+				<div class="pagination clear_fix">
+					<a href="#1">1</a>
+					<a href="#2" class="active">2</a>
+					<a href="#3">3</a>
 				</div>
 
 				<br />
--->
+
+				<!-- Event -->
+				<h2>Events</h2>
+				<p>Pager will automatically detect the current page based on the <code>active</code> class.</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").pager();
+
+$(".target").on("update.pager", function (e, index) {
+	// Current page updated
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div class="pagination events clear_fix">
+					<a href="#1">1</a>
+					<a href="#2">2</a>
+					<a href="#3">3</a>
+					<a href="#4">4</a>
+					<a href="#5">5</a>
+					<a href="#6">6</a>
+					<a href="#7">7</a>
+					<a href="#8">8</a>
+					<a href="#9">9</a>
+					<a href="#10">10</a>
+				</div>
+				<div class="output">
+
+				</div>
+
+				<br />
 
 			</div>
 		</article>

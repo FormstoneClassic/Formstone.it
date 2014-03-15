@@ -6,7 +6,7 @@
  * @author Ben Plum
  * @link http://benplum.com
  * @license http://opensource.org/licenses/MIT
- * @Version 1.0.0
+ * @Version 1.1.0
  */
 class Nano_Navigation {
 
@@ -14,6 +14,7 @@ class Nano_Navigation {
 	private $navigation;
 	private $redirect_lower;
 	private $redirects;
+	private $is_sitemap = false;
 
 	public function config_loaded(&$settings) {
 		$this->base_url = $settings["base_url"];
@@ -23,6 +24,15 @@ class Nano_Navigation {
 	public function request_url(&$url) {
 		if (array_key_exists($url, $this->redirects)) {
 			$this->redirect($this->base_url . "/" . $this->redirects[$url]);
+		}
+		if ($url === 'sitemap.xml') {
+			$this->is_sitemap = true;
+		}
+	}
+
+	public function before_load_content(&$file) {
+		if ($this->is_sitemap) {
+			$file = str_ireplace("sitemap.xml.md", "index.md", $file);
 		}
 	}
 
@@ -58,6 +68,19 @@ class Nano_Navigation {
 
 		if ($this->redirect_lower) {
 			$this->redirect_lower($this->navigation);
+		}
+
+		if ($this->is_sitemap) {
+			header($_SERVER['SERVER_PROTOCOL']." 200 OK");
+			header("Content-Type: application/xml; charset=UTF-8");
+			header("Content-Type: text/xml");
+
+			$xml = '<?xml version="1.0" encoding="UTF-8"?>';
+			$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+			$xml .= $this->recurse_sitemap($this->navigation);
+			$xml .= '</urlset>';
+
+			die($xml);
 		}
 	}
 
@@ -121,6 +144,20 @@ class Nano_Navigation {
 		header("HTTP/1.1 301 Moved Permanently");
 		header("Location: " . $url);
 		die();
+	}
+
+	private function recurse_sitemap($pages) {
+		$xml = "";
+
+		foreach ($pages as $page) {
+			$xml .= '<url><loc>'.$page['url'].'</loc></url>';
+
+			if (count($page["children"]) > 0) {
+				$xml .= $this->recurse_sitemap($page["children"]);
+			}
+		}
+
+		return $xml;
 	}
 }
 

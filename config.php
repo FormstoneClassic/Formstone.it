@@ -13,6 +13,7 @@ $config["nano_navigation"]["redirects"] = array(
 	"macaroon" 		=> "components/macaroon",
 	"mimeo" 		=> "components/mimeo",
 	"naver"			=> "components/naver",
+	"pager"		=> "components/pager",
 	"picker"		=> "components/picker",
 	"pronto"		=> "components/pronto",
 	"ranger"		=> "components/ranger",

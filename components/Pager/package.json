@@ -2,7 +2,7 @@
   "name": "Pager",
   "id": "pager",
   "codename": "jquery.fs.pager",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "A jQuery plugin for simple pagination. Part of the formstone library.",
   "keywords": [
   	"pagination",

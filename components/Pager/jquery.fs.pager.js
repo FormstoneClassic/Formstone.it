@@ -1,5 +1,5 @@
 /* 
- * Pager v0.1.2 - 2014-03-14 
+ * Pager v1.0.0 - 2014-03-15 
  * A jQuery plugin for simple pagination. Part of the formstone library. 
  * http://formstone.it/pager/ 
  * 
@@ -25,7 +25,7 @@
 	 * @param visible [int] <2> "Visible pages before and after current page"
 	 */
 	var options = {
-		ajax: true,
+		ajax: false,
 		labels: {
 			count: "of",
 			next: "Next",
@@ -217,11 +217,11 @@
 		if (data.ajax) {
 			e.preventDefault();
 			e.stopPropagation();
-
-			_updatePage(data, index);
 		} else {
 			window.location.href = $target.attr("href");
 		}
+
+		_updatePage(data, index);
 	}
 
 	/**
