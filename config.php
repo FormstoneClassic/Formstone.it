@@ -169,7 +169,7 @@ $config["nano_resources"] = array(
 			)
 		),
 		"vars" => array(
-			// "gridlock_bookmarklet_css" => file_get_contents("../cache/gridlock.bookmarklet.css")
+			// "gridlock_bookmarklet_css" => file_get_contents("lib/cache/resources/gridlock.bookmarklet.css")
 		),
 		"minify" => true
 	)

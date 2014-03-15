@@ -1,13 +1,12 @@
 /*
- * Gridlock Overlay Bookmarklet
+ * Gridlock Overlay Bookmarklet <http://formstone.it/gridlock>
  * @author Ben Plum
- * @version 0.2.1
+ * @version 1.0.0
  *
  * Copyright 2013 Ben Plum <mr@benplum.co>
- * Not to be reproduced
  */
- 
-//javascript:(function(){if(typeof%20GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://www.benplum.com/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
+
+//javascript:(function(){if(typeof%20GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://formstone.it/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
 
 function GridlockBookmarklet() {
 	var $jq,
@@ -19,7 +18,7 @@ function GridlockBookmarklet() {
 					position: "top-right", // top-right, top-left, bottom-right, bottom-left
 					useCookies: false
 				}, window.GridlockBookmarkletConfig);
-			
+
 			if ($jq(".gridlock").length < 1) {
 				alert("Gridlock Not Found.\nYou'll need to include Gridlock before using this bookmarklet.\n\nLearn more: http://www.benplum.com/projects/gridlock/");
 			} else {
@@ -27,15 +26,15 @@ function GridlockBookmarklet() {
 					mobileFirst = $jq(".gridlock").hasClass("gridlock-mf"),
 					tabletCount = Math.ceil(desktopCount / 2);
 					mobileCount = 3;
-				console.log("MOBILE FIRST: " + mobileFirst);
+
 				if($jq("#gridlock_styles").length < 1) {
-					$jq("body").append('<style id="gridlock_styles">$gridlock_bookmarklet_css</style>');
+					$jq("body").append('<link id="gridlock_styles" rel="stylesheet" href="base_url/css/gridlock.bookmarklet.css" type="text/css" media="all">');
 				}
-				
+
 				if ($jq("#gridlock_overlay").length < 1) {
 					var _this = this,
 						html = '';
-					
+
 					html += '<menu id="gridlock_menu" class="' + config.position + '">';
 					html += '<span class="icon logo">Gridlock</span>';
 					html += '<span class="show option">SHOW</span>';
@@ -48,16 +47,16 @@ function GridlockBookmarklet() {
 					}
 					html += '</div>';
 					html += '</section>';
-					
+
 					$jq("body").append(html);
-					
+
 					_this.$menu = $jq("#gridlock_menu");
 					_this.$menuItems = _this.$menu.find("span");
 					_this.$overlay = $jq("#gridlock_overlay");
-					
+
 					_this.$menu.on("click", ".option", $jq.proxy(_this.onClick, _this))
 							   .on("click", ".remove", $jq.proxy(_this.remove, _this));
-					
+
 					if (config.onLoad || (config.useCookies === true && _this.readCookie("gridlock-active") == "true")) {
 						_this.$menuItems.filter(".show")
 										.trigger("click");
@@ -69,7 +68,7 @@ function GridlockBookmarklet() {
 		onClick: function(e) {
 			var _this = this;
 			var $target = $jq(e.currentTarget);
-			
+
 			if ($target.hasClass("active") || $target.hasClass("remove")) {
 				$target.removeClass("active")
 					   .html("SHOW");
@@ -84,7 +83,7 @@ function GridlockBookmarklet() {
 		},
 		remove: function(e) {
 			var _this = this;
-			
+
 			_this.$menu.remove();
 			_this.$overlay.remove();
 		},
@@ -112,11 +111,11 @@ function GridlockBookmarklet() {
 			this.createCookie(key, "", -1);
 		}
 	};
-	
+
 	function initOverlay() {
-		OverlayObj = new Overlay(); 
+		OverlayObj = new Overlay();
 	}
-	
+
 	function loadJQuery() {
 		var jQ = document.createElement("script");
 		jQ.id = "gridlock-jquery";
@@ -127,7 +126,7 @@ function GridlockBookmarklet() {
 		};
 		document.body.appendChild(jQ);
 	}
-	
+
 	if (typeof jQuery == "undefined") {
 		loadJQuery();
 	} else {

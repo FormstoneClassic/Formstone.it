@@ -22,7 +22,7 @@
 
 #gridlock_menu .show { font-size: 11px; line-height: 35px; text-align: center; width: 60px; }
 
-#gridlock_menu .icon { background: url(www_root/images/gridlock_bookmarklet_icons.png) no-repeat; margin: 9px; padding: 0; }
+#gridlock_menu .icon { background: url(base_url/images/assets/gridlock_bookmarklet_icons.png) no-repeat; margin: 9px; padding: 0; }
 #gridlock_menu .icon.logo { background-position: -14px 10px; border-right: 1px solid #000; margin: 0 0 0 10px; padding: 0; text-indent: -99999px; width: 25px; }
 #gridlock_menu .icon.remove { background-position: 0 0; border: none; cursor: pointer; height: 13px; margin: 10px; opacity: 0.5; text-indent: -99999px; width: 13px; }
 #gridlock_menu .icon.remove:hover { opacity: 1; }
