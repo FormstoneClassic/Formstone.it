@@ -1,10 +1,10 @@
 {% include 'layout/header.html' %}
-<section class="row page component detail">
+<div class="row page component detail">
+	<div class="mobile-full tablet-full desktop-9 right">
+		{{ content }}
+	</div>
 	<div class="mobile-full tablet-full desktop-3 desktop_navigation">
 		{% include 'layout/navigation.html' %}
 	</div>
-	<article class="mobile-full tablet-full desktop-9">
-		{{ content }}
-	</article>
-</section>
+</div>
 {% include 'layout/footer.html' %}
