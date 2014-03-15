@@ -1,6 +1,6 @@
 {
   "name": "Pager",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A jQuery plugin for simple pagination. Part of the formstone library.",
   "author": {
     "name": "Ben Plum",
