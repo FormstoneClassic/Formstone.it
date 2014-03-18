@@ -6,7 +6,7 @@
  * @author Ben Plum
  * @link http://benplum.com
  * @license http://opensource.org/licenses/MIT
- * @Version 1.1.0
+ * @Version 1.1.1
  */
 class Nano_Navigation {
 
@@ -23,7 +23,8 @@ class Nano_Navigation {
 
 	public function request_url(&$url) {
 		if (array_key_exists($url, $this->redirects)) {
-			$this->redirect($this->base_url . "/" . $this->redirects[$url]);
+			$redirect = (strpos($this->redirects[$url], "http") > -1) ? $this->redirects[$url] : $this->base_url."/".$this->redirects[$url];
+			$this->redirect($redirect);
 		}
 		if ($url === 'sitemap.xml') {
 			$this->is_sitemap = true;
@@ -65,6 +66,15 @@ class Nano_Navigation {
 
 		unset($parsed["children"]["_index"]);
 		$this->navigation = $parsed["children"];
+
+		$prev_page = false;
+		$next_page = false;
+
+		foreach ($this->navigation as $p) {
+			if (isset($p["children"])) {
+				$this->find_siblings($p["children"], $prev_page, $next_page);
+			}
+		}
 
 		if ($this->redirect_lower) {
 			$this->redirect_lower($this->navigation);
@@ -129,6 +139,24 @@ class Nano_Navigation {
 		return true;
 	}
 
+	private function find_siblings($navigation, &$prev_page, &$next_page) {
+		for ($i = 0, $count = count($navigation); $i < $count; $i++) {
+			$page = $navigation[$i];
+
+			if ($page["active"]) {
+				if ($i > 0) {
+					$next_page = $navigation[$i - 1];
+				}
+				if ($i < $count) {
+					$prev_page = $navigation[$i + 1];
+				}
+				return;
+			} else if (isset($page["children"])) {
+				$this->find_siblings($page["children"], $prev_page, $next_page);
+			}
+		}
+	}
+
     private function redirect_lower($navigation) {
 		foreach ($navigation as $page) {
 			if ($page["active"]) {
@@ -162,7 +190,7 @@ class Nano_Navigation {
 }
 
 function sortByOrder($a, $b) {
-    return $a["order"] - $b["order"];
+    return $b["order"] - $a["order"];
 }
 
 ?>
