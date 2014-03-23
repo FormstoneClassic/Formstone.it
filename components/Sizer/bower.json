@@ -16,15 +16,5 @@
     "*.jquery.json",
     "Gruntfile.js",
     "src/"
-  ],
-  "_release": "3.0.2",
-  "_resolution": {
-    "type": "version",
-    "tag": "3.0.2",
-    "commit": "f0a2a90a4f32272d5832dc67b6029897ca4bd90a"
-  },
-  "_source": "git://github.com/benplum/Sizer.git",
-  "_target": "~3.0.2",
-  "_originalSource": "Sizer",
-  "_direct": true
+  ]
 }

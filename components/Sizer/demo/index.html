@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+		<title>Sizer Demo </title>
+
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+
+		<!--[if LTE IE 8]>
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+		<![endif]-->
+
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<script src="../jquery.fs.sizer.js"></script>
+
+		<style>
+			.sized { background: #eee; margin: 20px 0; }
+			.sized p { margin: 0; padding: 20px; }
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				$(".sized").sizer();
+
+				$(window).on("snap", function() {
+					$(".sized").sizer("resize");
+				});
+			});
+		</script>
+	</head>
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Sizer Demo</h1>
+					<br />
+					<a href="http://formstone.it/sizer/" class="button">View Documentation</a>
+				</header>
+
+				<!-- BASIC -->
+				<h2>Basic</h2>
+				<p>The most basic method is simply applying the plugin:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").sizer();</code></pre>
+
+				<h5>Demo</h5>
+				<div class="row sized">
+					<div class="all-third sizer-item">
+						<p>Etiam porta sem malesuada magna mollis euismod.</p>
+					</div>
+					<div class="all-third sizer-item">
+						<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+					</div>
+					<div class="all-third sizer-item">
+						<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+					</div>
+				</div>
+
+				<br />
+
+			</div>
+		</article>
+
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>

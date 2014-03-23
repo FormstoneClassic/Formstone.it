@@ -22,6 +22,7 @@ $config["nano_navigation"]["redirects"] = array(
 	"scroller"		=> "components/scroller",
 	"selecter"		=> "components/selecter",
 	"shifter"		=> "components/shifter",
+	"sizer"			=> "components/sizer",
 	"stepper"		=> "components/stepper",
 	"tabber"		=> "components/tabber",
 	"tipper"		=> "components/tipper",
