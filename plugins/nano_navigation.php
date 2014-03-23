@@ -6,7 +6,7 @@
  * @author Ben Plum
  * @link http://benplum.com
  * @license http://opensource.org/licenses/MIT
- * @Version 1.1.1
+ * @Version 1.1.4
  */
 class Nano_Navigation {
 
@@ -121,16 +121,20 @@ class Nano_Navigation {
 		$ordered = array();
 		$unordered = array();
 		foreach ($pages as $k => $page) {
-			if (!is_numeric($page["order"])) {
-				$unordered[$k] = $page;
-			} else {
-				$ordered[$k] = $page;
+			if (is_array($page)) {
+				if (!is_numeric($page["order"])) {
+					$unordered[$k] = $page;
+				} else {
+					$ordered[$k] = $page;
+				}
 			}
 		}
 
-		usort($ordered, "sortByOrder");
-		ksort($unordered);
-		$pages = array_merge($ordered, $unordered);
+		if (count($ordered) > 0 || count($unordered) > 0) {
+			usort($ordered, "sortByOrder");
+			ksort($unordered);
+			$pages = array_merge($ordered, $unordered);
+		}
 
 		foreach ($pages as $k => $v) {
 			$this->sort_tree($pages[$k]);
@@ -140,15 +144,17 @@ class Nano_Navigation {
 	}
 
 	private function find_siblings($navigation, &$prev_page, &$next_page) {
+		$keys = array_keys($navigation);
+
 		for ($i = 0, $count = count($navigation); $i < $count; $i++) {
-			$page = $navigation[$i];
+			$page = $navigation[ $keys[$i] ];
 
 			if ($page["active"]) {
 				if ($i > 0) {
-					$next_page = $navigation[$i - 1];
+					$next_page = $navigation[ $keys[$i - 1] ];
 				}
 				if ($i < $count) {
-					$prev_page = $navigation[$i + 1];
+					$prev_page = $navigation[ $keys[$i + 1] ];
 				}
 				return;
 			} else if (isset($page["children"])) {
