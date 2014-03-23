@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.19 - 2014-03-15 
+ * Roller v3.0.20 - 2014-03-21 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -28,7 +28,6 @@
 		autoAdvance: false,
 		autoTime: 8000,
 		autoWidth: false,
-		//canister: true, * @param canister [boolean] <true> "Flag to draw canister"
 		controls: true,
 		customClass: "",
 		infinite: false,
@@ -39,7 +38,6 @@
 		single: false,
 		touchPaged: true,
 		useMargin: false
-		//viewport: true * @param viewport [boolean] <true> "Flag to draw viewport"
 	};
 
 	/**
@@ -305,13 +303,14 @@
 
 			if (!opts.single) {
 				// Verify viewport and canister are available
-				if (!$roller.find(".roller-canister").length) {
-					$roller.wrapInner('<div class="roller-canister"></div>');
-					opts.canister = true;
-				}
 				if (!$roller.find(".roller-viewport").length) {
 					$roller.wrapInner('<div class="roller-viewport"></div>');
 					opts.viewport = true;
+				}
+				if (!$roller.find(".roller-canister").length) {
+					$roller.find(".roller-viewport")
+						   .wrapInner('<div class="roller-canister"></div>');
+					opts.canister = true;
 				}
 			}
 
