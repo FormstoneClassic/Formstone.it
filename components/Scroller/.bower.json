@@ -1,6 +1,6 @@
 {
   "name": "Scroller",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.2",
+  "_release": "3.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.2",
-    "commit": "20caf0073cda66b0cd9e4057c1ce569c48c4317b"
+    "tag": "3.0.3",
+    "commit": "3e9a19bbb8459ec8f70e353cdc435c166ac8369b"
   },
   "_source": "git://github.com/benplum/Scroller.git",
   "_target": "~3.0.1",
