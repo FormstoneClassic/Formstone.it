@@ -1,5 +1,5 @@
 /* 
- * Wallpaper v3.0.7 - 2014-03-26 
+ * Wallpaper v3.1.0 - 2014-03-29 
  * A jQuery plugin for smooth-scaling image and video backgrounds. Part of the Formstone Library. 
  * http://formstone.it/wallpaper/ 
  * 
@@ -10,9 +10,14 @@
 	"use strict";
 
 	var $window = $(window),
-		$body = $("body"),
+		$body,
 		nativeSupport = ("backgroundSize" in document.documentElement.style),
-		isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( (window.navigator.userAgent||window.navigator.vendor||window.opera) );
+		guid = 0,
+		youTubeReady = false,
+		youTubeQueue = [],
+		isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( (window.navigator.userAgent||window.navigator.vendor||window.opera) ),
+		transitionEvent,
+		transitionSupported;
 
 	/**
 	 * @options
@@ -26,13 +31,13 @@
 	 */
 	var options = {
 		autoPlay: true,
+		embedRatio: 0.5625,
 		hoverPlay: false,
 		loop: true,
 		mute: true,
 		onLoad: $.noop,
 		onReady: $.noop,
-		source: null,
-		speed: 500
+		source: null
 	};
 
 	/**
@@ -65,9 +70,10 @@
 				var data = $(this).data("wallpaper");
 
 				if (data) {
-					data.$target.removeClass("wallpaper")
-								.off(".boxer");
 					data.$container.remove();
+					data.$target.removeClass("wallpaper")
+								.off(".boxer")
+								.data("wallpaper", null);
 				}
 			});
 
@@ -98,6 +104,30 @@
 
 		/**
 		 * @method
+		 * @name pause
+		 * @description Pauses target video
+		 * @example $(".target").wallpaper("stop");
+		 */
+		pause: function() {
+			return $(this).each(function() {
+				var data = $(this).data("wallpaper");
+
+				if (data) {
+					if (data.isYouTube && data.player) {
+						data.player.pauseVideo();
+					} else {
+						var $video = data.$container.find("video");
+
+						if ($video.length) {
+							$video[0].pause();
+						}
+					}
+				}
+			});
+		},
+
+		/**
+		 * @method
 		 * @name play
 		 * @description Plays target video
 		 * @example $(".target").wallpaper("play");
@@ -107,31 +137,41 @@
 				var data = $(this).data("wallpaper");
 
 				if (data) {
-					var $video = data.$container.find("video");
+					if (data.isYouTube && data.player) {
+						data.player.playVideo();
+					} else {
+						var $video = data.$container.find("video");
 
-					if ($video.length) {
-						$video[0].play();
+						if ($video.length) {
+							$video[0].play();
+						}
 					}
 				}
 			});
 		},
 
 		/**
-		 * @method
+		 * @method private
 		 * @name stop
-		 * @description Stops target video
+		 * @description Deprecated; Aliased to "pause"
 		 * @example $(".target").wallpaper("stop");
 		 */
 		stop: function() {
+			pub.pause.apply(this);
+		},
+
+		/**
+		 * @method
+		 * @name unload
+		 * @description Unloads current media
+		 * @example $(".target").wallpaper("unload");
+		 */
+		unload: function() {
 			return $(this).each(function() {
 				var data = $(this).data("wallpaper");
 
 				if (data) {
-					var $video = data.$container.find("video");
-
-					if ($video.length) {
-						$video[0].pause();
-					}
+					_unloadMedia(data);
 				}
 			});
 		}
@@ -145,6 +185,15 @@
 	 */
 	function _init(opts) {
 		var data = $.extend({}, options, opts);
+
+		$body = $("body");
+		transitionEvent = _getTransitionEvent();
+		transitionSupported = (transitionEvent !== false);
+
+		// no transitions :(
+		if (!transitionSupported) {
+			transitionEvent = "transitionend.wallpaper";
+		}
 
 		// Apply to each
 		var $targets = $(this);
@@ -176,7 +225,7 @@
 			$target.addClass("wallpaper loading")
 				   .append('<div class="wallpaper-container"></div>');
 
-			data.isAnimating = false;
+			data.guid = "wallpaper-" + (guid++);
 			data.$target = $target;
 			data.$container = data.$target.find(".wallpaper-container");
 
@@ -201,23 +250,29 @@
 	 * @param data [object] "Instance data"
 	 */
 	function _loadMedia(source, data) {
-		// Check if we're animating
-		if (!data.isAnimating) {
-			// Check if the source is new
-			if (data.source !== source) {
-				data.$target.addClass("loading");
+		// Check if the source is new
+		if (data.source !== source) {
+			data.source = source;
 
-				data.source = source;
-				data.isAnimating = true;
-
-				if (typeof source === "object") {
-					_loadVideo(source, data);
-				} else {
-					_loadImage(source, data);
-				}
-			} else {
-				data.$target.trigger("wallpaper.loaded");
+			// Check YouTube
+			if (typeof source === "string") {
+				var parts = source.match( /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/ );
+				data.isYouTube = (parts && parts.length >= 1);
 			}
+
+			if (data.isYouTube) {
+				data.playing = false;
+				data.posterLoaded = false;
+
+				_loadYouTube(source, data);
+			} else if (typeof source === "object") {
+				_loadVideo(source, data);
+			} else {
+				_loadImage(source, data);
+			}
+		} else {
+			data.$target.trigger("wallpaper.loaded");
+			data.onLoad.call(data.$target);
 		}
 	}
 
@@ -240,29 +295,34 @@
 			}
 
 			// Append
-			$imgContainer.animate({ opacity: 1 }, data.speed, function() {
-				if (!poster) {
-					_cleanMedia(data);
+			$imgContainer.on(transitionEvent, function(e) {
+				_killEvent(e);
+
+				if ($(e.target).is($imgContainer)) {
+					$imgContainer.off(transitionEvent);
+
+					if (!poster) {
+						_cleanMedia(data);
+					}
 				}
 			});
 
-			// Set state
-			data.isAnimating = false;
-			data.$target.removeClass("loading")
-						.trigger("wallpaper.loaded");
+			setTimeout( function() { $imgContainer.css({ opacity: 1 }); }, 50);
 
 			// Resize
 			_onResize({ data: data });
+
 			if (!poster) {
-				data.onLoad.call();
+				data.$target.trigger("wallpaper.loaded");
+				data.onLoad.call(data.$target);
 			}
 		}).attr("src", source);
 
-		$imgContainer.appendTo(data.$container);
+		data.$container.append($imgContainer);
 
 		// Check if image is cached
 		if ($img[0].complete || $img[0].readyState === 4) {
-			$img.trigger("load");
+			$img.trigger("load.wallpaper");
 		}
 	}
 
@@ -279,9 +339,8 @@
 		}
 
 		if (!isMobile) {
-			var $videoContainer = $('<div class="wallpaper-media wallpaper-video"></div>'),
-				html = '<video';
-
+			var html = '<div class="wallpaper-media wallpaper-video">';
+			html += '<video';
 			if (data.loop) {
 				html += ' loop';
 			}
@@ -299,29 +358,130 @@
 				html += '<source src="' + data.source.ogg + '" type="video/ogg" />';
 			}
 			html += '</video>';
+			html += '</div>';
 
-			$videoContainer.append(html).find("video").one("loadedmetadata", function(e) {
-				// Append
-				$videoContainer.appendTo(data.$container)
-							   .animate({ opacity: 1 }, data.speed, function() { _cleanMedia(data); });
+			var $videoContainer = $(html),
+				$video = $videoContainer.find("video");
 
-				// Set state
-				data.isAnimating = false;
-				data.$target.removeClass("loading")
-							.trigger("wallpaper.loaded");
+			$video.one("loadedmetadata.wallpaper", function(e) {
+				$videoContainer.on(transitionEvent, function(e) {
+					_killEvent(e);
+
+					if ($(e.target).is($videoContainer)) {
+						$videoContainer.off(transitionEvent);
+
+						_cleanMedia(data);
+					}
+				});
+
+				setTimeout( function() { $videoContainer.css({ opacity: 1 }); }, 50);
 
 				// Resize
 				_onResize({ data: data });
-				data.onLoad.call();
+
+				data.$target.trigger("wallpaper.loaded");
+				data.onLoad.call(data.$target);
 
 				// Events
 				if (data.hoverPlay) {
 					data.$target.on("mouseover.boxer", pub.play)
-								.on("mouseout.boxer", pub.stop);
+								.on("mouseout.boxer", pub.pause);
 				} else if (data.autoPlay) {
 					this.play();
 				}
 			});
+
+			data.$container.append($videoContainer);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _loadYouTube
+	 * @description Loads YouTube video
+	 * @param source [string] "YouTube URL"
+	 * @param data [object] "Instance data"
+	 */
+	function _loadYouTube(source, data) {
+		if (!data.videoId) {
+			var parts = source.match( /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/ );
+			data.videoId = parts[1];
+		}
+
+		if (!data.posterLoaded) {
+			if (!data.poster) {
+				data.poster = "http://img.youtube.com/vi/" + data.videoId + "/maxresdefault.jpg";
+			}
+
+			data.posterLoaded = true;
+			_loadImage(data.poster, data, true);
+		}
+
+		if (!isMobile) {
+			if (!$("script[src*='www.youtube.com/iframe_api']").length) {
+				$("head").append('<script src="' + window.location.protocol + '//www.youtube.com/iframe_api"></script>');
+			}
+
+			if (!youTubeReady) {
+				youTubeQueue.push({
+					source: source,
+					data: data
+				});
+			} else {
+				var html = '<div class="wallpaper-media wallpaper-embed">';
+				html += '<iframe id="' + data.guid + '" type="text/html" src="';
+				// build fresh source
+				html += window.location.protocol + "//www.youtube.com/embed/" + data.videoId + "/";
+				html += '?controls=0&rel=0&showinfo=0&enablejsapi=1&version=3&&playerapiid=' + data.guid;
+				if (data.loop) {
+					html += '&loop=1';
+				}
+				// youtube draws play button if not set to autoplay...
+				html += '&autoplay=1';
+				html += '&origin=' + window.location.protocol + "//" + window.location.host;
+				html += '" frameborder="0" allowfullscreen></iframe>';
+				html += '</div>';
+
+				var $embedContainer = $(html);
+				data.$container.append($embedContainer);
+
+				data.player = new window.YT.Player(data.guid, {
+					events: {
+						"onReady": function (e) {
+							// Fix for Safari's overly secure security settings...
+							data.$target.find(".wallpaper-embed").addClass("ready");
+
+							data.player.setPlaybackQuality("highres");
+
+							if (data.mute) {
+								data.player.mute();
+							}
+
+							if (data.hoverPlay) {
+								data.$target.on("mouseover.boxer", pub.play)
+											.on("mouseout.boxer", pub.pause);
+							}
+						},
+						"onStateChange": function (e) {
+							if (!data.playing && e.data === window.YT.PlayerState.PLAYING) {
+								data.playing = true;
+
+								if (data.hoverPlay || !data.autoPlay) {
+									data.player.pauseVideo();
+								}
+
+								data.$target.trigger("wallpaper.loaded");
+								data.onLoad.call(data.$target);
+
+								data.$target.find(".wallpaper-media").css({ opacity: 1 });
+							}
+						}
+					}
+		        });
+
+				// Resize
+				_onResize({ data: data });
+			}
 		}
 	}
 
@@ -332,10 +492,32 @@
 	 * @param data [object] "Instance data"
 	 */
 	function _cleanMedia(data) {
-		var $media = data.$container.find(".wallpaper-media");
+		var $mediaContainer = data.$container.find(".wallpaper-media");
 
-		if ($media.length >= 1) {
-			$media.not(":last").remove();
+		if ($mediaContainer.length >= 1) {
+			$mediaContainer.not(":last").remove();
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _uploadMedia
+	 * @description Unloads current media
+	 * @param data [object] "Instance data"
+	 */
+	function _unloadMedia(data) {
+		var $mediaContainer = data.$container.find(".wallpaper-media");
+
+		if ($mediaContainer.length >= 1) {
+			$mediaContainer.on(transitionEvent, function(e) {
+				_killEvent(e);
+
+				if ($(e.target).is($mediaContainer)) {
+					$(this).remove();
+
+					delete data.source;
+				}
+			}).css({ opacity: 0 });
 		}
 	}
 
@@ -346,10 +528,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onResize(e) {
-		if (e.preventDefault) {
-			e.preventDefault();
-			e.stopPropagation();
-		}
+		_killEvent(e);
 
 		var data = e.data;
 
@@ -358,22 +537,22 @@
 
 		for (var i = 0, count = $mediaContainers.length; i < count; i++) {
 			var $mediaContainer = $mediaContainers.eq(i),
-				type = $mediaContainer.find("video").length ? "video" : "image",
+				type = (data.isYouTube) ? "iframe" : ($mediaContainer.find("video").length ? "video" : "img"),
 				$media = $mediaContainer.find(type);
 
 			// If media found and scaling is not natively support
-			if ($media.length && !(type === "image" && data.nativeSupport)) {
+			if ($media.length && !(type === "img" && data.nativeSupport)) {
 				var frameWidth = data.$target.outerWidth(),
 					frameHeight = data.$target.outerHeight(),
 					frameRatio = frameWidth / frameHeight,
-					naturalSize = _naturalSize($media);
+					naturalSize = _naturalSize(data, $media);
 
 				data.width = naturalSize.naturalWidth;
 				data.height = naturalSize.naturalHeight;
 				data.left = 0;
 				data.top = 0;
 
-				var mediaRatio = data.width / data.height;
+				var mediaRatio = (data.isYouTube) ? data.embedRatio : (data.width / data.height);
 
 				// First check the height
 				data.height = frameHeight;
@@ -415,11 +594,17 @@
 	 * @method private
 	 * @name _naturalSize
 	 * @description Determines natural size of target media
+	 * @param data [object] "Instance data"
 	 * @param $media [jQuery object] "Source media object"
 	 * @return [object | boolean] "Object containing natural height and width values or false"
 	 */
-	function _naturalSize($media) {
-		if ($media.is("img")) {
+	function _naturalSize(data, $media) {
+		if (data.isYouTube) {
+			return {
+				naturalHeight: 500,
+				naturalWidth:  500 / data.embedRatio
+			};
+		} else if ($media.is("img")) {
 			var node = $media[0];
 
 			if (typeof node.naturalHeight !== "undefined") {
@@ -443,6 +628,60 @@
 		}
 		return false;
 	}
+
+	/**
+	 * @method private
+	 * @name _killEvent
+	 * @description Prevents default and stops propagation on event
+	 * @param e [object] "Event data"
+	 */
+	function _killEvent(e) {
+		if (e.preventDefault) {
+			e.stopPropagation();
+			e.preventDefault();
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _getTransitionEvent
+	 * @description Retuns a properly prefixed transitionend event
+	 * @return [string] "Properly prefixed event"
+	 */
+	function _getTransitionEvent() {
+		var transitions = {
+				'WebkitTransition': 'webkitTransitionEnd',
+				'MozTransition':    'transitionend',
+				'OTransition':      'oTransitionEnd',
+				'transition':       'transitionend'
+			},
+			test = document.createElement('div');
+
+		for (var type in transitions) {
+			if (transitions.hasOwnProperty(type) && type in test.style) {
+				return transitions[type] + ".wallpaper";
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @method global
+	 * @name window.onYouTubeIframeAPIReady
+	 * @description Attaches YouTube players to active instances
+	 */
+	window.onYouTubeIframeAPIReady = function() {
+		youTubeReady = true;
+
+		for (var i in youTubeQueue) {
+			if (youTubeQueue.hasOwnProperty(i)) {
+				_loadYouTube(youTubeQueue[i].source, youTubeQueue[i].data);
+			}
+		}
+
+		youTubeQueue = [];
+	};
 
 	$.fn.wallpaper = function(method) {
 		if (pub[method]) {

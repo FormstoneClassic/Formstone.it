@@ -82,7 +82,7 @@
 		<h2 id="methods">Methods</h2>
 		<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
 		{% for method in meta.documentation.methods %}
-			{% if not method.private %}
+			{% if (not method.private) and (not method.global) %}
 		<div class="method">
 			<h3>{{ method.name }}</h3>
 			<p>{{ method.description }}</p>

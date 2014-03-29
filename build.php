@@ -48,6 +48,9 @@
 						if (strpos($content, "private")) {
 							$m["private"] = true;
 						}
+						if (strpos($content, "global")) {
+							$m["global"] = true;
+						}
 						$doc["methods"][] = $m;
 					}
 				}
