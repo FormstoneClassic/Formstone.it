@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.20 - 2014-03-21 
+ * Roller v3.0.21 - 2014-04-08 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -16,6 +16,9 @@
 	 * @param autoWidth [boolean] <false> "Flag to fit items to viewport width"
 	 * @param controls [boolean] <true> "Flag to draw controls"
 	 * @param customClass [string] <''> "Class applied to instance"
+	 * @param infinite [boolean] <false> "Flag for looping items"
+	 * @param labels.next [string] <'Next'> "Control text"
+	 * @param labels.previous [string] <'Previous'> "Control text"
 	 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
 	 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 	 * @param paged [boolean] <false> "Flag for paged items"
@@ -31,6 +34,10 @@
 		controls: true,
 		customClass: "",
 		infinite: false,
+		labels: {
+			next: "Next",
+			previous: "Previous"
+		},
 		maxWidth: Infinity,
 		minWidth: '0px',
 		paged: false,
@@ -318,8 +325,8 @@
 			var html = '';
 			if (opts.controls && !$roller.find(".roller-controls").length) {
 				html += '<div class="roller-controls">';
-				html += '<span class="roller-control previous">Previous</span>';
-				html += '<span class="roller-control next">Next</span>';
+				html += '<span class="roller-control previous">' + opts.labels.previous + '</span>';
+				html += '<span class="roller-control next">' + opts.labels.next + '</span>';
 				html += '</div>';
 			}
 			if (opts.pagination && !$roller.find(".roller-pagination").length) {
