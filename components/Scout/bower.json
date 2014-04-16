@@ -16,14 +16,5 @@
     "*.jquery.json",
     "Gruntfile.js",
     "src/"
-  ],
-  "_release": "3.0.1",
-  "_resolution": {
-    "type": "version",
-    "tag": "3.0.1",
-    "commit": "0e6a3e77de988d6e882a756905113ca3901bf4a3"
-  },
-  "_source": "git://github.com/benplum/Scout.git",
-  "_target": "~3.0.0",
-  "_originalSource": "Scout"
+  ]
 }

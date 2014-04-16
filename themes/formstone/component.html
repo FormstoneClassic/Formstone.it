@@ -7,10 +7,10 @@
 			<p>Current Version: {{ meta.version }}</p>
 			<div class="links">
 				{% if meta.demo %}
-				<a href="{{ meta.demo }}" class="button no-pronto">View Demo</a>
+				<a href="{{ meta.demo }}" class="button no-pronto" data-scout-event="Button, Click, Demo">View Demo</a>
 				{% endif %}
 				{% if meta.repository %}
-				<a href="{{ meta.repository }}" class="button" target="_blank">Download</a>
+				<a href="{{ meta.repository }}" class="button" target="_blank" data-scout-event="Button, Click, Download">Download</a>
 				{% endif %}
 			</div>
 		</header>

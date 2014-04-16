@@ -10,7 +10,7 @@
 			$.pronto({
 				selector: "a:not(.no-pronto)",
 				tracking: {
-					manager: true
+					// manager: true
 				}
 			});
 
