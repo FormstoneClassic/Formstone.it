@@ -22,6 +22,8 @@ class Nano_Navigation {
 	}
 
 	public function request_url(&$url) {
+		// $url = strtolower($url);
+
 		if (array_key_exists($url, $this->redirects)) {
 			$redirect = (strpos($this->redirects[$url], "http") > -1) ? $this->redirects[$url] : $this->base_url."/".$this->redirects[$url];
 			$this->redirect($redirect);

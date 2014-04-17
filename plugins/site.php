@@ -15,6 +15,9 @@ class Site {
 	}
 
 	public function request_url(&$url) {
+		// keep it lower
+		$url = strtolower($url);
+
 		if (substr($url, strlen($url)-1, 1) === "/") {
 			$url = substr($url, 0, strlen($url)-1);
 		}

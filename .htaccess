@@ -1,3 +1,6 @@
+## Foolow sym
+Options FollowSymLinks
+
 ## Prevent file browsing
 Options -Indexes
 
