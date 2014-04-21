@@ -1,5 +1,5 @@
 /* 
- * Tipper v3.0.2 - 2014-02-12 
+ * Tipper v3.0.3 - 2014-04-21 
  * A jQuery plugin for simple tooltips. Part of the formstone library. 
  * http://formstone.it/tipper/ 
  * 
@@ -83,7 +83,7 @@
 		html += '<div class="tipper ' + data.direction + '">';
 		html += '<div class="tipper-content">';
 		html += data.formatter.apply($body, [$target]);
-		html += '<span class="tipper-caret"</span>';
+		html += '<span class="tipper-caret"></span>';
 		html += '</div>';
 		html += '</div>';
 
