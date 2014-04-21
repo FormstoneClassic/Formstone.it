@@ -80,7 +80,7 @@
 		},
 		_checkMainNav: function() {
 			var href = window.location.href;
-			Site.$navigation.removeClass("active").each(function() {
+			Site.$navigation = $(".navigation a").removeClass("active").each(function() {
 				var url = $(this).attr("href");
 				if (href.indexOf(url) > -1) {
 					$(this).addClass("active");

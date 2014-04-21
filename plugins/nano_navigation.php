@@ -132,10 +132,12 @@ class Nano_Navigation {
 			}
 		}
 
-		if (count($ordered) > 0 || count($unordered) > 0) {
-			usort($ordered, "sortByOrder");
-			ksort($unordered);
-			$pages = array_merge($ordered, $unordered);
+		if (!$pages["title"]) {
+			if (count($ordered) > 0 || count($unordered) > 0) {
+				usort($ordered, "sortByOrder");
+				ksort($unordered);
+				$pages = array_merge($ordered, $unordered);
+			}
 		}
 
 		foreach ($pages as $k => $v) {
