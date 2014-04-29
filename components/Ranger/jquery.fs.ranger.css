@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.0 - 2014-01-20 
+ * Ranger v3.0.2 - 2014-02-06 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -39,3 +39,7 @@
 	.ranger-vertical .ranger-label,
 	.ranger-vertical .ranger-label.max { clear: both; float: none; height: 10%; padding: 5px 0 0; text-align: center; width: 100%; }
 	.ranger-vertical .ranger-label.max { padding: 0; }
+
+	/* 'Disabled' state */
+	.ranger.disabled { cursor: default; opacity: 0.5; }
+	.ranger.disabled .ranger-disc { cursor: default; }

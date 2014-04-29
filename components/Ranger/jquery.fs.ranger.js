@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.0 - 2014-01-20 
+ * Ranger v3.0.2 - 2014-02-06 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -17,7 +17,7 @@
 	 * @param label [boolean] <true> "Draw labels"
 	 * @param labels.max [string] "Max value label; defaults to max value"
 	 * @param labels.min [string] "Min value label; defaults to min value"
-	 * @param vertical [boolean] <false> "Flag to rander vertical range"
+	 * @param vertical [boolean] <false> "Flag to render vertical range"
 	 */
 	var options = {
 		callback: $.noop,
@@ -56,7 +56,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (typeof data !== "undefined") {
+				if (data) {
 					data.$ranger.off(".ranger")
 								.remove();
 
@@ -78,8 +78,8 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (typeof data !== "undefined") {
-					data.$input.attr("disabled", "disabled");
+				if (data) {
+					data.$input.prop("disabled", true);
 					data.$ranger.addClass("disabled");
 				}
 			});
@@ -96,8 +96,8 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (typeof data !== "undefined") {
-					data.$input.attr("disabled", null);
+				if (data) {
+					data.$input.prop("disabled", false);
 					data.$ranger.removeClass("disabled");
 				}
 			});
@@ -114,7 +114,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (typeof data !== "undefined") {
+				if (data) {
 					data.stepCount = (data.max - data.min) / data.step;
 					if (data.vertical) {
 						data.trackHeight = data.$track.outerHeight();
@@ -249,12 +249,14 @@
 
 		var data = e.data;
 
-		_onMouseMove(e);
+		if (!data.$input.is(":disabled")) {
+			_onMouseMove(e);
 
-		data.$ranger.addClass("focus");
+			data.$ranger.addClass("focus");
 
-		$("body").on("touchmove.ranger mousemove.ranger", data, _onMouseMove)
-				 .one("touchend.ranger touchcancel.ranger mouseup.ranger", data, _onMouseUp);
+			$("body").on("touchmove.ranger mousemove.ranger", data, _onMouseMove)
+					 .one("touchend.ranger touchcancel.ranger mouseup.ranger", data, _onMouseUp);
+		}
 	}
 
 	/**
@@ -268,10 +270,12 @@
 
 		var data = e.data;
 
-		data.$ranger.addClass("focus");
+		if (!data.$input.is(":disabled")) {
+			data.$ranger.addClass("focus");
 
-		$("body").on("touchmove.ranger mousemove.ranger", data, _onMouseMove)
-				 .one("touchend.ranger touchcancel.ranger mouseup.ranger", data, _onMouseUp);
+			$("body").on("touchmove.ranger mousemove.ranger", data, _onMouseMove)
+					 .one("touchend.ranger touchcancel.ranger mouseup.ranger", data, _onMouseUp);
+		}
 	}
 
 	/**
@@ -328,7 +332,13 @@
 		e.data.$ranger.removeClass("focus");
 	}
 
-	// Position handle within track
+	/**
+	 * @method private
+	 * @name _position
+	 * @description Positions handle
+	 * @param data [object] "Instance Data"
+	 * @param perc [number] "Position precentage"
+	 */
 	function _position(data, perc) {
 		if (data.increment > 1) {
 			if (data.vertical) {
@@ -361,22 +371,34 @@
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name _onChange
+	 * @description Handles change events
+	 * @param e [object] "Event data"
+	 * @param internal [boolean] "Flag for internal change"
+	 */
 	function _onChange(e, internal) {
-		if (!internal) {
-			var data = e.data,
-				perc = data.$input.val() / (data.max - data.min);
+		var data = e.data;
 
+		if (!internal && !data.$input.is(":disabled")) {
+			var perc = (data.$input.val() - data.min) / (data.max - data.min);
 			_position(data, perc);
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name _formatNumber
+	 * @description Formats provided number
+	 * @param number [number] "Number to format"
+	 */
 	function _formatNumber(number) {
 		var parts = number.toString().split(".");
 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		return parts.join(".");
 	}
 
-	// Define Plugin
 	$.fn.ranger = function(method) {
 		if (pub[method]) {
 			return pub[method].apply(this, Array.prototype.slice.call(arguments, 1));

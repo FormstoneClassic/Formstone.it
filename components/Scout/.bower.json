@@ -1,6 +1,6 @@
 {
   "name": "Scout",
-  "version": "3.0.1",
+  "version": "3.1.3",
   "description": "A jQuery plugin for pushing Google Analytics Events. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -17,13 +17,14 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.1",
+  "_release": "3.1.3",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.1",
-    "commit": "0e6a3e77de988d6e882a756905113ca3901bf4a3"
+    "tag": "3.1.3",
+    "commit": "89621e8c9d9314bb9ec9566bee37f13fe54efe8f"
   },
   "_source": "git://github.com/benplum/Scout.git",
-  "_target": "~3.0.0",
-  "_originalSource": "Scout"
+  "_target": "~3.1.3",
+  "_originalSource": "Scout",
+  "_direct": true
 }

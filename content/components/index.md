@@ -1,4 +1,0 @@
-/*
-Template: redirect
-Title: Components
-*/

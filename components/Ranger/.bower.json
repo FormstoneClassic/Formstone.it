@@ -30,5 +30,15 @@
     "name": "Ben Plum",
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
-  }
+  },
+  "_release": "3.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.2",
+    "commit": "00b098548a91c09fdc705ce98741a216b161f893"
+  },
+  "_source": "git://github.com/benplum/Ranger.git",
+  "_target": "~3.0.2",
+  "_originalSource": "Ranger",
+  "_direct": true
 }
