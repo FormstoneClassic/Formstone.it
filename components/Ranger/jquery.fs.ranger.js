@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.2 - 2014-02-06 
+ * Ranger v3.0.3 - 2014-04-30 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -170,7 +170,7 @@
 			var min = parseFloat($input.attr("min")) || 0,
 				max = parseFloat($input.attr("max")) || 100,
 				step = parseFloat($input.attr("step")) || 1,
-				value = $input.val() || (min + ((max - min) / 2));
+				value = parseFloat($input.val()) || (min + ((max - min) / 2));
 
 			var html = '<div class="ranger';
 			if (opts.vertical) {

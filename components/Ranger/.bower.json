@@ -1,6 +1,6 @@
 {
   "name": "Ranger",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A jQuery plugin for cross browser range inputs. Part of the formstone library.",
   "keywords": [
     "javascript",
@@ -31,14 +31,14 @@
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
   },
-  "_release": "3.0.2",
+  "_release": "3.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.2",
-    "commit": "00b098548a91c09fdc705ce98741a216b161f893"
+    "tag": "3.0.3",
+    "commit": "f6911e24ad9167ac89f70b8056bd37b75dfe3279"
   },
   "_source": "git://github.com/benplum/Ranger.git",
-  "_target": "~3.0.2",
+  "_target": "~3.0.3",
   "_originalSource": "Ranger",
   "_direct": true
 }
