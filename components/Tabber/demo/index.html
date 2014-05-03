@@ -32,6 +32,10 @@
 			.tabber .tabber-handle.active { background: #eee; }
 
 			.tabber .tabber-tab { background: #eee; padding: 20px; }
+			.tabber .tabber-tab p { margin: 10px 0; }
+
+			.tabber.mobile .tabber-tab { padding-top: 10px; }
+			.tabber.mobile .tabber-tab p { margin-top: 0; }
 		</style>
 
 		<script>
@@ -61,12 +65,13 @@
 				<h2>Basic</h2>
 				<p>Target tabbed interfaces should match the following markup pattern:</p>
 
-				<pre class="example"><code class="language-markup">&lt;div class="tabbed"&gt;
-	&lt;nav&gt;
+				<pre class="example"><code class="language-markup">
+&lt;div class="tabbed"&gt;
+	&lt;menu class="tabber-menu"&gt;
 		&lt;a href="#tab-1" class="tabber-handle"&gt;Tab 1&lt;/a&gt;
 		&lt;a href="#tab-2" class="tabber-handle"&gt;Tab 2&lt;/a&gt;
 		&lt;a href="#tab-3" class="tabber-handle"&gt;Tab 3&lt;/a&gt;
-	&lt;/nav&gt;
+	&lt;/menu&gt;
 	&lt;div class="tabber-tab" id="tab-1"&gt;
 		Content...
 	&lt;/div&gt;
@@ -76,24 +81,25 @@
 	&lt;div class="tabber-tab" id="tab-3"&gt;
 		Content...
 	&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+			</code></pre>
 				<pre class="example"><code class="language-javascript">$(".tabbed").tabber();</code></pre>
 
 				<h5>Demo</h5>
 				<div class="tabbed">
-					<nav>
-						<a href="#tab-1" class="tabber-handle">Tab 1</a>
-						<a href="#tab-2" class="tabber-handle">Tab 2</a>
-						<a href="#tab-3" class="tabber-handle">Tab 3</a>
-					</nav>
-					<div class="tabber-tab" id="tab-1">
-						Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui velit aliquet.
+					<menu class="tabber-menu">
+						<a href="#tab-1-1" class="tabber-handle">Tab 1</a>
+						<a href="#tab-1-2" class="tabber-handle">Tab 2</a>
+						<a href="#tab-1-3" class="tabber-handle">Tab 3</a>
+					</menu>
+					<div class="tabber-tab" id="tab-1-1">
+						<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui velit aliquet. Sed posuere consectetur est at lobortis. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
 					</div>
-					<div class="tabber-tab" id="tab-2">
-						Erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+					<div class="tabber-tab" id="tab-1-2">
+						<p>Erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla.</p>
 					</div>
-					<div class="tabber-tab" id="tab-3">
-						Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus porttitor ligula.
+					<div class="tabber-tab" id="tab-1-3">
+						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus porttitor ligula. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
 					</div>
 				</div>
 
@@ -103,21 +109,47 @@
 				<h2>Breakpoint</h2>
 				<p>By default, Tabber will enable itself on screens smaller then 980 pixels wide. You can specify a different width by setting the <code>maxWidth</code> option on initialization.</p>
 
-				<pre class="example"><code class="language-javascript">$(".tabbed").tabber({
-	maxWidth: "740px"
-});</code></pre>
+				<pre class="example"><code class="language-javascript">$(".tabbed").tabber({ maxWidth: "740px" });</code></pre>
 
 				<h5>Demo</h5>
 				<div class="tabbed" data-tabber-options='{"maxWidth":"740px"}'>
-					<nav>
-						<a href="#tab-1" class="tabber-handle">Tab 1</a>
-						<a href="#tab-2" class="tabber-handle">Tab 2</a>
-					</nav>
-					<div class="tabber-tab" id="tab-1">
-						Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui velit aliquet.
+					<menu class="tabber-menu">
+						<a href="#tab-2-1" class="tabber-handle">Tab 1</a>
+						<a href="#tab-2-2" class="tabber-handle">Tab 2</a>
+					</menu>
+					<div class="tabber-tab" id="tab-2-1">
+						<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui velit aliquet. Sed posuere consectetur est at lobortis. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
 					</div>
-					<div class="tabber-tab" id="tab-2">
-						Erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+					<div class="tabber-tab" id="tab-2-2">
+						<p>Erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla.</p>
+					</div>
+				</div>
+
+				<br />
+
+				<!-- VERTICAL -->
+				<h2>Vertical</h2>
+				<p>You can also create a vertical tab set:</p>
+
+				<pre class="example"><code class="language-javascript">$(".tabbed").tabber({
+	vertical: true
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div class="tabbed" data-tabber-options='{"vertical":true}'>
+					<menu class="tabber-menu">
+						<a href="#tab-3-1" class="tabber-handle">Tab 1</a>
+						<a href="#tab-3-2" class="tabber-handle">Tab 2</a>
+						<a href="#tab-3-3" class="tabber-handle">Tab 3</a>
+					</menu>
+					<div class="tabber-tab" id="tab-3-1">
+						<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui velit aliquet. Sed posuere consectetur est at lobortis. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+					</div>
+					<div class="tabber-tab" id="tab-3-2">
+						<p>Erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla.</p>
+					</div>
+					<div class="tabber-tab" id="tab-3-3">
+						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus porttitor ligula. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
 					</div>
 				</div>
 
