@@ -1,5 +1,5 @@
 /* 
- * Scout v3.1.3 - 2014-04-28 
+ * Scout v3.1.4 - 2014-05-05 
  * A jQuery plugin for pushing Google Analytics Events. Part of the Formstone Library. 
  * http://formstone.it/scout/ 
  * 
@@ -66,21 +66,24 @@
 	 * @param e [object] "Event data"
 	 */
 	function _track(e) {
-		e.preventDefault();
+		// Universal Analytics
+		if (typeof window.ga === "function") {
+			e.preventDefault();
 
-		var $target = $(this),
-			url = $target.attr("href"),
-			data = $target.data("scout-event").split(",");
+			var $target = $(this),
+				url = $target.attr("href"),
+				data = $target.data("scout-event").split(",");
 
-		// Trim that data
-		for (var i in data) {
-			if (data.hasOwnProperty(i)) {
-				data[i] = $.trim(data[i]);
+			// Trim that data
+			for (var i in data) {
+				if (data.hasOwnProperty(i)) {
+					data[i] = $.trim(data[i]);
+				}
 			}
-		}
 
-		// Push data
-		_push(data[0], data[1], (data[2] || url), data[3], data[4], $target);
+			// Push data
+			_push(data[0], data[1], (data[2] || url), data[3], data[4], $target);
+		}
 	}
 
 	/**
