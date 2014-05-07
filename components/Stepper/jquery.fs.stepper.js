@@ -1,5 +1,5 @@
 /* 
- * Stepper v3.0.6 - 2014-03-25 
+ * Stepper v3.0.7 - 2014-05-07 
  * A jQuery plugin for cross browser number inputs. Part of the Formstone Library. 
  * http://formstone.it/stepper/ 
  * 
@@ -154,9 +154,29 @@
 				$stepper.addClass("disabled");
 			}
 
+			// Bind keyboard events
+			$stepper.on("keypress", ".stepper-input", data, _onKeyup);
+
 			// Bind click events
 			$stepper.on("touchstart.stepper mousedown.stepper", ".stepper-arrow", data, _onMouseDown)
 					.data("stepper", data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onKeyup
+	 * @description Handles keypress event on inputs
+	 * @param e [object] "Event data"
+	 */
+	function _onKeyup(e) {
+		var data = e.data;
+
+		// If arrow keys
+		if (e.keyCode === 38 || e.keyCode === 40) {
+			e.preventDefault();
+
+			_step(data, (e.keyCode === 38) ? data.step : -data.step);
 		}
 	}
 
