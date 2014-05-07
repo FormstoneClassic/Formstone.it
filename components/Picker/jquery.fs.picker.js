@@ -201,7 +201,7 @@
 					   .on("deselect.picker", data, _onDeselect)
 					   .data("picker", data);
 
-			data.$picker.on("click.picker", data, _onClick);
+			data.$handle.on("click.picker", data, _onClick);
 		}
 	}
 
