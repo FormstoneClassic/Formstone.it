@@ -65,6 +65,9 @@
 	pre.example { background: $bgGray; border-left: 3px solid $lightGray; border-radius: 0; }
 
 
+	.bar.ads { padding: 50px 0 25px; text-align: center; }
+	.bar.ads a { display: inline-block; float: none; margin: 0 5px 10px; }
+
 /*-------------------------------------------
   Mobile
 -------------------------------------------*/
@@ -123,6 +126,8 @@
 		.features .feature { padding: 0 45px; }
 
 		.page { padding: 50px 0; }
+
+		.page .bar.ads { text-align: left; }
 	}
 
 /*-------------------------------------------
