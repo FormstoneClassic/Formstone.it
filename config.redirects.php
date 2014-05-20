@@ -2,6 +2,7 @@
 
 $config["nano_navigation"]["redirects"] = array(
 	"boxer" 		=> "components/boxer",
+	"dropper" 		=> "components/dropper",
 	"gridlock" 		=> "components/gridlock",
 	"macaroon" 		=> "components/macaroon",
 	"mimeo" 		=> "components/mimeo",

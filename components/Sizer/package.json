@@ -2,7 +2,7 @@
   "name": "Sizer",
   "id": "sizer",
   "codename": "jquery.fs.sizer",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "A jQuery plugin for matching dimensions. Part of the Formstone Library.",
   "keywords": [
 	"javascript",

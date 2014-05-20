@@ -1,6 +1,6 @@
 {
   "name": "Sizer",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "A jQuery plugin for matching dimensions. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -17,14 +17,13 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.2",
+  "_release": "3.0.4",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.2",
-    "commit": "f0a2a90a4f32272d5832dc67b6029897ca4bd90a"
+    "tag": "3.0.4",
+    "commit": "5cad61e48d5ccec64acc580a24fcd05b870d4fcf"
   },
   "_source": "git://github.com/benplum/Sizer.git",
   "_target": "~3.0.2",
-  "_originalSource": "Sizer",
-  "_direct": true
+  "_originalSource": "Sizer"
 }

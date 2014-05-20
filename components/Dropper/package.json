@@ -1,14 +1,13 @@
 {
-  "name": "Roller",
-  "id": "roller",
-  "codename": "jquery.fs.roller",
-  "version": "3.0.24",
-  "description":  "A jQuery plugin for simple content carousels. Part of the Formstone Library.",
+  "name": "Dropper",
+  "id": "dropper",
+  "codename": "jquery.fs.dropper",
+  "version": "0.1.0",
+  "description": "A jQuery plugin for simple drag and drop uploads. Part of the Formstone Library.",
   "keywords": [
-  	"carousel",
-  	"slider",
-  	"rotate",
-  	"ui",
+  	"upload",
+  	"form",
+  	"ajax",
   	"javascript",
   	"jquery",
   	"formstone",
@@ -16,10 +15,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benplum/Roller"
+    "url": "https://github.com/benplum/Dropper"
   },
-  "homepage": "http://formstone.it/roller/",
-  "demo": "http://formstone.it/components/Roller/demo/index.html",
+  "homepage": "http://formstone.it/dropper/",
+  "demo": "http://formstone.it/components/Dropper/demo/index.html",
   "license": "MIT",
   "author": {
     "name": "Ben Plum",

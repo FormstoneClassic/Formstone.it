@@ -1,6 +1,6 @@
 {
   "name": "Wallpaper",
-  "version": "3.1.11",
+  "version": "3.1.14",
   "description": "A jQuery plugin for smooth-scaling image and video backgrounds. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.1.11",
+  "_release": "3.1.14",
   "_resolution": {
     "type": "version",
-    "tag": "3.1.11",
-    "commit": "4cecc6a3500cc30e2b51bfcbc8d2e16dcc0be964"
+    "tag": "3.1.14",
+    "commit": "e68443939cb69ae5c524f7d4ef96705b74b99ea4"
   },
   "_source": "git://github.com/benplum/Wallpaper.git",
   "_target": "~3.1.0",
