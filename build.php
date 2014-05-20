@@ -31,7 +31,9 @@
 			}
 
 			$doc = array();
+			echo $source . "\n";
 			if ($source) {
+				echo $source . "\n";
 				$file = file_get_contents($dir . $source);
 
 				// Match /** ... */ style block comments
