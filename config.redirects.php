@@ -23,7 +23,8 @@ $config["nano_navigation"]["redirects"] = array(
 	"tipper"		=> "components/tipper",
 	"wallpaper"		=> "components/wallpaper",
 	"zoetrope"		=> "components/zoetrope",
-	"zoomer"		=> "components/zoomer"
+	"zoomer"		=> "components/zoomer",
+	"components/Gridlock/demo/demo-12.html" => "components/Gridlock/demo/demo.html"
 );
 
 ?>

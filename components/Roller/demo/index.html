@@ -14,6 +14,16 @@
 
 		<script src="http://formstone.it/js/demo.js"></script>
 
+		<!--[if LTE IE 9]>
+			<script src="ie/html5.js"></script>
+		<![endif]-->
+		<!--[if IE 9]>
+			<script src="ie/matchMedia.ie9.js"></script>
+		<![endif]-->
+		<!--[if LTE IE 8]>
+			<script src="ie/matchMedia.ie8.js"></script>
+		<![endif]-->
+
 		<link href="../jquery.fs.roller.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="../jquery.fs.roller.js"></script>
 
@@ -48,7 +58,6 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Roller Demo</h1>
-					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
 					<br />
 					<a href="http://formstone.it/roller/" class="button">View Documentation</a>
 				</header>
@@ -275,7 +284,7 @@
 
 				<!-- IE -->
 				<h2>IE Support</h2>
-				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>).</p>
+				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>). </p>
 
 			</div>
 		</article>

@@ -1,5 +1,5 @@
 /* 
- * Wallpaper v3.1.14 - 2014-05-20 
+ * Wallpaper v3.1.18 - 2014-06-16 
  * A jQuery plugin for smooth-scaling image and video backgrounds. Part of the Formstone Library. 
  * http://formstone.it/wallpaper/ 
  * 
@@ -20,7 +20,8 @@
 		isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(UA),
 		isSafari = (UA.toLowerCase().indexOf('safari') >= 0) && (UA.toLowerCase().indexOf('chrome') < 0),
 		transitionEvent,
-		transitionSupported;
+		transitionSupported,
+		respondTimer;
 
 	/**
 	 * @options
@@ -31,7 +32,7 @@
 	 * @param mute [boolean] <true> "Mute video"
 	 * @param onLoad [function] <$.noop> "On load callback"
 	 * @param onReady [function] <$.noop> "On ready callback"
-	 * @param source [string | object] <null> "Source image (string) or video (object)"
+	 * @param source [string | object] <null> "Source image (string or object) or video (object) or YouTube (object)"
 	 */
 	var options = {
 		autoPlay: true,
@@ -81,7 +82,7 @@
 				}
 			});
 
-			if ($(".wallpaper").length < 1) {
+			if (typeof $body !== "undefined" && typeof $window !== "undefined" && $(".wallpaper").length < 1) {
 				$body.removeClass("wallpaper-inititalized");
 				$window.off(".wallpaper");
 			}
@@ -93,7 +94,7 @@
 		 * @method
 		 * @name load
 		 * @description Loads source media
-		 * @param source [string | object] "Source image (string) or video (object)"
+		 * @param source [string | object] "Source image (string) or video (object) or YouTube (object); { source: { poster: <"">, video: <"" or {}>  } }"
 		 * @example $(".target").wallpaper("load", "path/to/image.jpg");
 		 */
 		load: function(source) {
@@ -101,11 +102,6 @@
 				var data = $(this).data("wallpaper");
 
 				if (data) {
-					if (typeof source === "object" && source.poster) {
-						data.poster = source.poster;
-						source = source.source;
-					}
-
 					_loadMedia(source, data);
 				}
 			});
@@ -262,14 +258,14 @@
 	 */
 	function _loadMedia(source, data, firstLoad) {
 		// Check if the source is new
-		if (data.source !== source) {
+		if (source !== data.source) {
 			data.source = source;
 			data.isYouTube = false;
 
 			// Check YouTube
-			if (typeof source === "string") {
+			if (typeof source === "object" && typeof source.video === "string") {
 				// var parts = source.match( /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/ );
-				var parts = source.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i );
+				var parts = source.video.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i );
 				if (parts && parts.length >= 1) {
 					data.isYouTube = true;
 					data.videoId = parts[1];
@@ -277,19 +273,21 @@
 			}
 
 			if (data.isYouTube) {
+				// youtube video
 				data.playing = false;
 				data.playerReady = false;
 				data.posterLoaded = false;
 
 				_loadYouTube(source, data, firstLoad);
-			} else if (typeof source === "object" && !source.fallback) {
+			} else if (typeof source === "object" && !source.hasOwnProperty("fallback")) {
+				// html5 video
 				_loadVideo(source, data, firstLoad);
 			} else {
-				// clear old events
+				// regular old image
 				if (data.responsiveSource) {
 					for (var i in data.responsiveSource) {
 						if (data.responsiveSource.hasOwnProperty(i)) {
-							data.responsiveSource[i].mq.removeListener(_respond);
+							data.responsiveSource[i].mq.removeListener(_onRespond);
 						}
 					}
 				}
@@ -308,7 +306,7 @@
 
 							if (media) {
 								var _mq = window.matchMedia(media.replace(Infinity, "100000px"));
-								_mq.addListener(_respond);
+								_mq.addListener(_onRespond);
 								sources.push({
 									mq: _mq,
 									source: source[j]
@@ -352,7 +350,7 @@
 		$img.one("load.wallpaper", function() {
 			if (nativeSupport) {
 				$imgContainer.addClass("native")
-							 .css({ backgroundImage: "url(" + newSource + ")" });
+							 .css({ backgroundImage: "url('" + newSource + "')" });
 			}
 
 			// Append
@@ -485,13 +483,13 @@
 		}
 
 		if (!data.posterLoaded) {
-			if (!data.poster) {
-				// data.poster = "http://img.youtube.com/vi/" + data.videoId + "/maxresdefault.jpg";
-				data.poster = "http://img.youtube.com/vi/" + data.videoId + "/0.jpg";
+			if (!data.source.poster) {
+				// data.source.poster = "http://img.youtube.com/vi/" + data.videoId + "/maxresdefault.jpg";
+				data.source.poster = "http://img.youtube.com/vi/" + data.videoId + "/0.jpg";
 			}
 
 			data.posterLoaded = true;
-			_loadImage(data.poster, data, true, firstLoad);
+			_loadImage(data.source.poster, data, true, firstLoad);
 
 			firstLoad = false;
 		}
@@ -499,7 +497,7 @@
 		if (!isMobile) {
 			if (!$("script[src*='youtube.com/iframe_api']").length) {
 				// $("head").append('<script src="' + window.location.protocol + '//www.youtube.com/iframe_api"></script>');
-				$("head").append('<script src="https://www.youtube.com/iframe_api"></script>');
+				$("head").append('<script src="//www.youtube.com/iframe_api"></script>');
 			}
 
 			if (!youTubeReady) {
@@ -533,9 +531,8 @@
 						enablejsapi: 1,
 						version: 3,
 						playerapiid: guid,
-						loop: 1,
+						loop: (data.loop) ? 1 : 0,
 						autoplay: 1,
-						/* loop: ((data.loop) ? 1 : 0), */
 						origin: window.location.protocol + "//" + window.location.host
 					},
 					events: {
@@ -543,7 +540,7 @@
 							/* console.log("onReady", e); */
 
 							data.playerReady = true;
-							data.player.setPlaybackQuality("highres");
+							/* data.player.setPlaybackQuality("highres"); */
 
 							if (data.mute) {
 								data.player.mute();
@@ -722,10 +719,21 @@
 
 	/**
 	 * @method private
-	 * @name _respond
+	 * @name _onRespond
 	 * @description Handle media query changes
 	 */
-	function _respond() {
+	function _onRespond() {
+		respondTimer = _startTimer(respondTimer, 5, _doRespond);
+	}
+
+	/**
+	 * @method private
+	 * @name _doRespond
+	 * @description Handle media query changes
+	 */
+	function _doRespond() {
+		_clearTimer(respondTimer);
+
 		$responders.each(function() {
 			var $target = $(this),
 				$image = $target.find("img"),
@@ -747,6 +755,33 @@
 
 			$target.trigger("change.wallpaper");
 		});
+	}
+
+	/**
+	 * @method private
+	 * @name _startTimer
+	 * @description Starts an internal timer
+	 * @param timer [int] "Timer ID"
+	 * @param time [int] "Time until execution"
+	 * @param callback [int] "Function to execute"
+	 * @param interval [boolean] "Flag for recurring interval"
+	 */
+	function _startTimer(timer, time, func, interval) {
+		_clearTimer(timer, interval);
+		return setTimeout(func, time);
+	}
+
+	/**
+	 * @method private
+	 * @name _clearTimer
+	 * @description Clears an internal timer
+	 * @param timer [int] "Timer ID"
+	 */
+	function _clearTimer(timer) {
+		if (timer !== null) {
+			clearInterval(timer);
+			timer = null;
+		}
 	}
 
 	/**

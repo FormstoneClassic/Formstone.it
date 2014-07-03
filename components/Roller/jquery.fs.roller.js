@@ -1,5 +1,5 @@
 /* 
- * Roller v3.0.24 - 2014-05-19 
+ * Roller v3.1.4 - 2014-05-30 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -313,6 +313,11 @@
 		if (!$roller.data("roller")) {
 			opts = $.extend({}, opts, $roller.data("roller-options"));
 
+			// Legacy browser support
+			if (!opts.useMargin && !_getTransform3DSupport()) {
+				opts.useMargin = true;
+			}
+
 			if (!opts.single) {
 				// Verify viewport and canister are available
 				if (!$roller.find(".roller-viewport").length) {
@@ -606,6 +611,17 @@
 			}
 		}
 
+		data.$items.removeClass("visible");
+		if (!data.single && data.perPage !== Infinity) {
+			for (var i = 0; i < data.perPage; i++) {
+				if (data.leftPosition === data.maxMove) {
+					data.$items.eq(data.count - 1 - i).addClass("visible");
+				} else {
+					data.$items.eq((data.perPage * index) + i).addClass("visible");
+				}
+			}
+		}
+
 		if (index !== data.index && animate !== false) {
 			data.$roller.trigger("update.roller", [ index ]);
 		}
@@ -626,17 +642,6 @@
 
 		data.$paginationItems.filter(".active").removeClass("active");
 		data.$paginationItems.eq(data.index).addClass("active");
-
-		data.$items.removeClass("visible");
-		if (!data.single && data.perPage !== Infinity) {
-			for (var i = 0; i < data.perPage; i++) {
-				if (data.leftPosition === data.maxMove) {
-					data.$items.eq(data.count - 1 - i).addClass("visible");
-				} else {
-					data.$items.eq((data.perPage * data.index) + i).addClass("visible");
-				}
-			}
-		}
 
 		if (data.infinite) {
 			data.$controlItems.addClass("enabled");
@@ -758,6 +763,27 @@
 			timer = null;
 		}
 	}
+
+	/**
+	 * @method private
+	 * @name _getTransform3DSupport
+	 * @description Determines if transforms are support
+	 * @return [boolean] "True if transforms supported"
+	 */
+	function _getTransform3DSupport() {
+		/* http://stackoverflow.com/questions/11628390/how-to-detect-css-translate3d-without-the-webkit-context */
+		var prop = "transform",
+			val = "translate3d(0px, 0px, 0px)",
+			test = /translate3d\(0px, 0px, 0px\)/g,
+			$div = $("<div>");
+
+		$div.css(_prefix(prop, val));
+
+		var check = $div[0].style.cssText.match(test);
+
+		return (check !== null && check.length === 1);
+	}
+
 
 	$.fn.roller = function(method) {
 		if (pub[method]) {

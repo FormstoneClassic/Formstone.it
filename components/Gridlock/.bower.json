@@ -1,6 +1,6 @@
 {
   "name": "Gridlock",
-  "version": "3.0.6",
+  "version": "3.1.2",
   "description": "A responsive CSS grid system. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -10,21 +10,20 @@
   "license": "MIT",
   "homepage": "http://formstone.it/gridlock/",
   "main": [
-    "fs.gridlock-base.css",
-    "fs.gridlock-12.css"
+    "fs.gridlock.css"
   ],
   "ignore": [
     "*.jquery.json",
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.6",
+  "_release": "3.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.6",
-    "commit": "38dda0be03b1d9c0cd413086c30e031dcaba2250"
+    "tag": "3.1.2",
+    "commit": "322a0c96f1b74551bfb6b7727fc352145177af60"
   },
   "_source": "git://github.com/benplum/Gridlock.git",
-  "_target": "~3.0.0",
+  "_target": "~3.1.0",
   "_originalSource": "Gridlock"
 }

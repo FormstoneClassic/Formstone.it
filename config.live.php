@@ -49,10 +49,8 @@ $config["nano_resources"] = array(
 	"css" => array(
 		"files" => array(
 			"site" => array(
-				/* "../../components/Sprout/sprout.css", */
 				"../../components/normalize-css/normalize.css",
-				"../../components/Gridlock/fs.gridlock-base.css",
-				"../../components/Gridlock/fs.gridlock-12.css",
+				"../../components/Gridlock/fs.gridlock.css",
 				"../../components/Shifter/jquery.fs.shifter.css",
 
 				"css/fonts.css",
@@ -69,8 +67,7 @@ $config["nano_resources"] = array(
 			),
 			"demo" => array(
 				"../../components/normalize-css/normalize.css",
-				"../../components/Gridlock/fs.gridlock-base.css",
-				"../../components/Gridlock/fs.gridlock-12.css",
+				"../../components/Gridlock/fs.gridlock.css",
 
 				"css/fonts.css",
 				"css/prism.css",

@@ -15,7 +15,7 @@
 		<script src="http://formstone.it/js/demo.js"></script>
 
 		<link href="../fs.gridlock-base.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="../fs.gridlock-12.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../fs.gridlock-grid.css" rel="stylesheet" type="text/css" media="all" />
 
 		<!--[if LTE IE 8]>
 			<link href="../fs.gridlock-ie.css" rel="stylesheet" type="text/css" media="all" />
@@ -51,7 +51,7 @@
 		<script>
 		</script>
 	</head>
-	<body class="gridlock gridlock-fluid demo">
+	<body class="gridlock demo">
 		<header id="header">
 			<div class="row">
 				<div class="all-full">
@@ -63,8 +63,10 @@
 			<div class="mobile-full tablet-full desktop-full">
 				<header class="header">
 					<h1>Gridlock Demo</h1>
-					<h3>12 Column</h3>
-					<p><a href="demo-16.html">Switch to 16 column demo</a></p>
+					<h3>Adaptive Grid</h3>
+					<p>
+						<a href="demo-fluid.html">Switch to Fluid Grid</a>
+					</p>
 					<br>
 					<a href="http://formstone.it/gridlock/" class="button">View Documentation</a>
 				</header>
@@ -250,6 +252,47 @@
 					</div>
 				</div>
 				<!-- END Push -->
+
+				<br>
+
+				<!-- Centered -->
+				<h2>Centered</h2>
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+	&lt;div class=&quot;row&quot;&gt;
+		&lt;div class=&quot;desktop-7 tablet-3 mobile-1 centered&quot;&gt;
+			One
+		&lt;/div&gt;
+		&lt;div class=&quot;desktop-7 tablet-3 mobile-1  centered&quot;&gt;
+			Two
+		&lt;/div&gt;
+		&lt;div class=&quot;desktop-7 tablet-3 mobile-1  centered&quot;&gt;
+			Three
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+
+				<h5>Demo</h5>
+
+				<div class="example">
+					<div class="row">
+						<div class="desktop-7 tablet-3 mobile-1  centered">
+							<span class="label_d">desktop-7</span>
+							<span class="label_t">tablet-3</span>
+							<span class="label_m">mobile-1</span>
+						</div>
+						<div class="desktop-7 tablet-3 mobile-1  centered">
+							<span class="label_d">desktop-7</span>
+							<span class="label_t">tablet-3</span>
+							<span class="label_m">mobile-1</span>
+						</div>
+						<div class="desktop-7 tablet-3 mobile-1  centered">
+							<span class="label_d">desktop-7</span>
+							<span class="label_t">tablet-3</span>
+							<span class="label_m">mobile-1</span>
+						</div>
+					</div>
+				</div>
+				<!-- END Centered -->
 
 				<br>
 
