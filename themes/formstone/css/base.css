@@ -55,7 +55,7 @@
 	.table_wrapper,
 	.option_table_wrapper { overflow-y: auto; margin: 25px 0; width: 100%; }
 	table { min-width: 700px; width: 100%; }
-	table th { color: $lightGray; cursor: pointer; $lato; font-size: 12px; font-size: 12rem; letter-spacing: 0.2em; padding: 0 15px 10px; text-align: left; text-transform: uppercase; }
+	table th { color: $lightGray; /* cursor: pointer; */ $lato; font-size: 12px; font-size: 12rem; letter-spacing: 0.2em; padding: 0 15px 10px; text-align: left; text-transform: uppercase; }
 	table td { $lato; font-size: 16px; font-size: 16rem; line-height: 1.5; padding: 13px 15px 15px; }
 	table tr:nth-child(odd) td { background: $bgGray; }
 	table .option { width: 175px; }

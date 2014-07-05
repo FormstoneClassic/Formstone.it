@@ -62,7 +62,7 @@
 
 	.component.detail h3 { color: $orange; }
 
-	pre.example { background: $bgGray; border-left: 3px solid $lightGray; border-radius: 0; }
+	pre/* .example */ { background: $bgGray; border-left: 3px solid $lightGray; border-radius: 0; }
 
 
 	.bar.ads { padding: 50px 0 25px; text-align: center; }

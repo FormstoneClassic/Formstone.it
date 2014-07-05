@@ -15,9 +15,8 @@
 			</div>
 		</header>
 		<br />
-		<h2 id="usage">Usage</h2>
+		<h2 id="usage">Installation</h2>
 		{% if meta.files %}
-		<h3>Installation</h3>
 		<p>Include the following resources on your page before initializing:</p>
 		<pre class="example"><code class="language-markup">{% if meta.files.js %}{% for file in meta.files.js %}&lt;script src=&quot;{{ file }}&quot;&gt;&lt;/script&gt;
 {% endfor %}{% endif %}
@@ -119,6 +118,11 @@
 		{% endfor %}
 		<br />
 		{% endif %}
+		{% if meta.extra %}
+			{{ meta.extra }}
+		{% endif %}
+
+
 		{% if live %}
 		<!-- <div id="disqus_thread"></div> -->
 		{% endif %}

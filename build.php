@@ -10,6 +10,9 @@
 	ini_set('memory_limit', '32M');
 	set_time_limit(0);
 
+	include "lib/Parsedown.php";
+	$Parsedown = new Parsedown();
+
 	$c_file = file_get_contents(__DIR__ . "/components/components.json");
 	$c = json_decode($c_file, true);
 
@@ -75,6 +78,10 @@
 				}
 			}
 
+			$readme = file_get_contents($dir . "README.md");
+			$readme_parts = split("---", $readme, 2);
+			$readme_parsed = $Parsedown->text($readme_parts[1]);
+
 			$json = array(
 				"name" => $package["name"],
 				"description" => str_ireplace("Part of the Formstone Library.", "", $package["description"]),
@@ -82,7 +89,8 @@
 				"demo" => $package["demo"],
 				"repository" => $package["repository"]["url"],
 				"documentation" => $doc,
-				"files" => $main
+				"files" => $main,
+				"extra" => $readme_parsed
 			);
 
 			$markdown = "/* \n";
