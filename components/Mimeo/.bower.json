@@ -1,6 +1,6 @@
 {
   "name": "Mimeo",
-  "version": "3.0.5",
+  "version": "3.0.7",
   "description": "A jQuery plugin for responsive images. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -17,11 +17,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.5",
+  "_release": "3.0.7",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.5",
-    "commit": "b490286775b365b9bd8ae6d76c79d36b91726358"
+    "tag": "3.0.7",
+    "commit": "bbfb37027330b91d957f5d33a0034c77f61ee516"
   },
   "_source": "git://github.com/benplum/Mimeo.git",
   "_target": "~3.0.3",

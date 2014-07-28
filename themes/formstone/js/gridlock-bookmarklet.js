@@ -36,9 +36,8 @@ function GridlockBookmarklet() {
 						html = '';
 
 					html += '<menu id="gridlock_menu" class="' + config.position + '">';
-					html += '<span class="icon logo">Gridlock</span>';
-					html += '<span class="show option">SHOW</span>';
-					html += '<span class="icon remove">Close</span>';
+					html += '<span class="gridlock_show gridlock_option">Show Grid</span>';
+					html += '<span class="gridlock_icon gridlock_remove">Close</span>';
 					html += '</menu>';
 					html += '<section id="gridlock_overlay" class="' + ((mobileFirst) ? "mobile-first" : "") + '">';
 					html += '<div class="row">';
@@ -54,11 +53,11 @@ function GridlockBookmarklet() {
 					_this.$menuItems = _this.$menu.find("span");
 					_this.$overlay = $jq("#gridlock_overlay");
 
-					_this.$menu.on("click", ".option", $jq.proxy(_this.onClick, _this))
-							   .on("click", ".remove", $jq.proxy(_this.remove, _this));
+					_this.$menu.on("click", ".gridlock_option", $jq.proxy(_this.onClick, _this))
+							   .on("click", ".gridlock_remove", $jq.proxy(_this.remove, _this));
 
 					if (config.onLoad || (config.useCookies === true && _this.readCookie("gridlock-active") == "true")) {
-						_this.$menuItems.filter(".show")
+						_this.$menuItems.filter(".gridlock_show")
 										.trigger("click");
 					}
 				}
@@ -71,13 +70,13 @@ function GridlockBookmarklet() {
 
 			if ($target.hasClass("active") || $target.hasClass("remove")) {
 				$target.removeClass("active")
-					   .html("SHOW");
-				_this.$overlay.find(".row").hide();
+					   .html("Show Grid");
+				_this.$overlay.removeClass("visible");
 				_this.eraseCookie("gridlock-active");
 			} else {
 				$target.addClass("active")
-					   .html("HIDE");
-				_this.$overlay.find(".row").show();
+					   .html("Hide Grid");
+				_this.$overlay.addClass("visible");
 				_this.createCookie("gridlock-active", "true", 7);
 			}
 		},

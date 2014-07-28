@@ -1,5 +1,5 @@
 /* 
- * Mimeo v3.0.5 - 2014-03-07 
+ * Mimeo v3.0.7 - 2014-07-28 
  * A jQuery plugin for responsive images. Part of the Formstone Library. 
  * http://formstone.it/mimeo/ 
  * 
@@ -49,7 +49,7 @@
 						srcset = srcset.split(",");
 						for (var k in srcset) {
 							if (srcset.hasOwnProperty(k)) {
-								var s = srcset[k].trim().split(" "),
+								var s = srcset[k].replace(/^\s+|\s+$/g, '').split(" "),
 									r = parseInt(s[1], 10);
 
 								// Get the largest source possible

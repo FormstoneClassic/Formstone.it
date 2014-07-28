@@ -4,7 +4,7 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 
-		<title>Macroon Demo</title>
+		<title>Macaroon Demo</title>
 
 		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
 
@@ -72,15 +72,10 @@
 			function _output(label, value) {
 				var html = '';
 				html += '<p><span class="label">' + label + ':</span>';
-				html += '<span class="value">' + value; // + '<br />[ ' + document.cookie + ' ]</span></p>';
+				html += '<span class="value">' + value + '</p>';
 
 				$(".output").prepend(html);
 			}
-/*
-			function _output(text) {
-				$(".output").prepend("<p>" + text + "</p>");
-			}
-*/
 		</script>
 	</head>
 	<body class="gridlock demo">

@@ -1,6 +1,6 @@
 {
   "name": "Zoomer",
-  "version": "3.0.10",
+  "version": "3.0.12",
   "description": "A jQuery plugin for smooth image exploration. Part of the formstone library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.10",
+  "_release": "3.0.12",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.10",
-    "commit": "784441a0bab5124ddad73a8842ade70287d905ea"
+    "tag": "3.0.12",
+    "commit": "cc76eed195741b11f0b8fa7233aaa96ea46637a8"
   },
   "_source": "git://github.com/benplum/Zoomer.git",
   "_target": "~3.0.0",

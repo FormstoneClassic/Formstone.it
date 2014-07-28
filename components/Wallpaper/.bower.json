@@ -25,6 +25,7 @@
     "commit": "1c8519832a86caaa3efea83d42a168a2e054aa22"
   },
   "_source": "git://github.com/benplum/Wallpaper.git",
-  "_target": "~3.1.0",
-  "_originalSource": "Wallpaper"
+  "_target": "~3.1.18",
+  "_originalSource": "Wallpaper",
+  "_direct": true
 }
