@@ -1,5 +1,5 @@
 /* 
- * Pronto v3.0.14 - 2014-05-12 
+ * Pronto v3.0.18 - 2014-08-19 
  * A jQuery plugin for faster page loads. Part of the formstone library. 
  * http://formstone.it/pronto/ 
  * 
@@ -14,12 +14,14 @@
 	var $window = $(window),
 		$body,
 		navtiveSupport = window.history && window.history.pushState && window.history.replaceState,
-		currentURL = '';
+		currentURL = '',
+		visited = 0;
 
 	/**
 	 * @options
 	 * @param force [boolean] <false> "Forces new requests when navigating back/forward"
 	 * @param jump [boolean] <false> "Jump page to top on render"
+	 * @param modal [boolean] <false> "Flag for content loaded into modal"
 	 * @param selecter [string] <'a'> "Selecter to target in the DOM"
 	 * @param render [function] <$.noop> "Custom render function"
 	 * @param requestKey [string] <'pronto'> "GET variable for requests"
@@ -32,6 +34,7 @@
 	var options = {
 		force: false,
 		jump: true,
+		modal: false,
 		selector: "a",
 		render: $.noop,
 		requestKey: "pronto",
@@ -68,6 +71,32 @@
 		defaults: function(opts) {
 			options = $.extend(options, opts || {});
 			return $(this);
+		},
+
+		/**
+		 * @method
+		 * @name disable
+		 * @description Disable Pronto
+		 * @example $.pronto("enable");
+		 */
+		disable: function() {
+			if ($body && $body.hasClass("pronto")) {
+				$body.off("click.pronto")
+					 .removeClass("pronto");
+			}
+		},
+
+		/**
+		 * @method
+		 * @name enable
+		 * @description Enables Pronto
+		 * @example $.pronto("enable");
+		 */
+		enable: function() {
+			if ($body && !$body.hasClass("pronto")) {
+				$body.on("click.pronto", options.selector, _onClick)
+					 .addClass("pronto");
+			}
 		},
 
 		/**
@@ -118,8 +147,7 @@
 			// Bind state events
 			$window.on("popstate.pronto", _onPop);
 
-			$body.on("click.pronto", options.selector, _onClick)
-				 .addClass("pronto");
+			pub.enable();
 		}
 	}
 
@@ -163,16 +191,23 @@
 	function _onPop(e) {
 		var data = e.originalEvent.state;
 
-		// Check if data exists
-		if (data && data.url !== currentURL) {
-			if (options.force) {
-				// Force a new request, even if navigating back
-				_request(data.url);
+		if (data) {
+			if (options.modal && visited === 0 && data.url) {
+				// If opening content in a 'modal', return to original page on reload->back
+				window.location.href = data.url;
 			} else {
-				// Fire request event
-				$window.trigger("pronto.request");
+				// Check if data exists
+				if (data.url !== currentURL) {
+					if (options.force) {
+						// Force a new request, even if navigating back
+						_request(data.url);
+					} else {
+						// Fire request event
+						$window.trigger("pronto.request");
 
-				_process(data.url, data.data, data.scroll, false);
+						_process(data.url, data.data, data.scroll, false);
+					}
+				}
 			}
 		}
 	}
@@ -265,8 +300,10 @@
 			history.pushState({
 				url: currentURL,
 				data: data,
-				scroll: 0
+				scroll: scrollTop
 			}, "state-"+currentURL, currentURL);
+
+			visited++;
 		} else {
 			// Update state with history data
 			_saveState();

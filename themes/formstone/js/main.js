@@ -14,14 +14,12 @@
 			Site.transitionEvent = Site._getTransitionEvent();
 			Site.transitionSupported = (Site.transitionEvent !== false);
 
-			/*
-			$.pronto({
+						$.pronto({
 				selector: "a:not(.no-pronto)",
 				tracking: {
 					manager: true
 				}
 			});
-			*/
 
 			$.rubberband({
 				minWidth: [ 320, 500, 740, 980, 1220 ],

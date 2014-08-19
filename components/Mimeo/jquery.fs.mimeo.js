@@ -1,5 +1,5 @@
 /* 
- * Mimeo v3.0.7 - 2014-07-28 
+ * Mimeo v3.0.9 - 2014-08-08 
  * A jQuery plugin for responsive images. Part of the Formstone Library. 
  * http://formstone.it/mimeo/ 
  * 
@@ -13,6 +13,14 @@
 		$pictures = null,
 		pixelRatio = (typeof window.devicePixelRatio !== "undefined") ? Math.ceil(window.devicePixelRatio) : 1;
 
+	/**
+	 * @options
+	 * @param selector [string] <'picture'> "Target Selector"
+	 */
+	var options = {
+			selector: "picture"
+		};
+
 	var pub = {
 
 		/**
@@ -23,7 +31,7 @@
 		 */
 		update: function() {
 			// Fix IE9 shenanigans - http://www.w3.org/community/respimg/2012/03/15/polyfilling-picture-without-the-overhead/#comment-212
-			$("video > picture").each (function(i, picture) {
+			$("video > " + options.selector).each (function(i, picture) {
 				var $picture = $(this),
 					$video = $picture.parent("video");
 
@@ -32,7 +40,7 @@
 			});
 
 			// Then parse the pictures
-			$pictures = $("picture").each(function(i, picture) {
+			$pictures = $(options.selector).each(function(i, picture) {
 				var $sources = $(picture).find("source, .mimeo-source");
 
 				for (var j = 0, count = $sources.length; j < count; j++) {
@@ -90,7 +98,7 @@
 	 * @param opts [object] "Initialization options"
 	 */
 	function _init(opts) {
-		//$.extend(options, opts || {});
+		$.extend(options, opts || {});
 
 		//if (nativeSupport) {
 		//	return;

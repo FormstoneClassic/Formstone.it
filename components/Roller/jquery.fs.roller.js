@@ -1,5 +1,5 @@
 /* 
- * Roller v3.1.8 - 2014-07-28 
+ * Roller v3.1.13 - 2014-08-19 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
@@ -237,8 +237,9 @@
 					}
 
 					data.maxMove = -data.canisterWidth + data.viewportWidth + data.itemMargin;
-					if (data.maxMove > 0) {
+					if (data.maxMove >= 0) {
 						data.maxMove = 0;
+						data.pageCount = 1;
 					}
 
 					// Reset Page Count
@@ -250,7 +251,7 @@
 						data.$pagination.html(html);
 					}
 
-					if (data.pageCount < 1) {
+					if (data.pageCount <= 1) {
 						data.$controls.removeClass("visible");
 						data.$pagination.removeClass("visible");
 					} else {
@@ -366,7 +367,9 @@
 				yStart: 0,
 				enabled: false,
 				touchstart: 0,
-				touchEnd: 0
+				touchEnd: 0,
+				touchTimer: null,
+				hasTouched: false
 			}, opts);
 
 			data.$items = (data.single) ? data.$roller.find(".roller-item") : data.$canister.children(".roller-item");
@@ -539,8 +542,17 @@
 		var data = e.data,
 			index = data.index + (($(e.currentTarget).hasClass("next")) ? 1 : -1);
 
-		_clearTimer(data.autoTimer);
-		_position(data, index);
+		if (!data.hasTouched) {
+			_clearTimer(data.autoTimer);
+			_position(data, index);
+		}
+
+		if (e.type === "touchstart") {
+			data.hasTouched = true;
+			data.touchTimer = _startTimer(data.touchTimer, 500, function() {
+				data.hasTouched = false;
+			});
+		}
 	}
 
 	/**
@@ -625,10 +637,11 @@
 			}
 		}
 
-		if (index !== data.index && animate !== false) {
+		if (animate !== false && index !== data.index && index > -1 && index < data.pageCount) {
 			data.$roller.trigger("update.roller", [ index ]);
+
+			data.index = index;
 		}
-		data.index = index;
 
 		_updateControls(data);
 	}
