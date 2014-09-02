@@ -1,5 +1,5 @@
 /* 
- * Selecter v3.1.5 - 2014-07-29 
+ * Selecter v3.1.9 - 2014-09-02 
  * A jQuery plugin for replacing default select elements. Part of the Formstone Library. 
  * http://formstone.it/selecter/ 
  * 
@@ -141,13 +141,24 @@
 			});
 		},
 
+
 		/**
-		* @method
+		* @method private
 		* @name refresh
-		* @description Updates instance base on target options
+		* @description DEPRECATED - Updates instance base on target options
 		* @example $(".target").selecter("refresh");
 		*/
 		refresh: function() {
+			return pub.update.apply($(this));
+		},
+
+		/**
+		* @method
+		* @name update
+		* @description Updates instance base on target options
+		* @example $(".target").selecter("update");
+		*/
+		update: function() {
 			return $(this).each(function(i, input) {
 				var data = $(input).parent(".selecter").data("selecter");
 
@@ -204,6 +215,7 @@
 		if (!$select.hasClass("selecter-element")) {
 			// EXTEND OPTIONS
 			opts = $.extend({}, opts, $select.data("selecter-options"));
+
 			opts.multiple = $select.prop("multiple");
 			opts.disabled = $select.is(":disabled");
 
@@ -212,8 +224,8 @@
 			}
 
 			// Test for selected option in case we need to override the custom label
-			var $originalOption = $select.find("[selected]");
-			if (!opts.multiple && opts.label !== "" && $originalOption.length < 1) {
+			var $originalOption = $select.find(":selected");
+			if (!opts.multiple && opts.label !== "") {
 				$select.prepend('<option value="" class="selecter-placeholder" selected>' + opts.label + '</option>');
 			} else {
 				opts.label = "";
@@ -716,33 +728,30 @@
 
 		// Check for disabled options
 		if (!isDisabled) {
-			if (index === -1 && data.label !== "") {
-				data.$selected.html(data.label);
-			} else if (!isSelected) {
+			if (data.multiple) {
+				if (isSelected) {
+					data.$options.eq(index).prop("selected", null);
+					$item.removeClass("selected");
+				} else {
+					data.$options.eq(index).prop("selected", true);
+					$item.addClass("selected");
+				}
+			} else if (index > -1 && index < data.$items.length) {
 				var newLabel = $item.html(),
 					newValue = $item.data("value");
 
-				// Modify DOM
-				if (data.multiple) {
-					data.$options.eq(index).prop("selected", true);
-				} else {
-					data.$selected.html(newLabel)
-								  .removeClass('placeholder');
-					data.$items.filter(".selected")
-							   .removeClass("selected");
+				data.$selected.html(newLabel)
+							  .removeClass('placeholder');
 
-					data.$select[0].selectedIndex = index;
-				}
+				data.$items.filter(".selected")
+						   .removeClass("selected");
+
+				data.$select[0].selectedIndex = index;
 
 				$item.addClass("selected");
-			} else if (data.multiple) {
-				data.$options.eq(index).prop("selected", null);
-				$item.removeClass("selected");
-			}
-
-			if (!data.multiple) {
-				// Update index
 				data.index = index;
+			} else if (data.label !== "") {
+				data.$selected.html(data.label);
 			}
 		}
 	}

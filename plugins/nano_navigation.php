@@ -41,6 +41,7 @@ class Nano_Navigation {
 
 	public function before_read_file_meta(&$headers) {
 		$headers["order"] = "Order";
+		$headers["hidden"] = "Hidden";
 	}
 
 	public function file_meta(&$meta) {

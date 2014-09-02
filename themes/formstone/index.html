@@ -14,10 +14,13 @@
 		</header>
 		<div class="components clear">
 			{% for page in navigation.components.children %}
+				{% if page.hidden %}
+				{% else %}
 			<div class="mobile-full tablet-half desktop-third component">
 				<h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
 				<p>{{ page.description }}</p>
 			</div>
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>

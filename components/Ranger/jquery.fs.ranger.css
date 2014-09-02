@@ -1,12 +1,12 @@
 /* 
- * Ranger v3.0.5 - 2014-05-29 
+ * Ranger v3.0.8 - 2014-08-21 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
  * Copyright 2014 Ben Plum; MIT Licensed 
  */ 
 
- 	.ranger-element { *left: -9999px; opacity: 0; position: absolute; z-index: -1; }
+ 	.ranger-element { *left: -9999px; height: 1px; opacity: 0; position: absolute; z-index: -1; width: 1px; }
  	.ranger { overflow: hidden; width: 100%; }
  	.ranger * {
 	 	-webkit-user-select: none;

@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.5 - 2014-05-29 
+ * Ranger v3.0.8 - 2014-08-21 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -11,16 +11,14 @@
 
 	/**
 	 * @options
-	 * @param callback [function] <$.noop> "Value set callback"
 	 * @param customClass [string] <''> "Class applied to instance"
 	 * @param formatter [function] <$.noop> "Value format function"
 	 * @param label [boolean] <true> "Draw labels"
 	 * @param labels.max [string] "Max value label; defaults to max value"
 	 * @param labels.min [string] "Min value label; defaults to min value"
-	 * @param vertical [boolean] <false> "Flag to render vertical range"
+	 * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead
 	 */
 	var options = {
-		callback: $.noop,
 		customClass: "",
 		formatter: $.noop,
 		label: true,
@@ -172,6 +170,9 @@
 				step = parseFloat($input.attr("step")) || 1,
 				value = parseFloat($input.val()) || (min + ((max - min) / 2));
 
+			// Not valid in the spec
+			opts.vertical = $input.attr("orient") === "vertical" || opts.vertical;
+
 			var html = '<div class="ranger';
 			if (opts.vertical) {
 				html += ' ranger-vertical';
@@ -212,7 +213,7 @@
 				$ranger.addClass("disabled");
 			}
 
-			var data = $.extend({
+			var data = $.extend({}, opts, {
 				$input: $input,
 				$ranger: $ranger,
 				$track: $track,
@@ -223,7 +224,7 @@
 				step: step,
 				stepDigits: step.toString().length - step.toString().indexOf("."),
 				value: value
-			}, opts);
+			});
 
 			// Bind click events
 			$input.on("focus.ranger", data, _onFocus)
@@ -245,6 +246,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onTrackDown(e) {
+		e.preventDefault();
 		e.stopPropagation();
 
 		var data = e.data;
@@ -266,6 +268,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onHandleDown(e) {
+		e.preventDefault();
 		e.stopPropagation();
 
 		var data = e.data;
@@ -285,14 +288,20 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onMouseMove(e) {
-		var data = e.data,
+		e.preventDefault();
+		e.stopPropagation();
+
+		var oe = e.originalEvent,
+			data = e.data,
 			offset = data.$track.offset(),
 			perc = 0;
 
 		if (data.vertical) {
-			perc = 1 - (e.pageY - offset.top) / data.trackHeight;
+			var pageY = (typeof oe.targetTouches !== "undefined") ? oe.targetTouches[0].pageY : e.pageY;
+			perc = 1 - (pageY - offset.top) / data.trackHeight;
 		} else {
-			perc = (e.pageX - offset.left) / data.trackWidth;
+			var pageX = (typeof oe.targetTouches !== "undefined") ? oe.targetTouches[0].pageX : e.pageX;
+			perc = (pageX - offset.left) / data.trackWidth;
 		}
 
 		_position(data, perc);
@@ -305,6 +314,9 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onMouseUp(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
 		var data = e.data;
 
 		data.$ranger.removeClass("focus");
@@ -362,11 +374,9 @@
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
 		value += data.min;
 
-		if (value !== data.value && isReset !== true) {
+		if (value !== data.value && value && isReset !== true) {
 			data.$input.val(value)
 					   .trigger("change", [ true ]);
-
-			data.callback.call(data.$ranger, value);
 
 			data.value = value;
 		}
