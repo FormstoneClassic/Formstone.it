@@ -1,5 +1,5 @@
 /* 
- * Rubberband v3.0.3 - 2014-02-02 
+ * Rubberband v3.0.4 - 2014-09-14 
  * A jQuery plugin for responsive media query events. Part of the Formstone Library. 
  * http://formstone.it/rubberband/ 
  * 
@@ -74,22 +74,6 @@
 
 		/**
 		 * @method
-		 * @name unbind
-		 * @description Unbinds all callbacks from media query
-		 * @param media [string] "Media query to match"
-		 * @example $.rubberband("unbind", "(min-width: 500px)", { ... });
-		 */
-		unbind: function(media) {
-			if (bindings[media]) {
-				bindings[media].mq.removeListener(_onBindingRespond);
-				bindings = bindings.splice(bindings.indexOf(bindings[media]), 1);
-			}
-
-			return this;
-		},
-
-		/**
-		 * @method
 		 * @name defaults
 		 * @description Sets default plugin options
 		 * @param opts [object] <{}> "Options object"
@@ -114,6 +98,22 @@
 		 */
 		state: function () {
 			return currentState;
+		},
+
+		/**
+		 * @method
+		 * @name unbind
+		 * @description Unbinds all callbacks from media query
+		 * @param media [string] "Media query to match"
+		 * @example $.rubberband("unbind", "(min-width: 500px)", { ... });
+		 */
+		unbind: function(media) {
+			if (bindings[media]) {
+				bindings[media].mq.removeListener(_onBindingRespond);
+				bindings = bindings.splice(bindings.indexOf(bindings[media]), 1);
+			}
+
+			return this;
 		}
 	};
 

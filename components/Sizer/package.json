@@ -2,17 +2,16 @@
   "name": "Sizer",
   "id": "sizer",
   "codename": "jquery.fs.sizer",
-  "version": "3.0.4",
+  "version": "3.0.6",
   "description": "A jQuery plugin for matching dimensions. Part of the Formstone Library.",
   "keywords": [
 	"javascript",
   	"jquery",
-	"formstone",
-	"benplum"
+	"formstone"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benplum/Sizer"
+    "url": "https://github.com/Formstone/Sizer"
   },
   "homepage": "http://formstone.it/sizer/",
   "demo": "http://formstone.it/components/Sizer/demo/index.html",

@@ -1,7 +1,7 @@
 <?
 
 $config["nano_resources"] = array(
-	"debug" => false,
+	"debug" => true,
 	"css" => array(
 		"files" => array(
 			"site" => array(
@@ -17,10 +17,10 @@ $config["nano_resources"] = array(
 			),
 			"site-ie8" => array(
 				"../../components/Gridlock/fs.gridlock-ie.css",
-				"css/ie/ie8.css",
+				"css/ie/ie8.css"
 			),
 			"site-ie9" => array(
-				"css/ie/ie9.css",
+				"css/ie/ie9.css"
 			),
 			"demo" => array(
 				"../../components/normalize-css/normalize.css",
@@ -86,10 +86,11 @@ $config["nano_resources"] = array(
 				"js/main.js"
 			),
 			"site-ie8" => array(
-				"js/ie/matchMedia.ie8.js",
+				"js/ie/html5.js",
+				"js/ie/matchMedia.ie8.js"
 			),
 			"site-ie9" => array(
-				"js/ie/matchMedia.ie9.js",
+				"js/ie/matchMedia.ie9.js"
 			),
 			"demo" => array(
 				"../../components/jquery/jquery.min.js",

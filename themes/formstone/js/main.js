@@ -29,7 +29,7 @@
 			});
 
 			$.shifter({
-				maxWidth: "960px"
+				maxWidth: Infinity // "960px"
 			});
 
 			Site._onRender();

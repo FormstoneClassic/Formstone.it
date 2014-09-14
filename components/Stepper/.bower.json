@@ -1,6 +1,6 @@
 {
   "name": "Stepper",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "A jQuery plugin for cross browser number inputs. Part of the Formstone Library.",
   "keywords": [
     "javascript",
@@ -31,11 +31,11 @@
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
   },
-  "_release": "3.0.7",
+  "_release": "3.0.8",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.7",
-    "commit": "a1e3a969e8b4c8381336ffaad6f0153a65fb50c7"
+    "tag": "3.0.8",
+    "commit": "a432e5efe060f9b9efd2be4826cf97cb51287ddd"
   },
   "_source": "git://github.com/benplum/Stepper.git",
   "_target": "~3.0.2",

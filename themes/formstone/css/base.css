@@ -52,6 +52,8 @@
 
 	textarea { }
 
+	menu { margin: 0; padding: 0; }
+
 	.table_wrapper,
 	.option_table_wrapper { overflow-y: auto; margin: 25px 0; width: 100%; }
 	table { min-width: 700px; width: 100%; }

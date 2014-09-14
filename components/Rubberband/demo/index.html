@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 		<title>Rubberband Demo</title>
 
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
 
 		<!--[if LTE IE 8]>
-			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all">
 		<![endif]-->
 
 		<!-- Don't want to load a different version that's packaged with the normal demo files -->
@@ -26,50 +26,62 @@
 			<script src="ie/matchMedia.ie8.js"></script>
 		<![endif]-->
 
-		<script src="../src/jquery.fs.rubberband.js"></script>
+		<script src="../jquery.fs.rubberband.js"></script>
+
+		<!--[DEMO:START-RESOURCES]-->
 
 		<style>
-			.output { vertical-align: top; }
-			.output span { display: inline-block; width: 90px; }
-			.output p:first-child { font-weight: 600; }
+			.demo .output { vertical-align: top; }
+			.demo .output span { display: inline-block; width: 90px; }
+			.demo .output p:first-child { font-weight: 600; }
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$(window).on("snap", logSnap);
+				$(window).on("snap.demo", logSnap);
 
-				$.rubberband({
-					minWidth: [ 320, 500, 740, 980, 1220 ],
-					maxWidth: [ 1220, 980, 740, 500, 320 ],
-					minHeight: [ 400, 800 ],
-					maxHeight: [ 800, 400 ]
-				});
+				if ($.rubberband("state") === null) {
+					$.rubberband({
+						minWidth: [ 320, 500, 740, 980, 1220 ],
+						maxWidth: [ 1220, 980, 740, 500, 320 ],
+						minHeight: [ 400, 800 ],
+						maxHeight: [ 800, 400 ]
+					});
+				}
 
 				$.rubberband("bind", "(min-width: 740px)", {
 					enter: logChange,
 					leave: logChange
 				});
 
-				function logSnap(e, data) {
-					var html = "";
-
-					html += "<p><span>Snap:</span><span>MinWidth:</span>" + data.minWidth + "<br />";
-					html += "<span></span><span>MaxWidth:</span>"+ data.maxWidth + "<br />";
-					html += "<span></span><span>MinHeight:</span>"+ data.minHeight + "<br />";
-					html += "<span></span><span>MaxHeight:</span>"+ data.maxHeight + "</p>";
-
-					$("#rubberband_demo").prepend(html);
-				}
-
-				function logChange() {
-					var mql = this,
-						type = mql.matches ? "Enter" : "Leave"
-						html = "<p><span>" + type + ":</span>" + mql.media + "<br />";
-
-					$("#rubberband_demo_binding").prepend(html);
-				}
+				$(window).one("pronto.load", function() {
+					$(window).off("snap.demo");
+					$.rubberband("unbind", "(min-width: 740px)");
+				});
 			});
+
+			function logSnap(e, data) {
+				var html = "";
+
+				html += "<p><span>Snap:</span><span>MinWidth:</span>" + data.minWidth + "<br>";
+				html += "<span></span><span>MaxWidth:</span>"+ data.maxWidth + "<br>";
+				html += "<span></span><span>MinHeight:</span>"+ data.minHeight + "<br>";
+				html += "<span></span><span>MaxHeight:</span>"+ data.maxHeight + "</p>";
+
+				$("#rubberband_demo").prepend(html);
+			}
+
+			function logChange() {
+				var mql = this,
+					type = mql.matches ? "Enter" : "Leave"
+					html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
+
+				$("#rubberband_demo_binding").prepend(html);
+			}
 		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
 	</head>
 	<body class="gridlock demo">
 		<header id="header">
@@ -84,12 +96,14 @@
 				<header class="header">
 					<h1>Rubberband Demo</h1>
 					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
-					<br />
+					<br>
 					<a href="http://formstone.it/rubberband/" class="button">View Documentation</a>
 				</header>
 
+				<!--[DEMO:START-CONTENT]-->
+
 				<!-- Basic -->
-				<h3>Basic</h3>
+				<h2>Basic</h2>
 				<p>Rubberband can track global changes to screen size based on your existing grid system. This is useful when many elements need to be resized on all changes to screen size. Start by configuring the dimensions you'd like to track by passing arrays containing the target width and/or heights:</p>
 
 				<pre class="example"><code class="language-javascript">$.rubberband({
@@ -108,9 +122,9 @@
 				<h5>Demo</h5>
 				<div id="rubberband_demo" class="output"></div>
 
-				<br />
+				<br>
 
-				<h3>Binding</h3>
+				<h2>Binding</h2>
 				<p>Rubberband can also bind events to specific media query changes for more fine grain control:</p>
 
 				<pre class="example"><code class="language-javascript">$.rubberband("bind", "(min-width: 740px)", {
@@ -127,11 +141,13 @@
 				<h5>Demo</h5>
 				<div id="rubberband_demo_binding" class="output"></div>
 
-				<br />
+				<br>
 
 				<!-- IE -->
 				<h2>IE Support</h2>
 				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>).</p>
+
+				<!--[DEMO:END-CONTENT]-->
 
 			</div>
 		</article>
