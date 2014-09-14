@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 		<title>Tabber Demo</title>
 
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
 
 		<!--[if LTE IE 8]>
-			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all">
 		<![endif]-->
 
 		<script src="http://formstone.it/js/demo.js"></script>
@@ -24,25 +24,34 @@
 			<script src="ie/matchMedia.ie8.js"></script>
 		<![endif]-->
 
-		<link href="../jquery.fs.tabber.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../jquery.fs.tabber.css" rel="stylesheet" type="text/css" media="all">
 		<script src="../jquery.fs.tabber.js"></script>
 
+		<!--[DEMO:START-RESOURCES]-->
+
 		<style>
-			.tabber .tabber-handle { display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
-			.tabber .tabber-handle.active { background: #eee; }
+			.demo .tabbed .tabber-handle { font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+			.demo .tabbed .tabber-handle.active { background: #eee; }
 
-			.tabber .tabber-tab { background: #eee; padding: 20px; }
-			.tabber .tabber-tab p { margin: 10px 0; }
+			.demo .tabbed .tabber-tab { background: #eee; padding: 20px; }
+			.demo .tabbed .tabber-tab p { margin: 10px 0; }
 
-			.tabber.mobile .tabber-tab { padding-top: 10px; }
-			.tabber.mobile .tabber-tab p { margin-top: 0; }
+			.demo .tabbed.mobile .tabber-tab { padding-top: 10px; }
+			.demo .tabbed.mobile .tabber-tab p { margin-top: 0; }
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$(".tabbed").tabber();
+				$(".demo .tabbed").tabber();
+
+				$(window).one("pronto.load", function() {
+					$(".demo .tabbed").tabber("destroy");
+				});
 			});
 		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
 	</head>
 	<body class="gridlock demo">
 		<header id="header">
@@ -56,10 +65,11 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Tabber Demo</h1>
-					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
-					<br />
+					<br>
 					<a href="http://formstone.it/tabber/" class="button">View Documentation</a>
 				</header>
+
+				<!--[DEMO:START-CONTENT]-->
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
@@ -103,7 +113,7 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- BREAKPOINT -->
 				<h2>Breakpoint</h2>
@@ -125,7 +135,7 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- VERTICAL -->
 				<h2>Vertical</h2>
@@ -153,11 +163,13 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- IE -->
 				<h2>IE Support</h2>
 				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>).</p>
+
+				<!--[DEMO:END-CONTENT]-->
 
 			</div>
 		</article>

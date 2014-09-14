@@ -1,6 +1,6 @@
 {
   "name": "Roller",
-  "version": "3.1.15",
+  "version": "3.1.16",
   "description": "A jQuery plugin for simple content carousels. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.1.15",
+  "_release": "3.1.16",
   "_resolution": {
     "type": "version",
-    "tag": "3.1.15",
-    "commit": "36e0269b3ebf5d13da92a12c6b2ecd570e5df1d4"
+    "tag": "3.1.16",
+    "commit": "83b54a248923972c328840c33741b8cda70cb564"
   },
   "_source": "git://github.com/benplum/Roller.git",
   "_target": "~3.1.4",

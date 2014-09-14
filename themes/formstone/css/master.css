@@ -68,6 +68,12 @@
 	.bar.ads { padding: 50px 0 25px; text-align: center; }
 	.bar.ads a { display: inline-block; float: none; margin: 0 5px 10px; }
 
+
+	.demo_tabbed > .tabber-menu { border-bottom: 1px solid $bgGray; overflow: hidden; margin: 0 0 10px; }
+	.demo_tabbed > .tabber-menu > .tabber-handle { color: $textGray; display: block; float: left; font-size: 14px; line-height: 40px; margin: 0 1px 0 0; margin: 0 20px 0 0; padding: 0 10px 0 0; text-transform: uppercase; }
+	.demo_tabbed > .tabber-menu > .tabber-handle.active { color: $orange; }
+
+
 /*-------------------------------------------
   Mobile
 -------------------------------------------*/

@@ -1,6 +1,6 @@
 {
   "name": "Tabber",
-  "version": "3.0.10",
+  "version": "3.0.13",
   "description": "A jQuery plugin for adding simple tabbed interfaces. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "jquery.fs.tabber.js",
     "jquery.fs.tabber.css"
   ],
-  "_release": "3.0.10",
+  "_release": "3.0.13",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.10",
-    "commit": "437f6f20a40b393acbe78a884f629b524d951a12"
+    "tag": "3.0.13",
+    "commit": "ee8302e11ff90706103445787d9da406133f475e"
   },
   "_source": "git://github.com/benplum/Tabber.git",
   "_target": "~3.0.3",

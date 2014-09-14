@@ -2,39 +2,49 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 		<title>Pager Demo</title>
 
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
 
 		<!--[if LTE IE 8]>
-			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all">
 		<![endif]-->
 
 		<script src="http://formstone.it/js/demo.js"></script>
 
-		<link href="../jquery.fs.pager.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../jquery.fs.pager.css" rel="stylesheet" type="text/css" media="all">
 		<script src="../jquery.fs.pager.js"></script>
 
+		<!--[DEMO:START-RESOURCES]-->
+
 		<style>
-			.pager .pager-pages a { color: #222; }
-			.pager .pager-pages a.active { color: #999; }
+			.demo .pager .pager-pages a { color: #222; }
+			.demo .pager .pager-pages a.active { color: #999; }
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$(".pagination").pager();
-
-				$(".pagination.events").on("update.pager", function(e, index) {
+				$(".demo .pagination.events").on("update.pager", function(e, index) {
 					var html = '';
 					html += '<p><span class="label">Page Index: </span>';
 					html += '<span class="value">' + index + '</p>';
 
-					$(".output").prepend(html);
+					$(".demo .output").prepend(html);
+				});
+
+				$(".demo .pagination").pager();
+
+				$(window).one("pronto.load", function() {
+					$(".demo .pagination.events").off(".pager");
+					$(".demo .pagination").pager("destroy");
 				});
 			});
 		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
 	</head>
 	<body class="gridlock demo">
 		<header id="header">
@@ -48,9 +58,11 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Pager Demo</h1>
-					<br />
+					<br>
 					<a href="http://formstone.it/pager/" class="button">View Documentation</a>
 				</header>
+
+				<!--[DEMO:START-CONTENT]-->
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
@@ -78,7 +90,7 @@
 					<a href="#10">10</a>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- Current -->
 				<h2>Current Page</h2>
@@ -97,7 +109,7 @@
 					<a href="#3">3</a>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- Event -->
 				<h2>Events</h2>
@@ -126,7 +138,9 @@ $(".target").on("update.pager", function (e, index) {
 
 				</div>
 
-				<br />
+				<br>
+
+				<!--[DEMO:END-CONTENT]-->
 
 			</div>
 		</article>

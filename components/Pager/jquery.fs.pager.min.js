@@ -1,5 +1,5 @@
 /* 
- * Pager v1.0.0 - 2014-03-15 
+ * Pager v1.0.1 - 2014-09-13 
  * A jQuery plugin for simple pagination. Part of the formstone library. 
  * http://formstone.it/pager/ 
  * 

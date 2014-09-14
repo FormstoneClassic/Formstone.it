@@ -2,19 +2,18 @@
   "name": "Pager",
   "id": "pager",
   "codename": "jquery.fs.pager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A jQuery plugin for simple pagination. Part of the formstone library.",
   "keywords": [
   	"pagination",
 	"ui",
   	"javascript",
   	"jquery",
-  	"formstone",
-  	"benplum"
+  	"formstone"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benplum/Pager"
+    "url": "https://github.com/Formstone/Pager"
   },
   "homepage": "http://formstone.it/pager/",
   "demo": "http://formstone.it/components/Pager/demo/index.html",

@@ -1,6 +1,6 @@
 {
   "name": "Picker",
-  "version": "3.0.12",
+  "version": "3.0.14",
   "description": "A jQuery plugin for replacing default checkboxes and radios. Part of the formstone library.",
   "author": {
     "name": "Ben Plum",
@@ -18,11 +18,11 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.0.12",
+  "_release": "3.0.14",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.12",
-    "commit": "407e1adb994402b8c0c2a7ec53b8e51d67e52150"
+    "tag": "3.0.14",
+    "commit": "ed84a1d3e49685bcd55b49ba3f877fb8b665cea3"
   },
   "_source": "git://github.com/benplum/Picker.git",
   "_target": "~3.0.5",

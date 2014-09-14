@@ -1,6 +1,6 @@
 {
   "name": "Pager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A jQuery plugin for simple pagination. Part of the formstone library.",
   "author": {
     "name": "Ben Plum",
@@ -18,14 +18,13 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "1.0.0",
+  "_release": "1.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.0",
-    "commit": "051ae54c43b353701401b8419704869d48b94a35"
+    "tag": "1.0.1",
+    "commit": "015f3bef1b472b2ff62f0ef229cf562cb09ceb87"
   },
   "_source": "git://github.com/benplum/Pager.git",
   "_target": "~1.0.0",
-  "_originalSource": "Pager",
-  "_direct": true
+  "_originalSource": "Pager"
 }

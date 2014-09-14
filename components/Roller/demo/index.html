@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 		<title>Roller Demo</title>
 
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
 
 		<!--[if LTE IE 8]>
-			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all">
 		<![endif]-->
 
 		<script src="http://formstone.it/js/demo.js"></script>
@@ -24,27 +24,41 @@
 			<script src="ie/matchMedia.ie8.js"></script>
 		<![endif]-->
 
-		<link href="../jquery.fs.roller.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../jquery.fs.roller.css" rel="stylesheet" type="text/css" media="all">
 		<script src="../jquery.fs.roller.js"></script>
 
-		<style>
-			/* .roller { height: 300px; } */
-			.rolled .roller-item { background: #ccc; color: #fff; font-size: 100px; height: 294px; line-height: 290px; margin: 0 10px 0 0; text-align: center; width: 294px; }
-			.rolled .roller-viewport { overflow: hidden; }
+		<!--[DEMO:START-RESOURCES]-->
 
-			.rolled.single .roller-controls,
-			.rolled.single .roller-pagination { clear: both; }
+		<style>
+			.demo .rolled .roller-item { background: #ccc; color: #fff; font-size: 100px; height: 294px; line-height: 290px; margin: 0 10px 0 0; text-align: center; width: 294px; }
+			.demo .rolled .roller-viewport { overflow: hidden; }
+
+			.demo .rolled.single .roller-controls,
+			.demo .rolled.single .roller-pagination { clear: both; }
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$(".rolled").roller();
+				$(".demo .rolled").roller();
 
-				$(window).on("snap", function() {
-					$(".rolled").roller("reset");
+				$(window).on("snap.roller", function() {
+					$(".demo .rolled").roller("reset");
+				});
+
+				$(".demo_tabbed").on("update.tabber", function() {
+					$(".demo .rolled").roller("reset");
+				});
+
+				$(window).one("pronto.load", function() {
+					$(".demo .rolled").roller("destroy");
+					$(window).off("snap.roller");
+					$(".demo_tabbed").off("update.tabber");
 				});
 			});
 		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
 	</head>
 	<body class="gridlock demo">
 		<header id="header">
@@ -58,9 +72,11 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Roller Demo</h1>
-					<br />
+					<br>
 					<a href="http://formstone.it/roller/" class="button">View Documentation</a>
 				</header>
+
+				<!--[DEMO:START-CONTENT]-->
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
@@ -105,7 +121,7 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- PAGED -->
 				<h2>Paged</h2>
@@ -134,7 +150,7 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- AUTO WIDTH -->
 				<h2>Auto Width</h2>
@@ -163,7 +179,7 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- SINGLE -->
 				<h2>Single</h2>
@@ -192,7 +208,7 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- INFINITE -->
 				<h2>Infinite</h2>
@@ -221,37 +237,7 @@
 					</div>
 				</div>
 
-				<br />
-
-				<!-- Advanced -->
-<!--
-				<h2>Advanced</h2>
-				<p>The:</p>
-
-				<pre class="example"><code class="language-javascript">$(".target").roller({
-	pagination: false,
-	controls: false
-});</code></pre>
-
-				<h5>Demo</h5>
-				<div class="rolled" data-roller-options='{"controls":false,"pagination":false}'>
-					<div class="roller-item">
-						1
-					</div>
-					<div class="roller-item">
-						2
-					</div>
-					<div class="roller-item">
-						3
-					</div>
-					<div class="roller-item">
-						4
-					</div>
-					<div class="roller-item">
-						5
-					</div>
-				</div>
--->
+				<br>
 
 				<!-- BREAKPOINT -->
 				<h2>Breakpoint</h2>
@@ -280,11 +266,13 @@
 					</div>
 				</div>
 
-				<br />
+				<br>
 
 				<!-- IE -->
 				<h2>IE Support</h2>
 				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>). </p>
+
+				<!--[DEMO:END-CONTENT]-->
 
 			</div>
 		</article>

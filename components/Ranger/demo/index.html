@@ -17,19 +17,34 @@
 		<link href="../jquery.fs.ranger.css" rel="stylesheet" type="text/css" media="all">
 		<script src="../jquery.fs.ranger.js"></script>
 
+		<!--[DEMO:START-RESOURCES]-->
+
 		<style>
-			.ranger-vertical { float: left; }
+			.demo .ranger-vertical { float: left; }
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$("input[type=range]").ranger();
+				$(".demo input[type=range]").ranger();
 
-				$(window).on("snap", function() {
-					$("input[type=range]").ranger("reset");
+				$(window).on("snap.ranger", function() {
+					$(".demo input[type=range]").ranger("reset");
+				});
+
+				$(".demo_tabbed").on("update.tabber", function() {
+					$(".demo input[type=range]").ranger("reset");
+				});
+
+				$(window).one("pronto.load", function() {
+					$(".demo input[type=range]").ranger("destroy");
+					$(window).off("snap.ranger");
+					$(".demo_tabbed").off("update.tabber");
 				});
 			});
 		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
 	</head>
 	<body class="gridlock demo">
 		<header id="header">
@@ -43,10 +58,11 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Ranger Demo</h1>
-					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
 					<br>
 					<a href="http://formstone.it/ranger/" class="button">View Documentation</a>
 				</header>
+
+				<!--[DEMO:START-CONTENT]-->
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
@@ -91,6 +107,8 @@
 				</fieldset>
 
 				<br>
+
+				<!--[DEMO:END-CONTENT]-->
 
 			</div>
 		</article>

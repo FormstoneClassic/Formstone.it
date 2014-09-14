@@ -6,122 +6,150 @@
 			<p class="emphasized orange">{{ meta.description }}</p>
 			<p>Current Version: {{ meta.version }}</p>
 			<div class="links">
-				{% if meta.demo %}
+				{% if meta.demo and not meta.demo_content %}
 				<a href="{{ meta.demo }}" class="button no-pronto" data-scout-event="Button, Click, Demo">View Demo</a>
 				{% endif %}
 				{% if meta.repository %}
-				<a href="{{ meta.repository }}" class="button" target="_blank" data-scout-event="Button, Click, Download">Download</a>
+				<a href="{{ meta.repository }}" class="button" target="_blank" data-scout-event="Button, Click, Download">Download on GitHub</a>
 				{% endif %}
 			</div>
 		</header>
-		<br />
-		<h2 id="usage">Installation</h2>
-		{% if meta.files %}
-		<p>Include the following resources on your page before initializing:</p>
-		<pre class="example"><code class="language-markup">{% if meta.files.js %}{% for file in meta.files.js %}&lt;script src=&quot;{{ file }}&quot;&gt;&lt;/script&gt;
+		<br>
+
+		<div class="demo_tabbed">
+			<menu class="tabber-menu">
+				<a href="#docs" class="tabber-handle">Documentation</a>
+				{% if meta.demo_content %}
+				<a href="#demo" class="tabber-handle">Demo</a>
+				{% endif %}
+			</menu>
+			<div class="tabber-tab" id="docs">
+				<h2 id="usage">Installation</h2>
+				{% if meta.files %}
+				<p>Include the following resources on your page before initializing:</p>
+				<pre class="example"><code class="language-markup">{% if meta.files.js %}{% for file in meta.files.js %}&lt;script src=&quot;{{ file }}&quot;&gt;&lt;/script&gt;
 {% endfor %}{% endif %}
 {% if meta.files.css %}{% for file in meta.files.css %}&lt;link href=&quot;{{ file }}&quot; rel=&quot;stylesheet&quot;&gt;
-{% endfor %}{% endif %}
-</code></pre>
-		{% endif %}
-		<h3>Bower</h3>
-		<p>You can deploy and update via the command line with <a href="http://bower.io/" target="_blank">Bower</a>:
-		<pre class="example"><code class="language-javascript">bower install {{ meta.name }}</code></pre>
-		<br />
-		{% if meta.documentation.options %}
-		<h2 id="options">Options</h2>
-		<p>Options are set by passing a valid <code>options</code> object at initialization or to the public <code>"defaults"</code> method. You can also set custom options for a specific instance by attaching a <code>data-boxer-options</code> attribute containing a properly formatted JSON object to the target element.</p>
-		<div class="option_table_wrapper">
-			<table class="option_table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Default</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for option in meta.documentation.options %}
-					<tr>
-						<td><code>{{ option.name }}</code></td>
-						<td><code>{{ option.type }}</code></td>
-						<td><code>{{ option.default }}</code></td>
-						<td>{{ option.description }}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-		<br />
-		{% endif %}
-		{% if meta.documentation.events %}
-		<h2 id="events">Events</h2>
-		<p>Events are triggered on the target instance's element, unless otherwise stated.</p>
-		<div class="option_table_wrapper">
-			<table class="option_table">
-				<thead>
-					<tr>
-						<th>Option</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for event in meta.documentation.events %}
-					<tr>
-						<td><code>{{ event.name }}</code></td>
-						<td>{{ event.description }}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-		<br />
-		{% endif %}
-		{% if meta.documentation.methods %}
-		<h2 id="methods">Methods</h2>
-		<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
-		{% for method in meta.documentation.methods %}
-			{% if (not method.private) and (not method.global) %}
-		<div class="method">
-			<h3>{{ method.name }}</h3>
-			<p>{{ method.description }}</p>
-			{% if method.example %}
-			<pre class="example"><code class="language-javascript">{{ method.example }}</code></pre>
-			{% endif %}
-			{% if method.params %}
-			<div class="option_table_wrapper">
-				<table class="option_table">
-					<thead>
-						<tr>
-							<th>Parameter</th>
-							<th>Type</th>
-							<th>Default</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for param in method.params %}
-						<tr>
-							<td><code>{{ param.name }}</code></td>
-							<td><code>{{ param.type }}</code></td>
-							<td><code>{{ param.default }}</code></td>
-							<td>{{ param.description }}</td>
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>
+{% endfor %}{% endif %}</code></pre>
+				{% endif %}
+				<h3>Bower</h3>
+				<p>You can deploy and update via the command line with <a href="http://bower.io/" target="_blank">Bower</a>:</p>
+				<pre class="example"><code class="language-javascript">bower install {{ meta.name }}</code></pre>
+				<br>
+				{% if meta.documentation.options %}
+				<h2 id="options">Options</h2>
+				<p>Options are set by passing a valid <code>options</code> object at initialization or to the public <code>"defaults"</code> method. You can also set custom options for a specific instance by attaching a <code>data-boxer-options</code> attribute containing a properly formatted JSON object to the target element.</p>
+				<div class="option_table_wrapper">
+					<table class="option_table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for option in meta.documentation.options %}
+							<tr>
+								<td><code>{{ option.name }}</code></td>
+								<td><code>{{ option.type }}</code></td>
+								<td><code>{{ option.default }}</code></td>
+								<td>{{ option.description }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<br>
+				{% endif %}
+				{% if meta.documentation.events %}
+				<h2 id="events">Events</h2>
+				<p>Events are triggered on the target instance's element, unless otherwise stated.</p>
+				<div class="option_table_wrapper">
+					<table class="option_table">
+						<thead>
+							<tr>
+								<th>Option</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for event in meta.documentation.events %}
+							<tr>
+								<td><code>{{ event.name }}</code></td>
+								<td>{{ event.description }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<br>
+				{% endif %}
+				{% if meta.documentation.methods %}
+				<h2 id="methods">Methods</h2>
+				<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+				{% for method in meta.documentation.methods %}
+					{% if (not method.private) and (not method.global) %}
+				<div class="method">
+					<h3>{{ method.name }}</h3>
+					<p>{{ method.description }}</p>
+					{% if method.example %}
+					<pre class="example"><code class="language-javascript">{{ method.example }}</code></pre>
+					{% endif %}
+					{% if method.params %}
+					<div class="option_table_wrapper">
+						<table class="option_table">
+							<thead>
+								<tr>
+									<th>Parameter</th>
+									<th>Type</th>
+									<th>Default</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for param in method.params %}
+								<tr>
+									<td><code>{{ param.name }}</code></td>
+									<td><code>{{ param.type }}</code></td>
+									<td><code>{{ param.default }}</code></td>
+									<td>{{ param.description }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					{%  endif %}
+				</div>
+					{% endif %}
+				{% endfor %}
+				<br>
+				{% endif %}
+				{% if meta.extra %}
+					{{ meta.extra }}
+				{% endif %}
 			</div>
-			{%  endif %}
-		</div>
+			{% if meta.demo_content %}
+			<div class="tabber-tab demo" id="demo">
+				{{ meta.demo_content }}
+			</div>
 			{% endif %}
-		{% endfor %}
-		<br />
-		{% endif %}
-		{% if meta.extra %}
-			{{ meta.extra }}
-		{% endif %}
+		</div>
 
+		{% if meta.demo_resources %}
+			{% if meta.files.js %}
+				{% for file in meta.files.js %}
+		<script src="{{ base_url }}/components/{{ meta.name }}/{{ file }}"></script>
+				{% endfor %}
+			{% endif %}
+			{% if meta.files.css %}
+				{% for file in meta.files.css %}
+		<link href="{{ base_url }}/components/{{ meta.name }}/{{ file }}" rel="stylesheet">
+				{% endfor %}
+			{% endif %}
+			{{ meta.demo_resources }}
+		{% endif %}
 
 		{% if live %}
 		<!-- <div id="disqus_thread"></div> -->

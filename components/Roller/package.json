@@ -2,7 +2,7 @@
   "name": "Roller",
   "id": "roller",
   "codename": "jquery.fs.roller",
-  "version": "3.1.15",
+  "version": "3.1.16",
   "description":  "A jQuery plugin for simple content carousels. Part of the Formstone Library.",
   "keywords": [
   	"carousel",
@@ -11,12 +11,11 @@
   	"ui",
   	"javascript",
   	"jquery",
-  	"formstone",
-  	"benplum"
+  	"formstone"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benplum/Roller"
+    "url": "https://github.com/Formstone/Roller"
   },
   "homepage": "http://formstone.it/roller/",
   "demo": "http://formstone.it/components/Roller/demo/index.html",

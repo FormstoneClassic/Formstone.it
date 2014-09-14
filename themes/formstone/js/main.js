@@ -14,7 +14,7 @@
 			Site.transitionEvent = Site._getTransitionEvent();
 			Site.transitionSupported = (Site.transitionEvent !== false);
 
-						$.pronto({
+			$.pronto({
 				selector: "a:not(.no-pronto)",
 				tracking: {
 					manager: true
@@ -29,7 +29,7 @@
 			});
 
 			$.shifter({
-				maxWidth: Infinity
+				maxWidth: "960px"
 			});
 
 			Site._onRender();
@@ -60,6 +60,8 @@
 			clearTimeout(Site.progressTimer);
 			Site._transitionListener( Site.$progress, "width", "100%", Site._resetProgress );
 			Site.$progress.css({ width: "100%" });
+
+			$(".demo_tabbed").tabber("destroy");
 		},
 		_onRender: function() {
 			Pagination._init();
@@ -70,6 +72,10 @@
 
 			Site._checkMainNav();
 			Site.$pronto.removeClass("loading");
+
+			$(".demo_tabbed").tabber({
+				maxWidth: "0px"
+			});
 		},
 		_resetProgress: function() {
 			Site._transitionListener(Site.$progress, "opacity", "0", function() {

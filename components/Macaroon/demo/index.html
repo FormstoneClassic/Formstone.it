@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 		<title>Macaroon Demo</title>
 
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
 
 		<!--[if LTE IE 8]>
-			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="http://formstone.it/css/demo.ie.css" rel="stylesheet" type="text/css" media="all">
 		<![endif]-->
 
 		<script src="http://formstone.it/js/demo.js"></script>
@@ -26,22 +26,28 @@
 
 		<script src="../jquery.fs.macaroon.js"></script>
 
+		<!--[DEMO:START-RESOURCES]-->
+
 		<style>
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$(".form .set").click(_setCookie);
-				$(".form .get").click(_getCookie);
-				$(".form .erase").click(_eraseCookie);
+				$(".demo .form").on("click.cookie", ".set", _setCookie)
+								.on("click.cookie", ".get", _getCookie)
+								.on("click.cookie", ".erase", _eraseCookie);
+
+				$(window).one("pronto.load", function() {
+					$(".demo .form").off(".cookie");
+				});
 			});
 
 			function _setCookie(e) {
 				e.preventDefault();
 				e.stopPropagation();
 
-				var key = $(".form [name=set_key]").val(),
-					value = $(".form [name=set_value]").val();
+				var key = $(".demo .form [name=set_key]").val(),
+					value = $(".demo .form [name=set_value]").val();
 
 				$.macaroon(key, value);
 
@@ -52,7 +58,7 @@
 				e.preventDefault();
 				e.stopPropagation();
 
-				var key = $(".form [name=get_key]").val(),
+				var key = $(".demo .form [name=get_key]").val(),
 					value = $.macaroon(key);
 
 				_output("Get", key + " = " + value);
@@ -62,7 +68,7 @@
 				e.preventDefault();
 				e.stopPropagation();
 
-				var key = $(".form [name=erase_key]").val();
+				var key = $(".demo .form [name=erase_key]").val();
 
 				$.macaroon(key, null);
 
@@ -74,9 +80,12 @@
 				html += '<p><span class="label">' + label + ':</span>';
 				html += '<span class="value">' + value + '</p>';
 
-				$(".output").prepend(html);
+				$(".demo .output").prepend(html);
 			}
 		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
 	</head>
 	<body class="gridlock demo">
 		<header id="header">
@@ -90,10 +99,11 @@
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
 					<h1>Macaroon Demo</h1>
-					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
-					<br />
+					<br>
 					<a href="http://formstone.it/macaroon/" class="button">View Documentation</a>
 				</header>
+
+				<!--[DEMO:START-CONTENT]-->
 
 				<!-- Basic -->
 				<h2>Basic</h2>
@@ -115,30 +125,32 @@ $.macroon(key, null);</code></pre>
 						<fieldset class="mobile-third tablet-third desktop-third">
 							<h5>Set Cookie</h5>
 							<label>Key</label>
-							<input type="text" name="set_key" value="foo" />
+							<input type="text" name="set_key" value="foo">
 							<label>value</label>
-							<input type="text" name="set_value" value="bar" />
-							<input type="submit" class="button set" value="Set" />
+							<input type="text" name="set_value" value="bar">
+							<input type="submit" class="button set" value="Set">
 						</fieldset>
 					</form>
 					<form>
 						<fieldset class="mobile-third tablet-third desktop-third">
 							<h5>Get Cookie</h5>
 							<label>Key</label>
-							<input type="text" name="get_key" value="foo" />
-							<input type="submit" class="button get" value="Get" />
+							<input type="text" name="get_key" value="foo">
+							<input type="submit" class="button get" value="Get">
 						</fieldset>
 					</form>
 					<form>
 						<fieldset class="mobile-third tablet-third desktop-third">
 							<h5>Erase Cookie</h5>
 							<label>Key</label>
-							<input type="text" name="erase_key" value="foo" />
-							<input type="submit" class="button erase" value="Erase" />
+							<input type="text" name="erase_key" value="foo">
+							<input type="submit" class="button erase" value="Erase">
 						</fieldset>
 					</form>
 				</div>
 				<div class="output"></div>
+
+				<!--[DEMO:END-CONTENT]-->
 
 			</div>
 		</article>
