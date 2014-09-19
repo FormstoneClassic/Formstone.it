@@ -1,7 +1,7 @@
 <?
 
 $config["nano_resources"] = array(
-	"debug" => true,
+	"debug" => false,
 	"css" => array(
 		"files" => array(
 			"site" => array(

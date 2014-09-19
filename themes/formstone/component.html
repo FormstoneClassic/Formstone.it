@@ -137,20 +137,6 @@
 			{% endif %}
 		</div>
 
-		{% if meta.demo_resources %}
-			{% if meta.files.js %}
-				{% for file in meta.files.js %}
-		<script src="{{ base_url }}/components/{{ meta.name }}/{{ file }}"></script>
-				{% endfor %}
-			{% endif %}
-			{% if meta.files.css %}
-				{% for file in meta.files.css %}
-		<link href="{{ base_url }}/components/{{ meta.name }}/{{ file }}" rel="stylesheet">
-				{% endfor %}
-			{% endif %}
-			{{ meta.demo_resources }}
-		{% endif %}
-
 		{% if live %}
 		<!-- <div id="disqus_thread"></div> -->
 		{% endif %}

@@ -12,7 +12,7 @@ include "config.redirects.php";
 
 /** !Cache Plugin */
 $config["nano_cache"] = array(
-	"enabled" => false
+	"enabled" => true
 	//"time" => 604800
 );
 

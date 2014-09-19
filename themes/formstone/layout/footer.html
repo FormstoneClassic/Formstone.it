@@ -11,6 +11,23 @@
 			{% include 'layout/navigation.html' %}
 		</div>
 		<div id="progress"></div>
+
+		<script src="{{ base_url }}/js/site.js"></script>
+
+		{% if meta.demo_resources %}
+			{% if meta.files.js %}
+				{% for file in meta.files.js %}
+		<script src="{{ base_url }}/components/{{ meta.name }}/{{ file }}"></script>
+				{% endfor %}
+			{% endif %}
+			{% if meta.files.css %}
+				{% for file in meta.files.css %}
+		<link href="{{ base_url }}/components/{{ meta.name }}/{{ file }}" rel="stylesheet">
+				{% endfor %}
+			{% endif %}
+			{{ meta.demo_resources }}
+		{% endif %}
+
 	</body>
 </html>
 {% endif %}
