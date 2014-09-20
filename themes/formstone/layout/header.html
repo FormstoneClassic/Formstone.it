@@ -3,9 +3,9 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
 
 		<meta name="description" content="{{ meta.description }}">
 		{% if meta.robots %}
@@ -13,7 +13,26 @@
 		{% endif %}
 		<meta name="author" content="{{ site_title }}">
 
-		<!-- G+ AND FACEBOOK META TAGS -->
+		<title>{% if meta.title and not is_front_page %}{{ meta.title }} &middot; {% endif %}{{ site_title }}</title>
+
+		<!-- Favions / Touch Icons -->
+		<link rel="apple-touch-icon" sizes="57x57"   href="{{ base_url }}/images/favicons/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="{{ base_url }}/images/favicons/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="72x72"   href="{{ base_url }}/images/favicons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="{{ base_url }}/images/favicons/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="60x60"   href="{{ base_url }}/images/favicons/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="{{ base_url }}/images/favicons/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="76x76"   href="{{ base_url }}/images/favicons/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="{{ base_url }}/images/favicons/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="{{ base_url }}/images/favicons/favicon-196x196.png" sizes="196x196">
+		<link rel="icon" type="image/png" href="{{ base_url }}/images/favicons/favicon-160x160.png" sizes="160x160">
+		<link rel="icon" type="image/png" href="{{ base_url }}/images/favicons/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="{{ base_url }}/images/favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="{{ base_url }}/images/favicons/favicon-32x32.png" sizes="32x32">
+		<meta name="msapplication-TileColor" content="#D0021B">
+		<meta name="msapplication-TileImage" content="{{ base_url }}/images/favicons/mstile-144x144.png">
+
+		<!-- G+ AND FACEBOOK -->
 		<meta property="og:title" content="{{ site_title }}" />
 		<meta property="og:url" content="{{ base_url }}" />
 		<meta property="og:type" content="website">
@@ -21,7 +40,7 @@
 		<meta property="og:description" content="{{ meta.description }}" />
 		<meta property="og:site_name" content="{{ site_title }}" />
 
-		<!-- TWITTER CARD -->
+		<!-- TWITTER -->
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:site" content="@benplum" />
 		<meta name="twitter:creator" content="@benplum" />
@@ -30,24 +49,21 @@
 		<meta name="twitter:description" content="{{ meta.description }}" />
 		<meta name="twitter:image" content="{{ base_url }}/images/social.jpg" />
 
-		<title>{% if meta.title and not is_front_page %}{{ meta.title }} &middot; {% endif %}{{ site_title }}</title>
-
-		<link rel="icon" href="{{ base_url }}/favicon.ico" type="image/x-icon">
-		<link rel="shortcut icon" href="{{ base_url }}/favicon.ico" type="image/x-icon">
-
+		<!-- Modernizer -->
 		<script src="{{ base_url }}/js/modernizr.js"></script>
 
-		<link rel="stylesheet" href="{{ base_url }}/css/site.css" type="text/css" media="all">
+		<!-- Compiled CSS -->
+        <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ base_url }}/css/site.css"><!--<![endif]-->
 
 		<!--[if IE 8]>
         	<script>var IE8 = true;</script>
-        	<script src="{{ base_url }}/js/site-ie8.js"></script>
-			<link rel="stylesheet" href="{{ base_url }}/css/site-ie8.css">
+        	<script src="{{ base_url }}/js/site.ie8.js"></script>
+			<link rel="stylesheet" href="{{ base_url }}/css/site.ie8.css">
 		<![endif]-->
 		<!--[if IE 9]>
         	<script>var IE9 = true;</script>
-        	<script src="{{ base_url }}/js/site-ie9.js"></script>
-			<link rel="stylesheet" href="{{ base_url }}/css/ie9.css">
+        	<script src="{{ base_url }}/js/site.ie9.js"></script>
+			<link rel="stylesheet" href="{{ base_url }}/css/site.ie9.css">
 		<![endif]-->
 
 		{% if live %}

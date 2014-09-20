@@ -1,6 +1,7 @@
 {% if not meta.pronto %}
 				<br />
 			</div>
+			{% include 'layout/ads.html' %}
 			<footer id="footer" class="row">
 				<div class="all-full copyright">
 					Made with &hearts; in Hampden
@@ -12,8 +13,11 @@
 		</div>
 		<div id="progress"></div>
 
+		<!-- Compiled JS -->
 		<script src="{{ base_url }}/js/site.js"></script>
+{% endif %}
 
+		<!-- Demo Resources -->
 		{% if meta.demo_resources %}
 			{% if meta.files.js %}
 				{% for file in meta.files.js %}
@@ -28,6 +32,7 @@
 			{{ meta.demo_resources }}
 		{% endif %}
 
+{% if not meta.pronto %}
 	</body>
 </html>
 {% endif %}

@@ -42,8 +42,4 @@ $config["nano_placeholder"] = array(
 	)
 );
 
-
-/*/** !Resources Plugin */
-include "config.resources.php";
-
 ?>

@@ -26,3 +26,6 @@ Thumbs.db
 
 # User config
 config.php
+node_cache/*
+node_modules/*
+npm-debug.log

@@ -1,0 +1,70 @@
+{
+  "name": "Formstone.it",
+  "id": "formstone",
+  "version": "1.0.0",
+  "description": "Formstone website.",
+  "author": "Ben Plum",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-autoprefixer": "^1.0.1",
+    "grunt-combine-media-queries": "^1.0.19",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-contrib-jshint": "^0.7.2",
+    "grunt-contrib-less": "^0.11.0",
+    "grunt-contrib-uglify": "^0.2.7",
+    "grunt-contrib-watch": "~0.6.0",
+    "grunt-include-replace": "^2.0.0",
+    "grunt-newer": "^0.7.0",
+    "grunt-stripmq": "0.0.6"
+  },
+  "css": {
+    "css/site.css": "css/src/site.less",
+    "css/site.ie8.css": "css/src/ie/ie8.less",
+    "css/site.ie9.css": "css/src/ie/ie9.less",
+    "css/demo.css": "css/src/demo.less",
+    "css/gridlock.bookmarklet.css": "css/src/gridlock-bookmarklet.less"
+  },
+  "js": {
+    "js/modernizr.js": [
+      "js/src/lib/modernizr.custom.js"
+    ],
+    "js/site.js": [
+      "components/jquery/dist/jquery.min.js",
+      "components/Pronto/jquery.fs.pronto.min.js",
+      "components/Rubberband/jquery.fs.rubberband.min.js",
+      "components/Scout/jquery.fs.scout.min.js",
+      "components/Scout/jquery.fs.scout.maxScroll.min.js",
+      "components/Shifter/jquery.fs.shifter.min.js",
+      "components/Tabber/jquery.fs.tabber.min.js",
+      "components/Zoetrope/jquery.fs.zoetrope.min.js",
+      "js/src/lib/utils.js",
+      "js/src/lib/prism.js",
+      "js/src/site.js"
+    ],
+    "js/site.ie8.js": [
+      "components/html5shiv/dist/html5shiv.min.js",
+      "components/html5shiv/dist/html5shiv-printshiv.min.js",
+      "js/src/ie/matchMedia.ie8.js"
+    ],
+    "js/site.ie9.js": [
+      "js/src/ie/matchMedia.ie9.js"
+    ],
+    "js/demo.js": [
+      "components/jquery/jquery.min.js",
+      "components/Rubberband/jquery.fs.rubberband.min.js",
+      "js/src/lib/utils.js",
+      "js/src/lib/prism.js",
+      "js/src/demo.js"
+    ],
+    "js/gridlock.bookmarklet.js": [
+      "js/src/gridlock-bookmarklet.js"
+    ]
+  },
+  "js_ignores": [
+    "js/src/ie/*/",
+    "js/src/lib/*/"
+  ],
+  "vars": {
+    "variable": "value"
+  }
+}

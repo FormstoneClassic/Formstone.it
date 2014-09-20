@@ -1,0 +1,116 @@
+/*-------------------------------------------
+  Variables
+-------------------------------------------*/
+
+	@root_font_size: 16;
+
+	// Media Queries
+
+	@mobile:	~"screen and (min-width: 500px)";
+	@tablet:	~"screen and (min-width: 740px)";
+	@desktop:	~"screen and (min-width: 980px)";
+	@max:		~"screen and (min-width: 1220px)";
+
+	// Colors
+
+	@tan: #D6C591;
+	@orange: #C65032;
+	@gray: #494C51;
+
+	@textGray: #666;
+	@bgGray: #f8f8f8;
+	@lighterGray: #ccc;
+	@lightGray: #999;
+
+	@black0: rgba(0, 0, 0, 0);
+	@black25: rgba(0, 0, 0, 0.25);
+	@black50: rgba(0, 0, 0, 0.5);
+	@black75: rgba(0, 0, 0, 0.75);
+
+	@white0: rgba(255, 255, 255, 0);
+	@white25: rgba(255, 255, 255, 0.25);
+	@white50: rgba(255, 255, 255, 0.5);
+	@white75: rgba(255, 255, 255, 0.75);
+
+	@black: #1C1F1D;
+	@white: #fff;
+
+
+/*-------------------------------------------
+  Mixins
+-------------------------------------------*/
+
+	.font_size(@px_size) {
+		@px: @px_size;
+		@rem: (@px_size / @root_font_size);
+		font-size: ~"@{px}px";
+		font-size: ~"@{rem}rem";
+	}
+
+	.rgba_background(@base, @alpha) {
+		background-color: rgba(red(@base), green(@base), blue(@base), @alpha);
+	}
+
+	.rgba_text(@base, @alpha) {
+		color: rgba(red(@base), green(@base), blue(@base), @alpha);
+	}
+
+	.columns(@count, @gap) {
+		column-count: @count;
+		column-gap: @gap;
+	}
+
+	.icon_sprite(@left:0, @top:0) {
+		background: url(../images/icons.png) no-repeat @left @top;
+		background-image: url(../images/icons.svg), none;
+	}
+
+	.icon_indent() {
+		overflow: hidden;
+		text-indent: 200%;
+		white-space: nowrap;
+	}
+
+	.cover() {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.center() {
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.absolute_center_parent() {
+		position: relative;
+	}
+
+	.absolute_center() {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		margin: auto;
+		right: 0;
+		top: 0;
+	}
+
+	.ellipsis() {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	// Fonts
+
+	.lato() {
+		font-family: 'Lato', sans-serif;
+	}
+
+	.ptMono() {
+		font-family: 'PTMono', monospace;
+	}

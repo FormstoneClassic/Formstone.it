@@ -1,0 +1,420 @@
+/*-------------------------------------------
+  Imports
+-------------------------------------------*/
+
+	@import "base.less";
+
+	@import (inline) "../../components/Shifter/jquery.fs.shifter.css";
+	@import (inline) "../../components/Tabber/jquery.fs.tabber.css";
+
+/*-------------------------------------------
+  Master
+-------------------------------------------*/
+
+	#progress {
+		height: 2px;
+		width: 0;
+
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 6;
+
+		background: @orange;
+		opacity: 0;
+		transition: width 0.2s ease-out, opacity 0.2s linear;
+
+		&.visible {
+			opacity: 1;
+		}
+	}
+
+	#pronto {
+		@media @tablet {
+			min-height: 500px;
+		}
+
+		@media @desktop {
+			min-height: 600px;
+		}
+	}
+
+
+	.button {
+		.no-touch &:hover {
+			background: @black;
+		}
+
+		@media @tablet {
+			display: inline-block;
+			margin: 0 10px 10px 0;
+			padding: 0 30px;
+		}
+	}
+
+
+	.mobile_handle {
+		.font_size(12);
+
+		background: none;
+		color: @lightGray;
+		cursor: pointer;
+		display: block;
+		letter-spacing: 0.2em;
+		line-height: 18px;
+		text-transform: uppercase;
+
+		&:before {
+			display: none;
+		}
+	}
+
+	.shifter {
+		.shifter-handle {
+			width: auto;
+
+			text-indent: 0;
+		}
+
+		.shifter-page {
+			background: @white;
+			box-shadow: none;
+			padding-top: 60px;
+		}
+
+		.shifter-navigation {
+			background: @bgGray;
+			overflow-y: auto;
+			padding-top: 80px;
+		}
+
+		&-active .shifter-handle {
+			background: none;
+		}
+	}
+
+	.desktop_navigation {
+		display: none;
+
+		@media @desktop {
+			display: block;
+
+			& .navigation {
+				padding: 15px 0;
+			}
+		}
+	}
+
+	.navigation {
+		a {
+			.font_size(16);
+
+			color: @textGray;
+			display: block;
+			margin: 20px 0;
+
+			&.active {
+				color: @orange;
+			}
+
+			.no-touch &:hover {
+				color: @gray;
+			}
+		}
+
+		h5 {
+			.font_size(12);
+
+			color: @lightGray;
+			letter-spacing: 0.2em;
+			margin: 13px 0;
+			text-transform: uppercase;
+		}
+	}
+
+	.mobile_navigation {
+		padding: 10px 30px;
+
+		.navigation {
+			padding: 0 0 20px;
+		}
+	}
+
+
+	.bar {
+		padding: 50px 0;
+
+		@media @tablet {
+			padding: 75px 0;
+		}
+
+		@media @desktop {
+			padding: 100px 0;
+		}
+
+		&.tan {
+			background: @tan;
+		}
+
+		&.orange {
+			background: @orange;
+		}
+
+		&.gray {
+			background: @gray;
+			margin-bottom: 50px;
+
+			h2 {
+				color: @white;
+				color: @white50;
+			}
+		}
+
+		&.feature {
+			padding: 75px 0;
+			text-align: center;
+
+			@media @tablet {
+				padding: 125px 0;
+			}
+
+			@media @desktop {
+				padding: 175px 0;
+			}
+
+			h1 {
+				.font_size(30);
+
+				color: @white;
+				letter-spacing: 0.2em;
+				margin: 0 0 25px;
+				text-transform: uppercase;
+
+				@media @tablet {
+					.font_size(45);
+				}
+
+				&:before {
+					.icon_sprite(-15px, 0);
+
+					width: 60px;
+					height: 60px;
+
+					background-size: 500px 250px;
+					content: '';
+					display: block;
+					margin: 0 auto 30px;
+
+					@media @tablet {
+						width: 120px;
+						height: 120px;
+
+						background-position: -30px 0;
+						background-size: auto;
+						margin: 0 auto 40px;
+					}
+				}
+			}
+
+			p {
+				.font_size(16);
+
+				color: @white;
+				color: @white75;
+				margin: 25px 0 0;
+				padding: 0 20px;
+
+				@media @tablet {
+					.font_size(18);
+
+					padding: 0;
+				}
+
+				@media @max {
+					padding: 0 30px;
+				}
+			}
+		}
+
+		h2 {
+			.font_size(20);
+
+			color: @black25;
+			letter-spacing: 0.2em;
+			margin: 0 0 25px;
+			text-align: center;
+			text-transform: uppercase;
+
+			@media @tablet {
+				.font_size(28);
+			}
+		}
+
+		&.ads {
+			padding: 0 0 25px;
+			text-align: center;
+		}
+
+		&.ads a {
+			display: inline-block;
+			float: none;
+			margin: 0 5px 10px;
+		}
+	}
+
+
+	.components {
+		a {
+			color: @gray;
+		}
+
+		h3 {
+			margin-bottom: 10px;
+		}
+
+		p {
+			margin-top: 10px;
+		}
+
+		.component:nth-child(odd) {
+			@media @tablet {
+				clear: both;
+			}
+
+			@media @desktop {
+				clear: none;
+			}
+		}
+
+		.component:nth-child(3n+1) {
+			@media @desktop {
+				clear: both;
+			}
+		}
+	}
+
+	.features {
+		text-align: center;
+
+		h3 {
+			color: @white;
+		}
+
+		p {
+			color: @white;
+			color: @white75;
+		}
+
+		.feature {
+			@media @tablet {
+				padding: 0 10px;
+			}
+
+			@media @desktop {
+				padding: 0 45px;
+			}
+
+			@media @max {
+				padding: 0 50px;
+			}
+		}
+	}
+
+
+	.page {
+		padding: 25px 0;
+
+		@media @desktop {
+			padding: 50px 0;
+		}
+	}
+
+
+	.component.detail h3 {
+		color: @orange;
+	}
+
+
+	.demo_tabbed > .tabber-menu {
+		border-bottom: 1px solid @bgGray;
+		overflow: hidden;
+		margin: 0 0 10px;
+
+		& > .tabber-handle {
+			.font_size(14);
+
+			color: @textGray;
+			display: block;
+			float: left;
+			line-height: 40px;
+			margin: 0 1px 0 0;
+			margin: 0 20px 0 0;
+			padding: 0 10px 0 0;
+			text-transform: uppercase;
+
+			&.active {
+				color: @orange;
+			}
+		}
+	}
+
+
+/*-------------------------------------------
+  Print
+-------------------------------------------*/
+
+	@media print {
+	    * {
+	    	background: transparent !important;
+	    	box-shadow: none !important;
+	    	color: #000 !important;
+	    	text-shadow: none !important;
+	    }
+
+	    a,
+	    a:visited { text-decoration: underline; }
+
+	    a[href]:after {
+	    	content: " (" attr(href) ")";
+	    }
+
+	    abbr[title]:after {
+	    	content: " (" attr(title) ")";
+	    }
+
+	    a[href^="javascript:"]:after,
+	    a[href^="#"]:after {
+	    	content: "";
+	    }
+
+	    pre,
+	    blockquote {
+	    	border: 1px solid #999;
+	    	page-break-inside: avoid;
+	    }
+
+	    thead {
+	    	display: table-header-group;
+	    }
+
+	    tr,
+	    img {
+	    	page-break-inside: avoid;
+	    }
+
+	    img {
+	    	max-width: 100% !important;
+	    }
+
+	    p,
+	    h2,
+	    h3 {
+	    	orphans: 3;
+	    	widows: 3;
+	    }
+
+	    h2,
+	    h3 {
+	    	page-break-after: avoid;
+	    }
+	}
