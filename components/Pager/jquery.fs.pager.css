@@ -1,35 +1,49 @@
 /* 
- * Pager v1.0.1 - 2014-09-13 
+ * Pager v1.1.0 - 2014-09-20 
  * A jQuery plugin for simple pagination. Part of the formstone library. 
  * http://formstone.it/pager/ 
  * 
  * Copyright 2014 Ben Plum; MIT Licensed 
- */ 
+ */
 
-	.pager {  }
-
-	.pager .pager-pages { text-align: center; }
-	.pager .pager-pages a,
-	.pager .pager-pages .ellipsis.hide { display: none; margin: 0 5px; }
-
-	.pager .pager-pages a.active,
-	.pager .pager-pages a.first,
-	.pager .pager-pages a.last,
-	.pager .pager-pages a.visible,
-	.pager .pager-pages .ellipsis { display: inline-block; }
-
-/*
-	.pager .pager-pages a.first:after,
-	.pager .pager-pages a.last:before { content: '\2026'; display: inline-block; }
-*/
-
-	.pager .pager-control { display: block; }
-	.pager .pager-control.previous { float: left; }
-	.pager .pager-control.next { float: right; }
-
-	.pager .pager-position,
-	.pager .pager-select { display: none; }
-
-	.pager.mobile .pager-pages { display: none; }
-	.pager.mobile .pager-position { display: block; text-align: center; }
-	.pager.mobile .pager-select { display: block; opacity: 0; position: absolute; z-index: -1; }
+.pager .pager-pages {
+  text-align: center;
+}
+.pager .pager-pages a,
+.pager .pager-pages .ellipsis.hide {
+  display: none;
+  margin: 0 5px;
+}
+.pager .pager-pages a.active,
+.pager .pager-pages a.first,
+.pager .pager-pages a.last,
+.pager .pager-pages a.visible,
+.pager .pager-pages .ellipsis {
+  display: inline-block;
+}
+.pager .pager-control {
+  display: block;
+}
+.pager .pager-control.previous {
+  float: left;
+}
+.pager .pager-control.next {
+  float: right;
+}
+.pager .pager-position,
+.pager .pager-select {
+  display: none;
+}
+.pager.mobile .pager-pages {
+  display: none;
+}
+.pager.mobile .pager-position {
+  display: block;
+  text-align: center;
+}
+.pager.mobile .pager-select {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}

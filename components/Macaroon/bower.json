@@ -1,6 +1,6 @@
 {
   "name": "Macaroon",
-  "version": "3.0.6",
+  "version": "3.3.0",
   "description": "A jQuery plugin for simple access to browser cookies. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",

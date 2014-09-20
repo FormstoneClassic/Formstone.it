@@ -1,6 +1,6 @@
 {
   "name": "Dropper",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "A jQuery plugin for simple drag and drop uploads. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,13 +18,14 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "0.1.3",
+  "_release": "1.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.3",
-    "commit": "5f07a9e96672488bd348c1cf8a4d4cd4f0888c2a"
+    "tag": "1.0.0",
+    "commit": "63aba4bb602022965b198ef2e426a40c62422df5"
   },
   "_source": "git://github.com/benplum/Dropper.git",
-  "_target": "~0.1.0",
-  "_originalSource": "Dropper"
+  "_target": "1.0.0",
+  "_originalSource": "Dropper",
+  "_direct": true
 }
