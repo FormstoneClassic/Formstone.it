@@ -1,10 +1,10 @@
 /* 
- * Ranger v3.0.9 - 2014-09-14 
+ * Ranger v3.1.0 - 2014-09-20 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
  * Copyright 2014 Ben Plum; MIT Licensed 
- */ 
+ */
 
 ;(function ($, window) {
 	"use strict";
@@ -183,7 +183,7 @@
 			html += '">';
 			html += '<div class="ranger-track">';
 			html += '<span class="ranger-handle">';
-			html += '<span class="ranger-disc"></span>';
+			html += '<span class="ranger-marker"></span>';
 			html += '</span>';
 			html += '</div>';
 			html += '</div>';

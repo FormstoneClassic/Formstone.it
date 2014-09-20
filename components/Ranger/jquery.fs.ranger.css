@@ -1,44 +1,130 @@
 /* 
- * Ranger v3.0.9 - 2014-09-14 
+ * Ranger v3.1.0 - 2014-09-20 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
  * Copyright 2014 Ben Plum; MIT Licensed 
- */ 
+ */
 
- 	.ranger-element { *left: -9999px; height: 1px; opacity: 0; position: absolute; z-index: -1; width: 1px; }
- 	.ranger { overflow: hidden; width: 100%; }
- 	.ranger * {
-	 	-webkit-user-select: none;
-		   -moz-user-select: none;
-		    -ms-user-select: none;
-		        user-select: none;
- 	}
-	.ranger .ranger-track { background: #fbfbfb; border: 1px solid #ddd; border-radius: 4px; float: left; height: 8px; margin: 10px 0; position: relative; width: 100%; }
-	.ranger .ranger-handle { display: block; height: 100%; left: 0; position: absolute; top: 0; width: 1px; }
-	.ranger .ranger-disc { background: #DCDCDC; border: 1px solid #AFAFAF; border-radius: 100%; cursor: pointer; display: block; height: 14px; margin: -4px 0 0 -6px; width: 14px; }
-
-	@media screen and (min-width: 740px) {
-		.ranger:hover .ranger-track { box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1); }
-		.ranger:hover .ranger-disc { background: #ccc; border-color: #999; box-shadow: 0 0 3px rgba(0, 0, 0, 0.25); }
-	}
-
-	.ranger.focus .ranger-track { box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1); }
-	.ranger.focus .ranger-disc { background: #ccc; border-color: #999; box-shadow: 0 0 3px rgba(0, 0, 0, 0.25); }
-
-	/* Labels */
-	.ranger-labels .ranger-track { width: 80%; }
-	.ranger-labels .ranger-label { display: block; float: left; font-size: 12px; line-height: 28px; margin: 0 2% 0 0; text-align: right; width: 8%; }
-	.ranger-labels .ranger-label.max { float: right; margin: 0 0 0 2%; text-align: left; }
-
-	.ranger-vertical { height: 300px; width: 30px; }
-	.ranger-vertical .ranger-track { height: 75%; margin: 0 11px 0; width: 8px; }
-	.ranger-vertical .ranger-handle { bottom: 0; height: 1px; left: 0; top: auto; width: 100%; }
-	.ranger-vertical .ranger-disc { margin: -7px 0 0 -4px; }
-	.ranger-vertical .ranger-label,
-	.ranger-vertical .ranger-label.max { clear: both; float: none; height: 10%; padding: 5px 0 0; text-align: center; width: 100%; }
-	.ranger-vertical .ranger-label.max { padding: 0; }
-
-	/* 'Disabled' state */
-	.ranger.disabled { cursor: default; opacity: 0.5; }
-	.ranger.disabled .ranger-disc { cursor: default; }
+.ranger-element {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+  z-index: -1;
+}
+.no-touch .ranger-element {
+  left: -9999px;
+}
+.ranger {
+  overflow: hidden;
+  width: 100%;
+}
+.ranger * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.ranger .ranger-track {
+  background: #fbfbfb;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  float: left;
+  height: 8px;
+  margin: 10px 0;
+  position: relative;
+  width: 100%;
+}
+.ranger .ranger-handle {
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+.ranger .ranger-marker {
+  background: #DCDCDC;
+  border: 1px solid #AFAFAF;
+  border-radius: 100%;
+  cursor: pointer;
+  display: block;
+  height: 14px;
+  margin: -4px 0 0 -6px;
+  width: 14px;
+}
+.no-touch .ranger:hover .ranger-track {
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.no-touch .ranger:hover .ranger-disc {
+  background: #ccc;
+  border-color: #999;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+}
+.ranger.focus .ranger-track {
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.ranger.focus .ranger-marker {
+  background: #ccc;
+  border-color: #999;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+}
+.ranger.ranger-labels .ranger-track {
+  width: 80%;
+}
+.ranger.ranger-labels .ranger-label {
+  display: block;
+  font-size: 12px;
+  line-height: 28px;
+  width: 8%;
+}
+.ranger.ranger-labels .ranger-label.min {
+  float: left;
+  margin: 0 2% 0 0;
+  text-align: right;
+}
+.ranger.ranger-labels .ranger-label.max {
+  float: right;
+  margin: 0 0 0 2%;
+  text-align: left;
+}
+.ranger.ranger-vertical {
+  height: 300px;
+  width: 30px;
+}
+.ranger.ranger-vertical .ranger-track {
+  height: 75%;
+  margin: 0 11px 0;
+  width: 8px;
+}
+.ranger.ranger-vertical .ranger-handle {
+  bottom: 0;
+  height: 1px;
+  left: 0;
+  top: auto;
+  width: 100%;
+}
+.ranger.ranger-vertical .ranger-disc {
+  margin: -7px 0 0 -4px;
+}
+.ranger.ranger-vertical .ranger-label {
+  clear: both;
+  float: none;
+  height: 10%;
+  text-align: center;
+  width: 100%;
+}
+.ranger.ranger-vertical .ranger-label.min {
+  padding: 5px 0 0;
+}
+.ranger.ranger-vertical .ranger-label.max {
+  padding: 0;
+}
+.ranger.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.ranger.disabled .ranger-disc {
+  cursor: default;
+}
