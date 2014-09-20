@@ -50,7 +50,7 @@
       "js/src/ie/matchMedia.ie9.js"
     ],
     "js/demo.js": [
-      "components/jquery/jquery.min.js",
+      "components/jquery/dist/jquery.min.js",
       "components/Rubberband/jquery.fs.rubberband.min.js",
       "js/src/lib/utils.js",
       "js/src/lib/prism.js",
