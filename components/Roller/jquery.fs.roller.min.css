@@ -1,0 +1,9 @@
+/* 
+ * Roller v3.3.0 - 2014-09-20 
+ * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
+ * http://formstone.it/roller/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */
+
+.roller{width:100%}.roller *{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.roller,.roller .roller-viewport{position:relative}.roller .roller-canister{margin:0;overflow:hidden;position:relative;-webkit-transition:-webkit-transform .4s ease;transition:transform .4s ease;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.roller .roller-item{float:left;margin:0}.roller .roller-canister,.roller .roller-item{-webkit-backface-visibility:hidden;backface-visibility:hidden}.roller .roller-controls,.roller .roller-pagination{display:none;margin:0;padding:0;width:100%}.roller .roller-controls.visible,.roller .roller-pagination.visible{display:block}.roller .roller-control{cursor:default}.roller .roller-page,.roller .roller-control.enabled{cursor:pointer}.roller .roller-caption{display:none}.roller .roller-caption.active{display:block}.roller.single .roller-item{display:none}.roller.single .roller-item.active{display:block}

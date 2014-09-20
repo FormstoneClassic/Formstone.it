@@ -1,10 +1,10 @@
 /* 
- * Roller v3.1.16 - 2014-09-13 
+ * Roller v3.3.0 - 2014-09-20 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
  * Copyright 2014 Ben Plum; MIT Licensed 
- */ 
+ */
 
 ;(function ($, window) {
 	"use strict";
@@ -238,9 +238,12 @@
 
 					data.maxMove = -data.canisterWidth + data.viewportWidth + data.itemMargin;
 
+					/*
+					// breaks inifinite scroll
 					if (data.canisterWidth + data.maxMove > data.viewportWidth) {
 						data.pageCount++;
 					}
+					*/
 
 					if (data.maxMove >= 0) {
 						data.maxMove = 0;
@@ -642,7 +645,7 @@
 			}
 		}
 
-		if (animate !== false && index !== data.index && index > -1 && index < data.pageCount) {
+		if (animate !== false && index !== data.index && (data.infinite || (index > -1 && index < data.pageCount)) ) {
 			data.$roller.trigger("update.roller", [ index ]);
 			data.index = index;
 		}

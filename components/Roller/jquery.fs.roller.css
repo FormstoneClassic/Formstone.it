@@ -1,62 +1,71 @@
 /* 
- * Roller v3.1.16 - 2014-09-13 
+ * Roller v3.3.0 - 2014-09-20 
  * A jQuery plugin for simple content carousels. Part of the Formstone Library. 
  * http://formstone.it/roller/ 
  * 
  * Copyright 2014 Ben Plum; MIT Licensed 
- */ 
+ */
 
- 	.roller * {
-		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		   -moz-user-select: none;
-		    -ms-user-select: none;
-		     -o-user-select: none;
-			    user-select: none;
-	}
-
-	.roller,
-	.roller .roller-viewport { position: relative; }
-	.roller { width: 100%; }
-	.roller .roller-canister { margin: 0; overflow: hidden; position: relative;
-		-webkit-transition: -webkit-transform 0.4s ease;
-		   -moz-transition:    -moz-transform 0.4s ease;
-		    -ms-transition:     -ms-transform 0.4s ease;
-		     -o-transition:      -o-transform 0.4s ease;
-		        transition: 		transform 0.4s ease;
-		-webkit-transform: translate3d(0, 0, 0);
-		   -moz-transform: translate3d(0, 0, 0);
-		    -ms-transform: translate3d(0, 0, 0);
-		     -o-transform: translate3d(0, 0, 0);
-		        transform: translate3d(0, 0, 0);
-	}
-	.roller .roller-item { float: left; margin: 0; }
-
-	.roller .roller-canister,
-	.roller .roller-item {
-		-webkit-backface-visibility: hidden;
-		   -moz-backface-visibility: hidden;
-		    -ms-backface-visibility: hidden;
-			 -o-backface-visibility: hidden;
-			    backface-visibility: hidden;
-	}
-
-	/* !Controls & Pagination */
-	.roller .roller-controls,
-	.roller .roller-pagination { display: none; margin: 0; padding: 0; width: 100%; }
-
-	.roller .roller-controls.visible,
-	.roller .roller-pagination.visible { display: none; display: block; }
-
-	.roller .roller-control { cursor: default; }
-	.roller .roller-page,
-	.roller .roller-control.enabled { cursor: pointer; }
-
-	/* !Captions */
-	.roller .roller-caption { display: none; }
-	.roller .roller-caption.active { display: block; }
-
-	/* !Single */
-	.roller.single .roller-item { display: none; }
-	.roller.single .roller-item.active { display: block; }
+.roller {
+  width: 100%;
+}
+.roller * {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.roller,
+.roller .roller-viewport {
+  position: relative;
+}
+.roller .roller-canister {
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: -webkit-transform 0.4s ease;
+          transition: transform 0.4s ease;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.roller .roller-item {
+  float: left;
+  margin: 0;
+}
+.roller .roller-canister,
+.roller .roller-item {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.roller .roller-controls,
+.roller .roller-pagination {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.roller .roller-controls.visible,
+.roller .roller-pagination.visible {
+  display: block;
+}
+.roller .roller-control {
+  cursor: default;
+}
+.roller .roller-page,
+.roller .roller-control.enabled {
+  cursor: pointer;
+}
+.roller .roller-caption {
+  display: none;
+}
+.roller .roller-caption.active {
+  display: block;
+}
+.roller.single .roller-item {
+  display: none;
+}
+.roller.single .roller-item.active {
+  display: block;
+}
