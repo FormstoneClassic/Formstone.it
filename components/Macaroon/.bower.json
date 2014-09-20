@@ -1,6 +1,6 @@
 {
   "name": "Macaroon",
-  "version": "3.3.0",
+  "version": "3.1.0",
   "description": "A jQuery plugin for simple access to browser cookies. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -17,14 +17,14 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.3.0",
+  "_release": "3.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "3.3.0",
-    "commit": "4ef91093b7097ea95b7fd0c3ef2b5b15bf16a0ea"
+    "tag": "3.1.0",
+    "commit": "77b6fcdd31cd3f792d9700340713641933307e20"
   },
   "_source": "git://github.com/benplum/Macaroon.git",
-  "_target": "3.3.0",
+  "_target": "3.1.0",
   "_originalSource": "Macaroon",
   "_direct": true
 }
