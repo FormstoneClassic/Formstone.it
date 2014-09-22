@@ -1,7 +1,7 @@
 /*
  * Gridlock Overlay Bookmarklet <http://formstone.it/gridlock>
  * @author Ben Plum
- * @version 1.0.0
+ * @version 1.1.0
  *
  * Copyright 2013 Ben Plum <mr@benplum.co>
  */
@@ -20,7 +20,7 @@ function GridlockBookmarklet() {
 				}, window.GridlockBookmarkletConfig);
 
 			if ($jq(".gridlock").length < 1) {
-				alert("Gridlock Not Found.\nYou'll need to include Gridlock before using this bookmarklet.\n\nLearn more: http://www.benplum.com/projects/gridlock/");
+				alert("Gridlock Not Found.\nYou'll need to include Gridlock before using this bookmarklet.\n\nLearn more: http://formstone.it/gridlock/");
 			} else {
 				var desktopCount = $jq(".gridlock").hasClass("gridlock-16") ? 16 : 12,
 					mobileFirst = $jq(".gridlock").hasClass("gridlock-mf"),
@@ -28,7 +28,7 @@ function GridlockBookmarklet() {
 					mobileCount = 3;
 
 				if ($jq("#gridlock_styles").length < 1) {
-					$jq("body").append('<link id="gridlock_styles" rel="stylesheet" href="base_url/css/gridlock.bookmarklet.css" type="text/css" media="all">');
+					$jq("body").append('<link id="gridlock_styles" rel="stylesheet" href="http://formstone.it/css/gridlock.bookmarklet.css" type="text/css" media="all">');
 				}
 
 				if ($jq("#gridlock_overlay").length < 1) {
