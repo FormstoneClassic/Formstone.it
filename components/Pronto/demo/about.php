@@ -38,6 +38,13 @@
 
 		<script src="../jquery.fs.pronto.js"></script>
 		<script src="js/main.js"></script>
+
+		<style>
+			#pronto {
+				-webkit-transition: none;
+						transition: none;
+			}
+		</style>
 	</head>
 	<body class="gridlock demo">
 		<header id="header">

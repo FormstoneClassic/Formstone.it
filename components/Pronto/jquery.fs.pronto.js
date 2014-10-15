@@ -1,5 +1,5 @@
 /* 
- * Pronto v3.1.0 - 2014-09-20 
+ * Pronto v3.2.1 - 2014-10-05 
  * A jQuery plugin for faster page loads. Part of the formstone library. 
  * http://formstone.it/pronto/ 
  * 
@@ -32,6 +32,7 @@
 	 * @param tracking.manager [boolean] <false> "Flag for Tag Manager tracking"
 	 * @param tracking.variable [string] <'currentURL'> "Tag Manager dataLayer variable name (macro in Tag Manager)"
 	 * @param tracking.event [string] <'PageView'> "Tag Manager event name (rule in Tag Manager)"
+	 * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
 	 */
 	var options = {
 		cache: true,
@@ -50,12 +51,13 @@
 			manager: false, // Use tag manager events
 			variable: 'currentURL', // data layer variable name - macro in tag manager
 			event: 'PageView' // event name - rule in tag manager
-		}
+		},
+		transitionOut: $.noop
 	};
 
 	/**
 	 * @events
-	 * @event pronto.request "Before request is made; triggered on window"
+	 * @event pronto.request "Before request is made; triggered on window. Second parameter 'true' if pop event"
 	 * @event pronto.progress "As request is loaded; triggered on window"
 	 * @event pronto.load "After request is loaded; triggered on window"
 	 * @event pronto.render "After state is rendered; triggered on window"
@@ -137,8 +139,15 @@
 			$.extend(true, options, opts || {});
 
 			options.$container = $(options.container);
+
 			if (options.render === $.noop) {
 				options.render = _renderState;
+			}
+
+			if (options.transitionOut === $.noop) {
+				options.transitionOut = function() {
+					return $.Deferred().resolve();
+				};
 			}
 
 			// Capture current url & state
@@ -195,7 +204,7 @@
 		var data = e.originalEvent.state;
 
 		if (data) {
-			if (options.modal && visited === 0 && data.url) {
+			if (options.modal && visited === 0 && data.url && !data.initial) {
 				// If opening content in a 'modal', return to original page on reload->back
 				window.location.href = data.url;
 			} else {
@@ -206,7 +215,7 @@
 						_request(data.url);
 					} else {
 						// Fire request event
-						$window.trigger("pronto.request");
+						$window.trigger("pronto.request", [ true ]);
 
 						_process(data.url, data.hash, data.data, data.scroll, false);
 					}
@@ -223,12 +232,22 @@
 	 */
 	function _request(url) {
 		// Fire request event
-		$window.trigger("pronto.request");
+		$window.trigger("pronto.request", [ false ]);
+
+		// Get transition out deferred
+		options.transitionOutDeferred = options.transitionOut.apply(window, [ false ]);
 
 		var queryIndex = url.indexOf("?"),
 			hashIndex = url.indexOf("#"),
 			data = (queryIndex > -1) ? _getQueryParams( url.slice( queryIndex + 1 ) ) : {},
-			hash = (hashIndex > -1)  ? url.slice(hashIndex, queryIndex) : "";
+			hash = "",
+			requestDeferred = $.Deferred(),
+			error = "User error",
+			response = null;
+
+		if (hashIndex > -1) {
+			hash = (queryIndex > -1) ? url.slice(hashIndex, queryIndex) : url.slice(hashIndex);
+		}
 
 		data[ options.requestKey ] = true;
 
@@ -262,27 +281,35 @@
 
 				return xhr;
 			},
-			success: function(response, status, jqXHR) {
-				response  = (typeof response === "string") ? $.parseJSON(response) : response;
+			success: function(resp, status, jqXHR) {
+				response  = (typeof resp === "string") ? $.parseJSON(resp) : resp;
 
 				// handle redirects - requires passing new location with json response
-				if (response.location) {
-					url = response.location;
+				if (resp.location) {
+					url = resp.location;
 				}
 
-				_process(url, hash, response, (options.jump ? 0 : false), true);
+				requestDeferred.resolve();
 			},
-			error: function(jqXHR, status, error) {
-				$window.trigger("pronto.error", [ error ]);
+			error: function(jqXHR, status, err) {
+				error = err;
+
+				requestDeferred.reject();
 
 				// Try to parse response text
 				try {
-					var response = $.parseJSON(jqXHR.responseText);
-					_process(url, hash, response, 0, true);
+					// response = $.parseJSON(jqXHR.responseText);
+					// _process(url, hash, response, 0, true);
 				} catch (e) {
-					//console.error(e);
+					// console.error(e);
 				}
 			}
+		});
+
+		$.when(requestDeferred, options.transitionOutDeferred).done(function() {
+			_process(url, hash, response, (options.jump ? 0 : false), true);
+		}).fail(function() {
+			$window.trigger("pronto.error", [ error ]);
 		});
 	}
 
@@ -328,6 +355,14 @@
 
 		$window.trigger("pronto.render");
 
+		if (hash !== "") {
+			var $el = $(hash);
+
+			if ($el.length) {
+				scrollTop = $el.offset().top;
+			}
+		}
+
 		if (scrollTop !== false) {
 			$window.scrollTop(scrollTop);
 		}
@@ -346,14 +381,6 @@
 			for (var key in options.target) {
 				if (options.target.hasOwnProperty(key) && data.hasOwnProperty(key)) {
 					$(options.target[key]).html(data[key]);
-				}
-			}
-
-			if (hash !== "") {
-				var $el = $(hash);
-
-				if ($el.length) {
-					$window.scrollTop( $el.offset().top );
 				}
 			}
 		}

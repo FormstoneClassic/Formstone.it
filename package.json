@@ -52,6 +52,7 @@
     "js/demo.js": [
       "components/jquery/dist/jquery.min.js",
       "components/Rubberband/jquery.fs.rubberband.min.js",
+      "components/Zoetrope/jquery.fs.zoetrope.min.js",
       "js/src/lib/utils.js",
       "js/src/lib/prism.js",
       "js/src/demo.js"
