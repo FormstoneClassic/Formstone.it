@@ -55,7 +55,7 @@ class Nano_Cache {
 	public function after_render(&$output) {
 		$datestamp = date("Y-m-d H:i:s");
 
-		$output = "<!-- RENDERED : $datestamp -->\n" . $output;
+		//$output = "<!-- RENDERED : $datestamp -->\n" . $output;
 
 		if ($this->pronto) {
 			header("Content-type: application/json");

@@ -122,14 +122,6 @@ module.exports = function(grunt) {
 				files: '<%= pkg.css %>'
 			}
 		},
-		// Conbine MQs
-		cmq: {
-			target: {
-				files: {
-					'css': [ 'css/*.css' ]
-				}
-			}
-		},
 		// Auto Prefixer
 		autoprefixer: {
 			options: {
@@ -142,8 +134,9 @@ module.exports = function(grunt) {
 		// Strip MQ
 		stripmq: {
 			options: {
-				width: 980,
-				type: 'screen'
+				width: 1024,
+				type: 'screen',
+				cleanCss: false
 			},
 			all: {
 				files: {
@@ -195,7 +188,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [ 'css', 'js' ]);
 
 	// CSS
-	grunt.registerTask('css', [ 'less', /* 'cmq', */ 'autoprefixer', 'stripmq' ]);
+	grunt.registerTask('css', [ 'less', 'autoprefixer', 'stripmq' ]);
 
 	// JS
 	grunt.registerTask('js', [ 'jshint', 'uglify', 'includereplace' ]);
