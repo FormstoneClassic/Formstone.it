@@ -74,21 +74,28 @@
 			Site._transitionListener( Site.$progress, "width", "100%", Site._resetProgress );
 			Site.$progress.css({ width: "100%" });
 
-			$(".demo_tabbed").tabber("destroy");
+			$(".demo_tabbed")
+				.off("update.tabber")
+				.tabber("destroy");
 		},
 		_onRender: function() {
 			Pagination._init();
 
-			$("#pronto code").each(function() {
-				Prism.highlightElement($(this)[0]);
-			});
+			$("#pronto code")
+				.each(function() {
+					Prism.highlightElement($(this)[0]);
+				});
 
 			Site._checkMainNav();
 			Site.$pronto.removeClass("loading");
 
-			$(".demo_tabbed").tabber({
-				maxWidth: "0px"
-			});
+			$(".demo_tabbed")
+				.tabber({
+					maxWidth: "0px"
+				})
+				.on("update.tabber", function() {
+					$(".scroller").scroller("reset");
+				});
 		},
 		_startProgress: function() {
 			Site.$progress.css({ width: '15%' });
