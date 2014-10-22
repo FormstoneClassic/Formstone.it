@@ -1,5 +1,5 @@
 /* 
- * Boxer v3.2.0 - 2014-09-20 
+ * Boxer v3.2.4 - 2014-10-22 
  * A jQuery plugin for displaying images, videos or content in a modal overlay. Part of the Formstone Library. 
  * http://formstone.it/boxer/ 
  * 
@@ -168,10 +168,10 @@
 		// Check target type
 		var $target = $(this),
 			$object = e.data.$object,
-			source = ($target[0].attributes) ? $target.attr("href") || "" : "",
+			source = ($target[0].href) ? $target[0].href || "" : "",
 			sourceParts = source.toLowerCase().split(".").pop().split(/\#|\?/),
 			extension = sourceParts[0],
-			type = '', // $target.data("type") || "";
+			type = $target.data("boxer-type") || "",
 			isImage	= ( (type === "image") || ($.inArray(extension, e.data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
 			isVideo	= ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 ),
 			isUrl	  = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http") ),
@@ -255,6 +255,7 @@
 		}
 		html += '>';
 		html += '<span class="boxer-close">' + data.labels.close + '</span>';
+		html += '<span class="boxer-loading"></span>';
 		html += '<div class="boxer-container" style="';
 		if (data.isMobile) {
 			html += 'height: 100%; width: 100%';
@@ -591,7 +592,9 @@
 		// Cache current image
 		data.$image = $("<img />");
 
-		data.$image.one("load.boxer", function() {
+		data.$image.load(function() {
+			data.$image.off("load, error");
+
 			var naturalSize = _naturalSize(data.$image);
 
 			data.naturalHeight = naturalSize.naturalHeight;
@@ -613,7 +616,8 @@
 			// Size content to be sure it fits the viewport
 			_sizeImage();
 			_open();
-		}).attr("src", source)
+		}).error(_loadError)
+		  .attr("src", source)
 		  .addClass("boxer-image");
 
 		// If image has already loaded into cache, trigger load event
@@ -1006,14 +1010,14 @@
 	 * @param $object [jQuery Object] "Object to size"
 	 */
 	function _sizeContent($object) {
-		data.windowHeight	 = data.$window.height() - data.paddingVertical;
+		data.windowHeight	  = data.$window.height() - data.paddingVertical;
 		data.windowWidth	  = data.$window.width() - data.paddingHorizontal;
-		data.objectHeight	 = $object.outerHeight(true);
+		data.objectHeight	  = $object.outerHeight(true);
 		data.objectWidth	  = $object.outerWidth(true);
-		data.targetHeight	 = data.targetHeight || data.$target.data("boxer-height");
+		data.targetHeight	  = data.targetHeight || data.$target.data("boxer-height");
 		data.targetWidth	  = data.targetWidth  || data.$target.data("boxer-width");
-		data.maxHeight		= (data.windowHeight < 0) ? options.minHeight : data.windowHeight;
-		data.isIframe		 = $object.is("iframe");
+		data.maxHeight		  = (data.windowHeight < 0) ? options.minHeight : data.windowHeight;
+		data.isIframe		  = $object.is("iframe");
 		data.objectMarginTop  = 0;
 		data.objectMarginLeft = 0;
 
@@ -1050,6 +1054,24 @@
 			height: data.contentHeight,
 			width:  data.contentWidth
 		});
+	}
+
+	/**
+	 * @method private
+	 * @name _loadError
+	 * @description Error when resource fails to load
+	 * @param e [object] "Event data"
+	 */
+	function _loadError(e) {
+		var $error = $('<div class="boxer-error"><p>Error Loading Resource</p></div>');
+
+		// Clean up
+		data.type = "element";
+		data.$meta.remove();
+
+		data.$image.off("load, error");
+
+		_appendObject($error);
 	}
 
 	/**
