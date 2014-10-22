@@ -94,7 +94,9 @@
 					maxWidth: "0px"
 				})
 				.on("update.tabber", function() {
-					$(".scroller").scroller("reset");
+					if ($(".scroller").length) {
+						$(".scroller").scroller("reset");
+					}
 				});
 		},
 		_startProgress: function() {

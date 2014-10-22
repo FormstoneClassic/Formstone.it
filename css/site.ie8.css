@@ -234,30 +234,30 @@ th {
 }
 
 .gridlock .row {
+  width: 300px;
   margin-left: auto;
   margin-right: auto;
-  width: 300px;
 }
 
 .gridlock .row:after {
+  height: 0;
   clear: both;
   content: ".";
   display: block;
-  height: 0;
   line-height: 0;
   visibility: hidden;
 }
 
 .gridlock .row .row {
+  width: 102.08333333%;
   margin-left: -1.04166667%;
   margin-right: -1.04166667%;
-  width: 102.08333333%;
 }
 
 .gridlock .row .contained .row {
+  width: 100%;
   margin-left: 0;
   margin-right: 0;
-  width: 100%;
 }
 
 .gridlock .row [class*=all-],
@@ -277,12 +277,12 @@ th {
 .gridlock .row [class*=tablet-].padded,
 .gridlock .row [class*=desktop-].padded,
 .gridlock .row [class*=max-].padded {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   margin-left: 0;
   margin-right: 0;
   padding-left: 1.04166667%;
   padding-right: 1.04166667%;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
 }
 
 .gridlock .row [class*=all-].contained,
