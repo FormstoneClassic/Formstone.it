@@ -1,6 +1,6 @@
 {
   "name": "Boxer",
-  "version": "3.2.5",
+  "version": "3.3.0",
   "description": "A jQuery plugin for displaying images, videos or content in a modal overlay. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -18,13 +18,14 @@
     "Gruntfile.js",
     "src/"
   ],
-  "_release": "3.2.5",
+  "_release": "3.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "3.2.5",
-    "commit": "139a19b4575b16264c9158cb5af6837d0518b043"
+    "tag": "3.3.0",
+    "commit": "2c14df58af6d6a423c1f40de5201bb97e58e8404"
   },
   "_source": "git://github.com/benplum/Boxer.git",
-  "_target": "~3.2.1",
-  "_originalSource": "Boxer"
+  "_target": "~3.3.0",
+  "_originalSource": "Boxer",
+  "_direct": true
 }
