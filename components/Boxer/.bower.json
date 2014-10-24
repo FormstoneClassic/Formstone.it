@@ -14,15 +14,13 @@
     "jquery.fs.boxer.css"
   ],
   "ignore": [
-    "*.jquery.json",
-    "Gruntfile.js",
-    "src/"
+    "*.jquery.json"
   ],
   "_release": "3.3.0",
   "_resolution": {
     "type": "version",
     "tag": "3.3.0",
-    "commit": "2c14df58af6d6a423c1f40de5201bb97e58e8404"
+    "commit": "bab148e6c6cbf163cff1604cec4afc75c9d3dc1d"
   },
   "_source": "git://github.com/benplum/Boxer.git",
   "_target": "~3.3.0",

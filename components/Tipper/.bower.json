@@ -14,15 +14,13 @@
     "jquery.fs.tipper.css"
   ],
   "ignore": [
-    "*.jquery.json",
-    "Gruntfile.js",
-    "src/"
+    "*.jquery.json"
   ],
   "_release": "3.1.0",
   "_resolution": {
     "type": "version",
     "tag": "3.1.0",
-    "commit": "d8d20ca089bf95c80b1ca714b772a0e7ad25ffe2"
+    "commit": "9e488354d57dd383f1eedbbd3faebd334c272f6b"
   },
   "_source": "git://github.com/benplum/Tipper.git",
   "_target": "~3.1.0",

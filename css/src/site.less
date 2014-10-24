@@ -4,7 +4,9 @@
 
 	@import "base.less";
 
-	@import (inline) "../../components/Shifter/jquery.fs.shifter.css";
+	@import "jquery.fs.shifter-config.less";
+	@import "../../components/Shifter/src/jquery.fs.shifter-styles.less";
+
 	@import (inline) "../../components/Tabber/jquery.fs.tabber.css";
 
 /*-------------------------------------------
@@ -41,6 +43,9 @@
 
 
 	.button {
+		display: block;
+		width: 100%;
+
 		.no-touch &:hover {
 			background: @black;
 		}
@@ -49,6 +54,7 @@
 			display: inline-block;
 			margin: 0 10px 10px 0;
 			padding: 0 30px;
+			width: auto;
 		}
 	}
 
@@ -73,23 +79,22 @@
 		.shifter-handle {
 			width: auto;
 
+			float: right;
 			text-indent: 0;
+
+			&:after {
+				float: right;
+				margin: 6px 0 0 5px;
+				position: static;
+			}
 		}
 
 		.shifter-page {
-			background: @white;
-			box-shadow: none;
 			padding-top: 60px;
 		}
 
 		.shifter-navigation {
-			background: @bgGray;
-			overflow-y: auto;
 			padding-top: 80px;
-		}
-
-		&-active .shifter-handle {
-			background: none;
 		}
 	}
 

@@ -1,5 +1,5 @@
 /*! 
- * Formstone.it v1.0.0 [2014-10-22] 
+ * Formstone.it v1.0.0 [2014-10-24] 
  * Formstone website. 
  * Ben Plum 
  */
@@ -1255,33 +1255,35 @@ input.button {
 }
 
 .shifter-open {
-  overflow: hidden!important;
+  overflow: hidden;
 }
 
 .shifter-open .shifter-page *,
 .shifter-open .shifter-header * {
-  pointer-events: none!important;
+  pointer-events: none;
 }
 
-.shifter .shifter-navigation {
+.shifter-navigation {
   display: none;
   opacity: 0;
 }
 
-.shifter .shifter-handle {
+.shifter-handle {
   display: none;
 }
 
 .shifter-active .shifter-page {
-  background: #fff;
-  box-shadow: 2px 0 2px rgba(0,0,0,.15);
-  display: block;
-  left: 0;
   min-height: 100%;
-  overflow: hidden;
   position: relative;
-  top: 0;
   z-index: 1;
+  background: #fff;
+  box-shadow: 0 0 0 transparent;
+  display: block;
+  overflow: hidden;
+}
+
+.shifter-active.shifter-left .shifter-page {
+  box-shadow: 0 0 0 transparent;
 }
 
 .shifter-active .shifter-page,
@@ -1292,15 +1294,16 @@ input.button {
 }
 
 .shifter-active .shifter-navigation {
-  background: #fff;
-  display: block;
+  width: 270px;
   height: 100%;
-  opacity: 1;
-  pointer-events: none;
   position: fixed;
   top: 0;
-  width: 270px;
   z-index: 0;
+  background: #f8f8f8;
+  display: block;
+  opacity: 1;
+  overflow: auto;
+  pointer-events: none;
 }
 
 .shifter-active .shifter-page,
@@ -1308,25 +1311,39 @@ input.button {
 .shifter-active .shifter-navigation {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-transition: -webkit-transform .2s ease!important;
-  transition: transform .2s ease!important;
+  -webkit-transition: -webkit-transform .2s ease;
+  transition: transform .2s ease;
 }
 
 .shifter-active .shifter-handle {
-  background: url(jquery.fs.shifter-icon.png) no-repeat center center;
-  cursor: pointer;
-  content: '';
-  display: block;
-  float: right;
-  height: 30px;
   width: 30px;
+  height: 30px;
+  position: relative;
+  background: #fff;
+  cursor: pointer;
+  display: block;
   overflow: hidden;
-  text-indent: 110%;
+  text-indent: 200%;
   white-space: nowrap;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.shifter-active .shifter-handle:after {
+  height: 3px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #999;
+  box-shadow: 0 5px 0 #999,0 -5px 0 #999;
+  content: '';
+  display: block;
+  margin: auto;
 }
 
 .shifter-active .shifter-navigation {
@@ -1359,15 +1376,34 @@ input.button {
 
 .shifter-open .shifter-navigation {
   pointer-events: all;
-  z-index: 1\9;
   -webkit-transform: translate3D(0,0,0);
   -ms-transform: translate3D(0,0,0);
   transform: translate3D(0,0,0);
 }
 
-.shifter-open {
-  overflow: hidden!important;
-  height: 100%!important;
+.no-csstransforms3d .shifter-active.shifter-navigation {
+  right: -270px;
+}
+
+.no-csstransforms3d .shifter-active.shifter-left .shifter-navigation {
+  left: -270px;
+}
+
+.no-csstransforms3d .shifter-active.shifter-open .shifter-page {
+  left: -270px;
+}
+
+.no-csstransforms3d .shifter-active.shifter-open .shifter-navigation {
+  right: 0;
+}
+
+.no-csstransforms3d .shifter-active.shifter-left.shifter-open .shifter-page {
+  left: auto;
+  right: -270px;
+}
+
+.no-csstransforms3d .shifter-active.shifter-left.shifter-open .shifter-navigation {
+  left: 0;
 }
 
 .tabber {
@@ -1467,6 +1503,11 @@ input.button {
   min-height: 600px;
 }
 
+.button {
+  display: block;
+  width: 100%;
+}
+
 .no-touch .button:hover {
   background: #1c1f1d;
 }
@@ -1475,6 +1516,7 @@ input.button {
   display: inline-block;
   margin: 0 10px 10px 0;
   padding: 0 30px;
+  width: auto;
 }
 
 .mobile_handle {
@@ -1495,23 +1537,22 @@ input.button {
 
 .shifter .shifter-handle {
   width: auto;
+  float: right;
   text-indent: 0;
 }
 
+.shifter .shifter-handle:after {
+  float: right;
+  margin: 6px 0 0 5px;
+  position: static;
+}
+
 .shifter .shifter-page {
-  background: #fff;
-  box-shadow: none;
   padding-top: 60px;
 }
 
 .shifter .shifter-navigation {
-  background: #f8f8f8;
-  overflow-y: auto;
   padding-top: 80px;
-}
-
-.shifter-active .shifter-handle {
-  background: 0 0;
 }
 
 .desktop_navigation {

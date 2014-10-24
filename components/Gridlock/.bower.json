@@ -19,9 +19,10 @@
   "_resolution": {
     "type": "version",
     "tag": "3.2.1",
-    "commit": "9243399aa4be179199aa26aab637c2589c7eef26"
+    "commit": "533ced203d73b6f62c2b2108fd5b9b71035d8379"
   },
   "_source": "git://github.com/benplum/Gridlock.git",
-  "_target": "~3.2.0",
-  "_originalSource": "Gridlock"
+  "_target": "~3.2.1",
+  "_originalSource": "Gridlock",
+  "_direct": true
 }

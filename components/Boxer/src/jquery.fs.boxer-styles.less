@@ -1,0 +1,561 @@
+
+	.boxer-open {
+
+	}
+	.boxer-lock {
+		overflow: hidden !important;
+	}
+
+	#boxer-overlay {
+		width: 100%;
+		height: 100%;
+
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: @boxer-z-index;
+
+		background: @boxer-overlay-background;
+		opacity: 0;
+		transition: opacity 0.25s linear;
+
+		.boxer-open & {
+			opacity: @boxer-overlay-opacity;
+		}
+	}
+
+	#boxer {
+		width: 200px;
+		height: 200px;
+
+		position: absolute;
+		right: 0;
+		left: 0;
+		z-index: (@boxer-z-index + 1);
+
+		background: @boxer-background;
+		border-radius: @boxer-border-radius;
+		box-shadow: @boxer-box-shadow;
+		opacity: 0;
+		margin: 0 auto;
+		padding: @boxer-padding;
+
+		* {
+			transition: none;
+		}
+
+		&,
+		& * {
+			user-select: none !important;
+		}
+
+		&,
+		& *,
+		& *:before,
+		& *:after {
+			box-sizing: border-box;
+		}
+
+		// .fixed
+
+		&.fixed {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+
+			margin: auto;
+		}
+
+		// .inline
+
+		&.inline {
+			padding: @boxer-inline-padding;
+		}
+
+		// .animating
+
+		&.animating {
+			transition:
+				height @boxer-transition-duration @boxer-transition-timing,
+				width @boxer-transition-duration @boxer-transition-timing,
+				opacity @boxer-transition-duration linear,
+				top @boxer-transition-duration @boxer-transition-timing;
+
+			.boxer-container {
+				transition: opacity @boxer-transition-duration linear @boxer-transition-duration;
+			}
+		}
+
+		// .boxer-open
+
+		.boxer-open & {
+			opacity: 1;
+		}
+
+		&.loading .boxer-container {
+			opacity: 0;
+			transition: opacity @boxer-transition-duration linear;
+		}
+
+		// .boxer-close
+
+		.boxer-close {
+			width: @boxer-close-height;
+			height: @boxer-close-height;
+
+			position: absolute;
+			top: -@boxer-close-height / 4;
+			right: -@boxer-close-width / 4;
+			z-index: (@boxer-z-index + 5);
+
+			background: @boxer-close-background;
+			border-radius: @boxer-close-border-radius;
+			cursor: pointer;
+			display: block;
+			overflow: hidden;
+			padding: 0;
+			text-indent: 200%;
+			white-space: nowrap;
+
+			&:before {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+
+				color: @boxer-close-color;
+				content: "\00d7";
+				display: block;
+				font-size: @boxer-close-font-size;
+				font-weight: @boxer-close-font-weight;
+				line-height: @boxer-close-height;
+				margin: auto;
+				text-align: center;
+				text-indent: 0;
+				transition: color 0.15s linear;
+			}
+
+			// IE8 - opacity check
+
+			.no-opacity & {
+				text-indent: -999px;
+			}
+		}
+
+		// .boxer-loading
+
+		.boxer-loading {
+			width: @boxer-loading-width;
+			height: @boxer-loading-height;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: (@boxer-z-index + 5);
+
+			display: block;
+			margin: auto;
+			opacity: 0;
+			transition: opacity @boxer-transition-duration linear;
+
+			&:before,
+			&:after {
+				width: 100%;
+				height: 100%;
+
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+
+				border-radius: 110%;
+				content: '';
+				display: block;
+			}
+
+			&:before {
+				border: @boxer-loading-size solid fade(@boxer-loading-color, 25);
+			}
+
+			&:after {
+				animation: boxer-loading-spin @boxer-loading-animation-duration linear infinite;
+				border: @boxer-loading-size solid transparent;
+				border-top-color: @boxer-loading-color;
+			}
+		}
+
+		&.loading .boxer-loading {
+			opacity: 1;
+		}
+
+		@keyframes boxer-loading-spin {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		// .boxer-container
+
+		.boxer-container {
+			width: 100%;
+			height: 100%;
+
+			position: relative;
+			z-index: (@boxer-z-index + 3);
+
+			background: @boxer-container-background;
+			overflow: hidden;
+		}
+
+		// .boxer-content
+
+		.boxer-content {
+			width: 100%;
+
+			background: @boxer-content-background;
+			opacity: 1;
+			overflow: hidden;
+			padding: 0;
+		}
+
+		// Inline .boxer-content
+
+		&.inline .boxer-content,
+		&.iframe .boxer-content {
+			width: auto;
+		}
+
+		// .boxer-image
+
+		.boxer-image {
+			float: left;
+		}
+
+		// .boxer-video
+
+		.boxer-video {
+			width: 100%;
+			height: 100%;
+		}
+
+		// .boxer-iframe
+
+		.boxer-iframe {
+			width: 100%;
+			height: 100%;
+
+			border: none;
+			float: left;
+			overflow: auto;
+		}
+
+		// .boxer-meta
+
+		.boxer-meta {
+			clear: both;
+		}
+
+		// .boxer-controls
+
+		.boxer-control {
+			width: @boxer-control-width;
+			height: @boxer-control-height;
+
+			position: absolute;
+			top: 0;
+
+			background: @boxer-control-background;
+			border-radius: @boxer-control-border-radius;
+			box-shadow: @boxer-control-box-shadow;
+			cursor: pointer;
+			display: block;
+			margin-right: auto;
+			margin-left: auto;
+			opacity: @boxer-control-opacity;
+			overflow: hidden;
+			text-indent: 200%;
+			transition: opacity @boxer-control-transition-duration linear;
+			white-space: nowrap;
+
+			// Caret
+			@boxer-control-caret-width: (@boxer-control-caret-size * 1.3);
+			@boxer-control-carent-margin: (@boxer-control-width - (@boxer-control-caret-size * 1.5)) / 2;
+
+			&:before {
+				width: 0;
+				height: 0;
+
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+
+				content: '';
+				margin: auto;
+			}
+
+			&.previous {
+				left: @boxer-control-previous-left;
+
+				&:before {
+					border-top: @boxer-control-caret-size solid transparent;
+					border-bottom: @boxer-control-caret-size solid transparent;
+					border-right: @boxer-control-caret-width solid @boxer-control-caret-color;
+					margin-left: @boxer-control-carent-margin;
+				}
+			}
+
+			&.next {
+				right: @boxer-control-next-right;
+
+				&:before {
+					border-top: @boxer-control-caret-size solid transparent;
+					border-bottom: @boxer-control-caret-size solid transparent;
+					border-left: @boxer-control-caret-width solid @boxer-control-caret-color;
+					margin-right: @boxer-control-carent-margin;
+				}
+			}
+
+			&.disabled {
+				opacity: 0;
+			}
+
+			// IE8 - opacity check
+
+			.no-opacity & {
+				text-indent: -999px;
+			}
+		}
+
+		// controls hovers
+
+		.no-touch & .boxer-control {
+			opacity: 0;
+		}
+
+		.no-touch &:hover .boxer-control {
+			opacity: @boxer-control-opacity;
+
+			&.disabled {
+				opacity: 0;
+				cursor: default !important;
+			}
+		}
+
+		// .boxer-meta
+
+		.boxer-meta {
+			padding: @boxer-meta-padding;
+		}
+
+		// .boxer-position
+
+		.boxer-position {
+			color: @boxer-position-text-color;
+			font-size: @boxer-position-font-size;
+			margin: @boxer-position-margin;
+			padding: @boxer-position-padding;
+		}
+
+		// .boxer-caption
+
+		.boxer-caption {
+			& p {
+				color: @boxer-caption-text-color;
+				font-size: @boxer-caption-font-size;
+				margin: @boxer-caption-margin;
+				padding: @boxer-caption-padding;
+			}
+
+			&.gallery p {
+				padding-top: 0;
+			}
+		}
+
+		// .boxer-error
+
+		.boxer-error {
+			width: @boxer-error-width;
+
+			p {
+				color: @boxer-error-text-color;
+				font-size: @boxer-error-font-size;
+				margin: @boxer-error-margin;
+				padding: @boxer-error-padding;
+				text-align: center;
+				text-transform: uppercase;
+			}
+		}
+
+		// .mobile
+
+		&.mobile {
+			width: 100%;
+			height: 100%;
+
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			background: @boxer-mobile-background;
+			border-radius: 0;
+			padding: @boxer-mobile-close-height 0 0;
+
+			// .boxer-close
+
+			.boxer-close,
+			.boxer-close:hover {
+				height: @boxer-mobile-close-height;
+				width: @boxer-mobile-close-width;
+
+				top: 0;
+				right: 0;
+
+				background: @boxer-mobile-close-background;
+				border-radius: 0;
+			}
+
+			.boxer-close:before,
+			.boxer-close:hover:before {
+				color: @boxer-mobile-close-text-color;
+				font-size: @boxer-mobile-close-font-size;
+				font-weight: @boxer-mobile-close-font-weight;
+				line-height: @boxer-mobile-close-height;
+			}
+
+			// .boxer-loading
+
+			.boxer-loading:before {
+				border-color: fade(@boxer-mobile-loading-color, 25);
+			}
+
+			.boxer-loading:after {
+				border-top-color: @boxer-mobile-loading-color;
+			}
+
+			// .boxer-container
+
+			.boxer-container {
+				background: @boxer-mobile-container-background;
+			}
+
+			// .boxer-content
+
+			.boxer-content {
+				background-color: @boxer-mobile-content-background;
+			}
+
+			// .boxer-control
+
+			.boxer-control {
+				width: @boxer-mobile-control-width;
+				height: 100%;
+
+				background: @boxer-mobile-control-background;
+				border-radius: 0;
+				box-shadow: none;
+				opacity: 1;
+
+				// Caret
+				@boxer-mobile-control-carent-margin: (@boxer-mobile-control-width - (@boxer-control-caret-size * 1.5)) / 2;
+
+				&.previous {
+					left: 0;
+
+					&:before {
+						border-right-color: @boxer-mobile-control-carent-color;
+						margin-left: @boxer-mobile-control-carent-margin;
+					}
+				}
+
+				&.next {
+					right: 0;
+
+					&:before {
+						border-left-color: @boxer-mobile-control-carent-color;
+						margin-right: @boxer-mobile-control-carent-margin;
+					}
+				}
+			}
+
+			// controls hovers
+
+			.no-touch & .boxer-control,
+			.no-touch &:hover .boxer-control {
+				opacity: @boxer-control-opacity;
+
+				&.disabled {
+					opacity: 0;
+					cursor: default !important;
+				}
+			}
+
+			// .boxer-meta
+			.boxer-meta {
+				width: 100%;
+
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+
+				background-color: @boxer-mobile-meta-background;
+				padding: @boxer-mobile-meta-padding (@boxer-mobile-control-width + @boxer-mobile-meta-padding);
+			}
+
+			// .boxer-position
+
+			.boxer-position {
+				color: @boxer-mobile-position-text-color;
+				font-size: @boxer-mobile-position-font-size;
+				margin: @boxer-mobile-position-margin;
+				padding: @boxer-mobile-position-padding;
+			}
+
+			// .boxer-captions
+
+			.boxer-caption {
+				p {
+					color: @boxer-mobile-caption-text-color;
+					font-size: @boxer-mobile-caption-font-size;
+					margin: @boxer-mobile-caption-margin;
+					padding: @boxer-mobile-caption-padding;
+				}
+			}
+
+			// .boxer-image
+
+			.boxer-image {
+				transition: none !important;
+				transform: translate(0, 0);
+			}
+
+			// .animated
+
+			&.animated .boxer-image {
+				transition: transform 0.25s ease-out !important;
+			}
+
+			// .inline / .iframe
+
+			&.inline .boxer-content,
+			&.iframe .boxer-content {
+				overflow-x: hidden;
+				overflow-y: scroll;
+				-webkit-overflow-scrolling: touch;
+			}
+		}
+	}
