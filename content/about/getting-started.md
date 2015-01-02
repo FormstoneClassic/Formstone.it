@@ -11,7 +11,7 @@ Formstone components are designed to be implemented easily without impacting you
 
 ### Deploy
 
-The first step is to deploy the package, either by downloading the package from [GitHub](http://www.github.com/) or using [Bower](http://bower.io/), a front-end package manager. All Formstone components can be deployed and updated via the command line with Bower:
+The first step is to deploy the package, either by downloading the package from [GitHub](https://github.com/Formstone/Formstone) or using [Bower](http://bower.io/), a front-end package manager. All Formstone components can be deployed and updated via the command line with Bower:
 
 <pre class="example"><code>bower install ComponentName</code></pre>
 
