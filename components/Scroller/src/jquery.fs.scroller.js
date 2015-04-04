@@ -1,11 +1,3 @@
-/* 
- * Scroller v3.1.2 - 2014-12-08 
- * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library. 
- * http://formstone.it/scroller/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
-
 ;(function ($, window) {
 	"use strict";
 

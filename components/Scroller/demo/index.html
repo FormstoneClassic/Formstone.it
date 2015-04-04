@@ -20,7 +20,7 @@
 		<!--[DEMO:START-RESOURCES]-->
 
 		<style>
-			.demo .scrollbar { background: #fefefe; border: 1px solid #eee; height: 200px; overflow: auto; margin: 20px 0 0; padding: 10px 20px 10px 20px; }
+			.demo .scrollbar { border: 1px solid #eee; height: 200px; overflow: auto; margin: 20px 0 0; padding: 10px 20px 10px 20px; }
 			.demo .scrollbar.scroller { padding: 0; }
 			.demo .scrollbar.scroller .scroller-content,
 			.demo .scrollbar.scroller-active .scroller-content { padding: 20px 40px 20px 20px; }
@@ -31,12 +31,12 @@
 			.demo .wide_load { width: 2400px; overflow: hidden; padding: 20px 0 20px 20px; }
 			.demo .wide_load p { float: left; margin: 0 25px 0 0; width: 450px; }
 
-			.demo .advanced .scroller-handle { background: #DB0209; border-color: rgba(0,0,0, 0.25); border-radius: 3px; right: 2px; width: 15px; }
+			.demo .advanced .scroller-handle { background: #900; border: none; border-radius: 0; right: 0; width: 100%; }
 		</style>
 
 		<script>
 			$(document).ready(function() {
-				$(window).on("snap.demo", function() {
+				$(window).on("snap.demo", function(e, data) {
 					$(".demo .scrollbar").scroller("reset");
 				});
 
@@ -84,7 +84,7 @@
 					$(".demo .scroll_target").off("click");
 	                $(".demo .scroll_animate").off("click");
 	                $(".demo_tabbed").off("update.tabber");
-				});
+				}).trigger("snap");
 			});
 		</script>
 

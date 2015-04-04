@@ -22,6 +22,7 @@
     "css/site.ie8.css": "css/src/ie/ie8.less",
     "css/site.ie9.css": "css/src/ie/ie9.less",
     "css/demo.css": "css/src/demo.less",
+    "css/demos.css": "css/src/demos.less",
     "css/gridlock.bookmarklet.css": "css/src/gridlock-bookmarklet.less"
   },
   "js": {
@@ -59,6 +60,12 @@
     ],
     "js/gridlock.bookmarklet.js": [
       "js/src/gridlock-bookmarklet.js"
+    ],
+    "js/demos.js": [
+      "components/jquery/dist/jquery.min.js",
+      "js/src/lib/utils.js",
+      "js/src/lib/prism.js",
+      "js/src/demos.js"
     ]
   },
   "js_ignores": [

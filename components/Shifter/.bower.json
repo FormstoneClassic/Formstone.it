@@ -1,6 +1,6 @@
 {
   "name": "Shifter",
-  "version": "3.1.0",
+  "version": "3.1.2",
   "description": "A jQuery plugin for simple slide-out mobile navigation. Part of the Formstone Library.",
   "author": {
     "name": "Ben Plum",
@@ -16,14 +16,13 @@
   "ignore": [
     "*.jquery.json"
   ],
-  "_release": "3.1.0",
+  "_release": "3.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "3.1.0",
-    "commit": "5a8223cfe3d152896fe0a2d4e78a902eac505688"
+    "tag": "3.1.2",
+    "commit": "16604408827361fa856ad5c6485e5ff517526b5d"
   },
   "_source": "git://github.com/benplum/Shifter.git",
   "_target": "~3.1.0",
-  "_originalSource": "Shifter",
-  "_direct": true
+  "_originalSource": "Shifter"
 }

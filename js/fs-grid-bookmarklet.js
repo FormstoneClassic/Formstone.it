@@ -1,14 +1,12 @@
 /*
- * Gridlock Overlay Bookmarklet <http://formstone.it/gridlock>
+ * Grid Overlay Bookmarklet <http://formstone.it/grid>
  * @author Ben Plum
  * @version 1.1.0
  *
  * Copyright 2013 Ben Plum <mr@benplum.co>
  */
 
-//javascript:(function(){if(typeof%20GridlockBookmarklet==='undefined'){document.body.appendChild(document.createElement('script')).src='http://formstone.it/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
-
-function GridlockBookmarklet() {
+function FSGridBookmarklet() {
 	var $jq,
 		OverlayObj,
 		Overlay = function() {
@@ -17,28 +15,27 @@ function GridlockBookmarklet() {
 					onLoad: false,
 					position: "top-right", // top-right, top-left, bottom-right, bottom-left
 					useCookies: false
-				}, window.GridlockBookmarkletConfig);
+				}, window.FSGridBookmarkletConfig);
 
-			if ($jq(".gridlock").length < 1) {
-				alert("Gridlock Not Found.\nYou'll need to include Gridlock before using this bookmarklet.\n\nLearn more: http://formstone.it/gridlock/");
+			if ($jq(".fs-grid").length < 1) {
+				alert("Grid Not Found.\nYou'll need to include Grid before using this bookmarklet.\n\nLearn more: http://formstone.it/grid/");
 			} else {
-				var desktopCount = $jq(".gridlock").hasClass("gridlock-16") ? 16 : 12,
-					mobileFirst = $jq(".gridlock").hasClass("gridlock-mf"),
-					tabletCount = Math.ceil(desktopCount / 2),
+				var desktopCount = 12,
+					tabletCount = 6,
 					mobileCount = 3;
 
-				if ($jq("#gridlock_styles").length < 1) {
-					$jq("body").append('<link id="gridlock_styles" rel="stylesheet" href="http://formstone.it/css/gridlock.bookmarklet.css" type="text/css" media="all">');
+				if ($jq("#grid_styles").length < 1) {
+					$jq("body").append('<link id="grid_styles" rel="stylesheet" href="http://formstone.it/css/fs-grid-bookmarklet.css" type="text/css" media="all">');
 				}
 
-				if ($jq("#gridlock_overlay").length < 1) {
+				if ($jq("#grid_overlay").length < 1) {
 					var html = '';
 
-					html += '<menu id="gridlock_menu" class="' + config.position + '">';
-					html += '<span class="gridlock_show gridlock_option">Show Grid</span>';
-					html += '<span class="gridlock_icon gridlock_remove">Close</span>';
+					html += '<menu id="grid_menu" class="' + config.position + '">';
+					html += '<span class="grid_show grid_option">Show Grid</span>';
+					html += '<span class="grid_icon grid_remove">Close</span>';
 					html += '</menu>';
-					html += '<section id="gridlock_overlay" class="' + ((mobileFirst) ? "mobile-first" : "") + '">';
+					html += '<section id="grid_overlay" class="">';
 					html += '<div class="row">';
 					for (var i = 0; i < desktopCount; i++) {
 						html += '<div class="desktop-1 tablet-1 mobile-1"> <span> </span> </div>';
@@ -48,15 +45,15 @@ function GridlockBookmarklet() {
 
 					$jq("body").append(html);
 
-					_this.$menu = $jq("#gridlock_menu");
+					_this.$menu = $jq("#grid_menu");
 					_this.$menuItems = _this.$menu.find("span");
-					_this.$overlay = $jq("#gridlock_overlay");
+					_this.$overlay = $jq("#grid_overlay");
 
-					_this.$menu.on("click", ".gridlock_option", $jq.proxy(_this.onClick, _this))
-							   .on("click", ".gridlock_remove", $jq.proxy(_this.remove, _this));
+					_this.$menu.on("click", ".grid_option", $jq.proxy(_this.onClick, _this))
+							   .on("click", ".grid_remove", $jq.proxy(_this.remove, _this));
 
-					if (config.onLoad || (config.useCookies === true && _this.readCookie("gridlock-active") === "true")) {
-						_this.$menuItems.filter(".gridlock_show")
+					if (config.onLoad || (config.useCookies === true && _this.readCookie("grid-active") === "true")) {
+						_this.$menuItems.filter(".grid_show")
 										.trigger("click");
 					}
 				}
@@ -72,12 +69,12 @@ function GridlockBookmarklet() {
 				$target.removeClass("active")
 					   .html("Show Grid");
 				_this.$overlay.removeClass("visible");
-				_this.eraseCookie("gridlock-active");
+				_this.eraseCookie("grid-active");
 			} else {
 				$target.addClass("active")
 					   .html("Hide Grid");
 				_this.$overlay.addClass("visible");
-				_this.createCookie("gridlock-active", "true", 7);
+				_this.createCookie("grid-active", "true", 7);
 			}
 		},
 
@@ -130,7 +127,7 @@ function GridlockBookmarklet() {
 	function loadJQuery() {
 		var jQ = document.createElement("script");
 
-		jQ.id = "gridlock-jquery";
+		jQ.id = "grid-jquery";
 		jQ.src = "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
 		jQ.onload = function() {
 			$jq = jQuery.noConflict(true);
@@ -154,4 +151,4 @@ function GridlockBookmarklet() {
 	}
 }
 
-new GridlockBookmarklet();
+new FSGridBookmarklet();

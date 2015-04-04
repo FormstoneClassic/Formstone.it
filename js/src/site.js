@@ -94,6 +94,7 @@
 					maxWidth: "0px"
 				})
 				.on("update.tabber", function() {
+					console.log($(".scroller").length);
 					if ($(".scroller").length) {
 						$(".scroller").scroller("reset");
 					}

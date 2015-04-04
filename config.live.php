@@ -3,7 +3,7 @@
 /** !Core */
 $config['site_title'] = "Formstone";
 $config['theme'] = "formstone";
-$config['base_url'] = "http://formstone.it";
+$config['base_url'] = "http://classic.formstone.it";
 
 
 /** !Redirect Plugin */

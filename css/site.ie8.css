@@ -1,5 +1,5 @@
 /*! 
- * Formstone.it v1.0.0 [2014-10-24] 
+ * Formstone.it v1.0.0 [2014-12-08] 
  * Formstone website. 
  * Ben Plum 
  */
@@ -1272,7 +1272,7 @@ input.button {
   display: none;
 }
 
-.shifter-active .shifter-page {
+.shifter-enabled .shifter-page {
   min-height: 100%;
   position: relative;
   z-index: 1;
@@ -1282,18 +1282,11 @@ input.button {
   overflow: hidden;
 }
 
-.shifter-active.shifter-left .shifter-page {
+.shifter-enabled.shifter-left .shifter-page {
   box-shadow: 0 0 0 transparent;
 }
 
-.shifter-active .shifter-page,
-.shifter-active .shifter-header {
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-}
-
-.shifter-active .shifter-navigation {
+.shifter-enabled .shifter-navigation {
   width: 270px;
   height: 100%;
   position: fixed;
@@ -1301,21 +1294,29 @@ input.button {
   z-index: 0;
   background: #f8f8f8;
   display: block;
-  opacity: 1;
   overflow: auto;
   pointer-events: none;
+  -webkit-transition: opacity .001s linear .2s,-webkit-transform .2s ease;
+  transition: opacity .001s linear .2s,transform .2s ease;
 }
 
-.shifter-active .shifter-page,
-.shifter-active .shifter-header,
-.shifter-active .shifter-navigation {
+.shifter-enabled .shifter-page,
+.shifter-enabled .shifter-header,
+.shifter-enabled .shifter-navigation {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+.shifter-enabled .shifter-page,
+.shifter-enabled .shifter-header {
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
   -webkit-transition: -webkit-transform .2s ease;
   transition: transform .2s ease;
 }
 
-.shifter-active .shifter-handle {
+.shifter-enabled .shifter-handle {
   width: 30px;
   height: 30px;
   position: relative;
@@ -1331,7 +1332,7 @@ input.button {
   user-select: none;
 }
 
-.shifter-active .shifter-handle:after {
+.shifter-enabled .shifter-handle:after {
   height: 3px;
   width: 20px;
   position: absolute;
@@ -1346,7 +1347,7 @@ input.button {
   margin: auto;
 }
 
-.shifter-active .shifter-navigation {
+.shifter-enabled .shifter-navigation {
   right: 0;
   -webkit-transform: translate3D(0,0,0);
   -ms-transform: translate3D(0,0,0);
@@ -1360,49 +1361,52 @@ input.button {
   transform: translate3D(-270px,0,0);
 }
 
-.shifter-active.shifter-left .shifter-navigation {
+.shifter-enabled.shifter-left .shifter-navigation {
   left: 0;
   -webkit-transform: translate3D(0,0,0);
   -ms-transform: translate3D(0,0,0);
   transform: translate3D(0,0,0);
 }
 
-.shifter-active.shifter-left.shifter-open .shifter-page,
-.shifter-active.shifter-left.shifter-open .shifter-header {
+.shifter-enabled.shifter-left.shifter-open .shifter-page,
+.shifter-enabled.shifter-left.shifter-open .shifter-header {
   -webkit-transform: translate3D(270px,0,0);
   -ms-transform: translate3D(270px,0,0);
   transform: translate3D(270px,0,0);
 }
 
 .shifter-open .shifter-navigation {
+  opacity: 1;
   pointer-events: all;
   -webkit-transform: translate3D(0,0,0);
   -ms-transform: translate3D(0,0,0);
   transform: translate3D(0,0,0);
+  -webkit-transition: opacity .001s linear 0s,-webkit-transform .2s ease;
+  transition: opacity .001s linear 0s,transform .2s ease;
 }
 
-.no-csstransforms3d .shifter-active.shifter-navigation {
+.no-csstransforms3d .shifter-enabled.shifter-navigation {
   right: -270px;
 }
 
-.no-csstransforms3d .shifter-active.shifter-left .shifter-navigation {
+.no-csstransforms3d .shifter-enabled.shifter-left .shifter-navigation {
   left: -270px;
 }
 
-.no-csstransforms3d .shifter-active.shifter-open .shifter-page {
+.no-csstransforms3d .shifter-enabled.shifter-open .shifter-page {
   left: -270px;
 }
 
-.no-csstransforms3d .shifter-active.shifter-open .shifter-navigation {
+.no-csstransforms3d .shifter-enabled.shifter-open .shifter-navigation {
   right: 0;
 }
 
-.no-csstransforms3d .shifter-active.shifter-left.shifter-open .shifter-page {
+.no-csstransforms3d .shifter-enabled.shifter-left.shifter-open .shifter-page {
   left: auto;
   right: -270px;
 }
 
-.no-csstransforms3d .shifter-active.shifter-left.shifter-open .shifter-navigation {
+.no-csstransforms3d .shifter-enabled.shifter-left.shifter-open .shifter-navigation {
   left: 0;
 }
 
